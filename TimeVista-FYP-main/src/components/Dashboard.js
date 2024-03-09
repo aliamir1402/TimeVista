@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom"; // Assuming you're using React Router
 import Navbar from "./navbar";
 import Footer from "./footer";
 import climateanalytics from "../components/images/climateanalytics.png";
@@ -9,13 +10,22 @@ import { Link } from "react-router-dom";
 import Welcome from "./welcome";
 
 export default function Dashboard() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const data = queryParams.get("data");
+  var flag;
+  if (data == null) {
+    flag = 0;
+  } else {
+    flag = 1;
+  }
   return (
     <>
       <div className="themeBlack text-white bgcolor-white">
-        <Navbar />
+        <Navbar name={data} flag={flag} />
         <div>
           <div className="mt-2 p-2 bg-line"></div>
-          <Welcome></Welcome>
+          <Welcome name={data} flag={flag}></Welcome>
           <div className="mt-2 p-2 bg-line"></div>
           <div className="flex_box items-center justify-center mt-8">
             <Link to="/analytics">

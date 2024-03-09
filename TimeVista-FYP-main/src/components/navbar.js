@@ -21,75 +21,117 @@ export default function Navbar(props) {
       setim_name(props.sun);
     }
   }
-
-  return (
-    <>
-      <div className="ml-4 p-2 main-nav-inline flex_box">
-        <div className=" in-line m-2 flex_item">
-          <div className="">
-            <img class="logo-im" src={logo} alt="Time Vista Logo" />
+  if (props.flag) {
+    return (
+      <>
+        <div className="ml-4 p-2 main-nav-inline flex_box">
+          <div className=" in-line m-2 flex_item">
+            <div className="">
+              <img class="logo-im" src={logo} alt="Time Vista Logo" />
+            </div>
+            <div className=" title">
+              <span className="title-half">T</span>ime
+              <span className="title-half">V</span>ista
+            </div>
           </div>
-          <div className=" title">
-            <span className="title-half">T</span>ime
-            <span className="title-half">V</span>ista
+
+          <div className="navs flex_item">
+            <a href="#" className="wavy-underline nav-effects">
+              Home
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              Products
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              About
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              Articles
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              Contact Us
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              FAQs
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              Subscribe
+            </a>
+          </div>
+
+          <div className="flex_item">
+            <Link to="/profile">
+              <button
+                type="button"
+                class="text-white bg-gradient-to-br from-green-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-full text-sm px-7 py-2.5 text-center mr-2 mb-2 mt-5"
+              >
+                {props.name}
+              </button>
+            </Link>
           </div>
         </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="ml-4 p-2 main-nav-inline flex_box">
+          <div className=" in-line m-2 flex_item">
+            <div className="">
+              <img class="logo-im" src={logo} alt="Time Vista Logo" />
+            </div>
+            <div className=" title">
+              <span className="title-half">T</span>ime
+              <span className="title-half">V</span>ista
+            </div>
+          </div>
 
-        <div className="navs flex_item">
-          <a href="#" className="wavy-underline nav-effects">
-            Home
-          </a>
-          <a href="#" className="wavy-underline nav-effects">
-            Products
-          </a>
-          <a href="#" className="wavy-underline nav-effects">
-            About
-          </a>
-          <a href="#" className="wavy-underline nav-effects">
-            Articles
-          </a>
-          <a href="#" className="wavy-underline nav-effects">
-            Contact Us
-          </a>
-          <a href="#" className="wavy-underline nav-effects">
-            FAQs
-          </a>
-          <a href="#" className="wavy-underline nav-effects">
-            Subscribe
-          </a>
-        </div>
+          <div className="navs flex_item">
+            <a href="#" className="wavy-underline nav-effects">
+              Home
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              Products
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              About
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              Articles
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              Contact Us
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              FAQs
+            </a>
+            <a href="#" className="wavy-underline nav-effects">
+              Subscribe
+            </a>
+          </div>
 
-        <div className="flex_item ml-10">
-          <Link to="/login">
-            <button
-              type="button"
-              class="text-white-700 hover:text-white der der-white-700 hover:bg-neutral-100 hover:bg-opacity-10 focus:der-primary-accent-100 focus:outline-none focus:ring-0 active:der-primary-accent-200 dark:text-primary-100 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-7 py-2.5 text-center mr-2 mb-2 mt-5 dark:der-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
-            >
-              Login
-            </button>
-          </Link>
+          <div className="flex_item ml-10">
+            <Link to="/login">
+              <button
+                type="button"
+                class="text-white-700 hover:text-white der der-white-700 hover:bg-neutral-100 hover:bg-opacity-10 focus:der-primary-accent-100 focus:outline-none focus:ring-0 active:der-primary-accent-200 dark:text-primary-100 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-7 py-2.5 text-center mr-2 mb-2 mt-5 dark:der-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+              >
+                Login
+              </button>
+            </Link>
+          </div>
+          <div className="flex_item">
+            <Link to="/sign-up">
+              <button
+                type="button"
+                class="text-white bg-gradient-to-br from-green-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-full text-sm px-7 py-2.5 text-center mr-2 mb-2 mt-5"
+              >
+                Get Started
+              </button>
+            </Link>
+          </div>
         </div>
-        <div className="flex_item">
-          <Link to="/sign-up">
-            <button
-              type="button"
-              class="text-white bg-gradient-to-br from-green-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-full text-sm px-7 py-2.5 text-center mr-2 mb-2 mt-5"
-            >
-              Get Started
-            </button>
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 divide-x flex_item">
-          {/*<button onClick={revertThemeFunc}>
-            <img
-              className={im_theme}
-              src={im_name}
-              alt="sun"
-              class="commonicon"
-            />
-  </button>*/}
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }

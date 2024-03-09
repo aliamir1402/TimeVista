@@ -24,6 +24,10 @@ export default function Login() {
   };
 
   const SignUpFunc = async () => {
+    var usernameerr = document.getElementById("usernameerr");
+    var emailerr = document.getElementById("emailerr");
+    var registersuccess = document.getElementById("registersuccess");
+
     try {
       const DataInsert = {
         name: document.getElementById("FullName").value,
@@ -38,14 +42,14 @@ export default function Login() {
         !document.getElementById("FullName").value ||
         !document.getElementById("username").value ||
         !document.getElementById("email").value ||
-        document.getElementById("password").value ||
-        document.getElementById("ConfirmPassword").value
+        !document.getElementById("password").value ||
+        !document.getElementById("ConfirmPassword").value
       ) {
         alert("Please fill in all required fields.");
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/add", {
+      const response = await fetch("http://localhost:5000/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +58,28 @@ export default function Login() {
       });
 
       const responseData = await response.json();
-      alert(responseData);
+      if (responseData === 0) {
+        emailerr.style.display = "none";
+        usernameerr.style.display = "none";
+        registersuccess.style.display = "block";
+        document.getElementById("FullName").value = "";
+        document.getElementById("username").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("ConfirmPassword").value = "";
+      } else if (responseData === 3) {
+        emailerr.style.display = "block";
+        usernameerr.style.display = "block";
+        registersuccess.style.display = "none";
+      } else if (responseData === 1) {
+        emailerr.style.display = "block";
+        usernameerr.style.display = "none";
+        registersuccess.style.display = "none";
+      } else if (responseData === 2) {
+        usernameerr.style.display = "block";
+        emailerr.style.display = "none";
+        registersuccess.style.display = "none";
+      }
     } catch (error) {
       console.error("Error sending data:", error);
       alert("Error sending data. Please try again.");
@@ -68,6 +93,19 @@ export default function Login() {
           <div className="p-4 login-image">
             <img src={LogoTV} alt="LoginImage" width={60} height={60} />
             <div className="login-title">SignUp</div>
+          </div>
+          <div
+            id="registersuccess"
+            style={{
+              color: "white",
+              padding: "5px",
+              fontSize: "14px",
+              textAlign: "center",
+              backgroundColor: "#01c26f",
+              borderRadius: "12px",
+            }}
+          >
+            Registration Successfull!
           </div>
 
           <div class="flex_box border-b-2 border-solid border-gray-300">
@@ -99,20 +137,41 @@ export default function Login() {
               />
             </div>
           </div>
-
+          <div
+            id="usernameerr"
+            style={{
+              color: "red",
+              padding: "5px",
+              fontSize: "12px",
+              textAlign: "right",
+            }}
+          >
+            Username Already Taken...
+          </div>
           <div class="flex_box border-b-2 border-solid border-gray-300">
             <div className="h-fit m-2 mt-3.5">
               <img src={usernamepic} alt="userpic" width={30} height={30} />
             </div>
             <div className="m-2 flex_item">
               <input
-                type="text"
+                type="email"
                 id="email"
                 name="email"
                 placeholder="Email"
                 required
               />
             </div>
+          </div>
+          <div
+            id="emailerr"
+            style={{
+              color: "red",
+              padding: "5px",
+              fontSize: "12px",
+              textAlign: "right",
+            }}
+          >
+            Email Already Taken...
           </div>
 
           <div class="flex_box border-b-2 border-solid border-gray-300">
@@ -161,10 +220,8 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="login-button mt-4">
-            <button type="submit" onClick={SignUpFunc}>
-              Register
-            </button>
+          <div className="login-button mt-4" onClick={SignUpFunc}>
+            <button type="submit">Register</button>
           </div>
           <div className="flex_box mt-2">
             <div className="checkbox-group flex_item"></div>

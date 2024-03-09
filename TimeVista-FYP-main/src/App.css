@@ -599,7 +599,8 @@ label {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
   padding: 10px;
   font-size: 16px;
   width: 100%; /* Adjustable width */
@@ -709,6 +710,14 @@ input[type="checkbox"] {
 
 .login-account-title:hover {
   color: #38af38;
+}
+
+#emailerr,
+#usernameerr,
+#registersuccess,
+#loginsuccess,
+#loginerror {
+  display: none;
 }
 
 /* DashBoard.js */
