@@ -36,7 +36,7 @@ app.get("/api/display", async (req, res) => {
 });
 
 // Route to add data
-app.post("/api/add", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   try {
     const EntryData = req.body;
 
@@ -62,18 +62,59 @@ app.post("/api/add", async (req, res) => {
 
     console.log(FetchDisplay);
     if (FetchDisplay.length == 0) {
-      console.log("New User");
+      console.log(0);
 
-      //const dataDisplay = await collection.insertOne(EntryData);
+      const dataDisplay = await collection.insertOne(EntryData);
       //console.log("Data inserted:", dataDisplay.ops[0]);
-      res.json("Successfully Registered!"); // Send inserted data back as response
-
+      res.json(0); // Send inserted data back as response
+    } else if (
+      FetchDisplay[0].email == EntryData["email"] &&
+      FetchDisplay[0].username == EntryData["username"]
+    ) {
+      res.json(3);
     } else if (FetchDisplay[0].email == EntryData["email"]) {
-      res.json("Email already taken...");
+      res.json(1);
     } else if (FetchDisplay[0].username == EntryData["username"]) {
-      res.json("Username already taken...");
+      res.json(2);
     }
-    
+  } catch (error) {
+    console.error("Error inserting data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Route to add data
+app.post("/api/login", async (req, res) => {
+  try {
+    const EntryData = req.body;
+
+    const database = client.db("TimeVista");
+    const collection = database.collection("users");
+    const FetchDisplay = await collection
+      .find(
+        {
+          $and: [
+            {
+              username: EntryData["username"],
+            },
+            { password: EntryData["password"] },
+          ],
+        },
+        {
+          username: 1,
+          password: 1,
+          name: 1,
+        }
+      )
+      .toArray(); // Convert cursor to array
+
+    //console.log(FetchDisplay);
+    if (FetchDisplay.length == 1) {
+      res.json([0, FetchDisplay[0].name]); // Send inserted data back as response
+      
+    } else if (FetchDisplay.length == 0) {
+      res.json([1, FetchDisplay[0].name]);
+    }
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal Server Error" });
