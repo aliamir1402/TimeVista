@@ -5,7 +5,13 @@ const cors = require("cors");
 const app = express();
 const PORT = 5000;
 
-
+app.use(cors(
+  {
+    origin:["https://time-vista-two.vercel.app/"],
+    method:["POST","GET"],
+    credentials:true
+  }
+));
 
 // MongoDB connection URI
 const uri =
