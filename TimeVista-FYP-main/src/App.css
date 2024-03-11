@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .bor {
-  border: 1px solid rgb(0, 0, 0);
+  border: 0px solid rgb(0, 0, 0);
 }
 
 /* Media query for mobile devices (up to 768px) */
