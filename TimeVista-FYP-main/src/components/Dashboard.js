@@ -123,6 +123,29 @@ export default function Dashboard() {
                 </div>
               </div>
             </Link>
+
+            <Link to="/analytics">
+              <div className="box-1-selection  flex_item mx-5">
+                <div className="flex_box">
+                  <div className="flex_item">
+                    <img src={datasets} alt="fOneImg" className="fOneImg" />
+                  </div>
+                  <div className="flex_item flex">
+                    <div className="custom-box"></div>
+                    <div class="p-4 flex flex-col feature">
+                      <div className="title-feature">
+                        Water Availibilty Forcasting
+                      </div>
+                      <div className="des-feature">
+                        Analytics is the systematic exploration, interpretation,
+                        and communication of meaningful patterns and insights
+                        derived from data.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
         <Footer></Footer>
