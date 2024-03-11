@@ -4,7 +4,7 @@ import RainIcon from "../components/images/icons8-rainfall-96.png";
 import FloodIcon from "../components/images/flood_11518282.png"; // Import another image for cat icon
 import WindIcon from "../components/images/windstorm_2480645.png";
 import DroughtIcon from "../components/images/desert_11056941.png";
-import SnowIcon from "../components/images/snow.png";
+import SnowIcon from "../components/images/desert_11056941.png";
 
 export default function Maps() {
   useEffect(() => {
