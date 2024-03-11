@@ -5,7 +5,7 @@
       "type": "Feature",
       "properties": {
         "city": "Islamabad",
-        "population": "1,095,064"
+        "population": 0
       },
       "geometry": {
         "type": "Point",
@@ -16,7 +16,7 @@
       "type": "Feature",
       "properties": {
         "city": "Karachi",
-        "population": 14910352
+        "population": -2
       },
       "geometry": {
         "type": "Point",
@@ -27,7 +27,7 @@
       "type": "Feature",
       "properties": {
         "city": "Lahore",
-        "population": 111262850
+        "population": 10
       },
       "geometry": {
         "type": "Point",
@@ -38,7 +38,7 @@
       "type": "Feature",
       "properties": {
         "city": "Faisalabad",
-        "population": 3203846
+        "population": 15
       },
       "geometry": {
         "type": "Point",
@@ -49,7 +49,7 @@
       "type": "Feature",
       "properties": {
         "city": "Rawalpindi",
-        "population": 2098231
+        "population": 9
       },
       "geometry": {
         "type": "Point",
@@ -60,7 +60,7 @@
       "type": "Feature",
       "properties": {
         "city": "Multan",
-        "population": 1871843
+        "population": 25
       },
       "geometry": {
         "type": "Point",
@@ -71,7 +71,7 @@
       "type": "Feature",
       "properties": {
         "city": "Gujranwala",
-        "population": 2027001
+        "population": 31
       },
       "geometry": {
         "type": "Point",
@@ -82,7 +82,7 @@
       "type": "Feature",
       "properties": {
         "city": "Hyderabad",
-        "population": 1732693
+        "population": 18
       },
       "geometry": {
         "type": "Point",
@@ -93,7 +93,7 @@
       "type": "Feature",
       "properties": {
         "city": "Peshawar",
-        "population": 1970042
+        "population": 20
       },
       "geometry": {
         "type": "Point",
@@ -104,7 +104,7 @@
       "type": "Feature",
       "properties": {
         "city": "Quetta",
-        "population": 1001205
+        "population": -15
       },
       "geometry": {
         "type": "Point",
@@ -115,7 +115,7 @@
       "type": "Feature",
       "properties": {
         "city": "Sialkot",
-        "population": 655852
+        "population": 10
       },
       "geometry": {
         "type": "Point",
@@ -126,7 +126,7 @@
       "type": "Feature",
       "properties": {
         "city": "Bahawalpur",
-        "population": 801000
+        "population": 1
       },
       "geometry": {
         "type": "Point",
@@ -137,7 +137,7 @@
       "type": "Feature",
       "properties": {
         "city": "Sargodha",
-        "population": 673954
+        "population": 17
       },
       "geometry": {
         "type": "Point",
@@ -148,7 +148,7 @@
       "type": "Feature",
       "properties": {
         "city": "Sahiwal",
-        "population": 389605
+        "population": 11
       },
       "geometry": {
         "type": "Point",
@@ -159,7 +159,7 @@
       "type": "Feature",
       "properties": {
         "city": "Okara",
-        "population": 457983
+        "population": 2
       },
       "geometry": {
         "type": "Point",
@@ -170,7 +170,7 @@
       "type": "Feature",
       "properties": {
         "city": "Wah Cantonment",
-        "population": 588000
+        "population": 38
       },
       "geometry": {
         "type": "Point",
@@ -181,7 +181,7 @@
       "type": "Feature",
       "properties": {
         "city": "Mardan",
-        "population": 471478
+        "population": 1
       },
       "geometry": {
         "type": "Point",
@@ -192,7 +192,7 @@
       "type": "Feature",
       "properties": {
         "city": "Gujrat",
-        "population": 507196
+        "population": 2
       },
       "geometry": {
         "type": "Point",
@@ -203,7 +203,7 @@
       "type": "Feature",
       "properties": {
         "city": "Kasur",
-        "population": 291788
+        "population": 22
       },
       "geometry": {
         "type": "Point",
@@ -214,7 +214,7 @@
       "type": "Feature",
       "properties": {
         "city": "Rahim Yar Khan",
-        "population": 420419
+        "population": 12
       },
       "geometry": {
         "type": "Point",
@@ -225,7 +225,7 @@
       "type": "Feature",
       "properties": {
         "city": "Sukkur",
-        "population": 499900
+        "population": 32
       },
       "geometry": {
         "type": "Point",
@@ -236,7 +236,7 @@
       "type": "Feature",
       "properties": {
         "city": "Dera Ghazi Khan",
-        "population": 334745
+        "population": 22
       },
       "geometry": {
         "type": "Point",
@@ -247,7 +247,7 @@
       "type": "Feature",
       "properties": {
         "city": "Muzaffargarh",
-        "population": 252000
+        "population": 7
       },
       "geometry": {
         "type": "Point",
@@ -258,7 +258,7 @@
       "type": "Feature",
       "properties": {
         "city": "Nawabshah",
-        "population": 229504
+        "population": 4
       },
       "geometry": {
         "type": "Point",
@@ -269,7 +269,7 @@
       "type": "Feature",
       "properties": {
         "city": "Sahiwal",
-        "population": 207388
+        "population": -19
       },
       "geometry": {
         "type": "Point",
@@ -280,7 +280,7 @@
       "type": "Feature",
       "properties": {
         "city": "Mirpur Khas",
-        "population": 229504
+        "population": -2
       },
       "geometry": {
         "type": "Point",
@@ -291,7 +291,7 @@
       "type": "Feature",
       "properties": {
         "city": "Jacobabad",
-        "population": 137400
+        "population": 40
       },
       "geometry": {
         "type": "Point",
@@ -302,7 +302,7 @@
       "type": "Feature",
       "properties": {
         "city": "Shikarpur",
-        "population": 164531
+        "population": 28
       },
       "geometry": {
         "type": "Point",
