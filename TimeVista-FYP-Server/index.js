@@ -233,7 +233,7 @@ app.post("/api/login", async (req, res) => {
 });
 
 // Handle the root path with a simple message
-app.get("/api/hello", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Welcome to your Express serverrr!");
 });
 
@@ -245,4 +245,4 @@ process.on("SIGINT", () => {
   });
 });
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(process.env.PORT || PORT, () => console.log(`Server is running on port ${process.env.PORT || PORT}`));
