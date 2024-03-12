@@ -233,8 +233,8 @@ app.post("/api/login", async (req, res) => {
 });
 
 // Handle the root path with a simple message
-app.get("/", (req, res) => {
-  res.send("Welcome to your Express server!");
+app.get("/api/hello", (req, res) => {
+  res.send("Welcome to your Express serverrr!");
 });
 
 // Close the MongoDB connection when the server stops
