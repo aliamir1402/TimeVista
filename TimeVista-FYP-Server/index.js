@@ -3,7 +3,12 @@ const { MongoClient } = require("mongodb");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT;//5000;
+const PORT = const PORT = process.env.PORT || 5000; // Use process.env.PORT or default to 5000
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 
 app.use(cors(
   {
