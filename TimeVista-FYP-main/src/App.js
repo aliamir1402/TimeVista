@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard.js";
 import Login from "./components/login.js";
 import Signup from "./components/signUp.js";
 import Analytics from "./components/Analytics.js";
-import GISMAP from "../src/components/Map.js";
+import ExMAP from "../src/components/Map.js";
 import NotFound from "./components/NotFound.js"; // Import your 404 page component
 
 export default function App() {
@@ -18,7 +18,7 @@ export default function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<Signup />} />
-          <Route path="/extreme-events-map" element={<GISMAP />} />
+          <Route path="/extreme-events-map" element={<ExMAP />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </Router>
