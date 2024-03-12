@@ -9,14 +9,13 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-
-app.use(cors(
-  {
-    origin:["https://time-vista-two.vercel.app/"],
-    method:["POST","GET"],
-    credentials:true
-  }
-));
+app.use(
+  cors({
+    origin: ["https://time-vista-two.vercel.app/"],
+    method: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 // MongoDB connection URI
 const uri =
@@ -133,7 +132,7 @@ app.post("/api/gisLayer", async (req, res) => {
             count += 1;
           }
         }
-        YearOBJ[i].Temperature = YearOBJ[i].Temperature ;
+        YearOBJ[i].Temperature = YearOBJ[i].Temperature;
         YearOBJ[i].RainFall = YearOBJ[i].RainFall / count;
         YearOBJ[i].Humidity = YearOBJ[i].Humidity / count;
         YearOBJ[i].Pressure = YearOBJ[i].Pressure / count;
@@ -239,7 +238,7 @@ app.post("/api/login", async (req, res) => {
 
 // Handle the root path with a simple message
 app.get("/", (req, res) => {
-  res.send("Welcome to your Express serverrr!");
+  res.send("Welcome to your Express serverr!");
 });
 
 // Close the MongoDB connection when the server stops
@@ -250,4 +249,6 @@ process.on("SIGINT", () => {
   });
 });
 
-app.listen(PORT, () => console.log(`Server is running on port ${process.env.PORT || PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server is running on port ${process.env.PORT || PORT}`)
+);
