@@ -67,8 +67,8 @@ export default function VerticalTabs() {
   const [gisflag, setGisflag] = useState(0);
   const [scrollData, setScrollData] = useState([]);
   const [arrowData, setArrowData] = useState([]);
-  const [feature, setFeature] = useState("");
-  const [time, setTime] = useState("");
+  const [feature, setFeature] = useState(0);
+  const [time, setTime] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -83,28 +83,9 @@ export default function VerticalTabs() {
       setTimecounter(timecounter - 1);
       document.getElementById("next").disabled = false;
     }
-
-    if (feature === 1) {
-      for (let i = 0; i < 1; i++) {
-        scrollObj.push({
-          type: "Feature",
-          properties: {
-            city: arrowData[timecounter - 1980].City,
-            population: arrowData[timecounter - 1980].Temperature,
-          },
-          geometry: {
-            type: "Point",
-            coordinates: arrowData[timecounter - 1980].coordinates,
-          },
-        });
-      }
-    } else {
-    }
-
-    setScrollData({
-      type: "FeatureCollection",
-      features: scrollObj,
-    });
+    setTimeout(() => {
+      DataFetchGISLayer();
+    }, 0);
   };
 
   const nextSlide = () => {
@@ -119,28 +100,9 @@ export default function VerticalTabs() {
       setTimecounter(timecounter + 1);
       document.getElementById("prev").disabled = false;
     }
-
-    if (feature === 1) {
-      for (let i = 0; i < 1; i++) {
-        scrollObj.push({
-          type: "Feature",
-          properties: {
-            city: arrowData[timecounter - 1980].City,
-            population: arrowData[timecounter - 1980].Temperature,
-          },
-          geometry: {
-            type: "Point",
-            coordinates: arrowData[timecounter - 1980].coordinates,
-          },
-        });
-      }
-    } else {
-    }
-
-    setScrollData({
-      type: "FeatureCollection",
-      features: scrollObj,
-    });
+    setTimeout(() => {
+      DataFetchGISLayer();
+    }, 0);
   };
 
   const fetchData = async (Reqobj) => {
@@ -154,23 +116,24 @@ export default function VerticalTabs() {
         body: JSON.stringify(Reqobj),
       });
       const responseData = await response.json();
-      console.log("Timer: ", responseData);
+
       setArrowData(responseData);
-      if (Reqobj.feature === 1) {
-        for (let i = 0; i < 1; i++) {
+      console.log("Timer: ", arrowData[0]);
+
+      if (feature === 1) {
+        for (let i = 0; i < responseData.length; i++) {
           scrollObj.push({
             type: "Feature",
             properties: {
-              city: responseData[timecounter - 1980].City,
-              population: responseData[timecounter - 1980].Temperature,
+              city: responseData[i].City,
+              population: responseData[i].Temperature,
             },
             geometry: {
               type: "Point",
-              coordinates: responseData[timecounter - 1980].coordinates,
+              coordinates: responseData[i].coordinates,
             },
           });
         }
-      } else {
       }
 
       setScrollData({
@@ -185,25 +148,22 @@ export default function VerticalTabs() {
   };
 
   const DataFetchGISLayer = () => {
-    let feature = 0,
-      time = 0;
-
-    if (isSelected1 === true) feature = 1;
-    else if (isSelected2 === true) feature = 2;
-    else if (isSelected3 === true) feature = 3;
-    else if (isSelected4 === true) feature = 4;
-    else if (isSelected5 === true) feature = 5;
-    else if (isSelected6 === true) feature = 6;
-    if (isSelected9 === true) time = 1;
-    else if (isSelected10 === true) time = 2;
-    else if (isSelected11 === true) time = 3;
+    if (isSelected1 === true) setFeature(1);
+    else if (isSelected2 === true) setFeature(2);
+    else if (isSelected3 === true) setFeature(3);
+    else if (isSelected4 === true) setFeature(4);
+    else if (isSelected5 === true) setFeature(5);
+    else if (isSelected6 === true) setFeature(6);
+    if (isSelected9 === true) setTime(1);
+    else if (isSelected10 === true) setTime(2);
+    else if (isSelected11 === true) setTime(3);
 
     let Reqobj = {
       feature: feature,
       time: time,
+      year: timecounter,
     };
-    setFeature(feature);
-    setTime(time);
+
     fetchData(Reqobj);
   };
 
@@ -593,4 +553,3 @@ export default function VerticalTabs() {
     </>
   );
 }
-
