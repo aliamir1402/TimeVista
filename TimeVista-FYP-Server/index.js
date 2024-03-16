@@ -39,11 +39,12 @@ app.post("/api/gisLayer", async (req, res) => {
     console.log("Running...");
 
     const regexPattern = new RegExp(`-${EntryData.year}$`); // Constructing the regular expression dynamically
-    const uniqueCities = await collection.distinct("CityID");
-    //console.log(uniqueCities);
+    var uniqueCities = await collection.distinct("CityID");
+    console.log(uniqueCities);
 
     var numberOfCities = uniqueCities;
     var coordinatesCities = [
+      [],
       [73.2215, 34.1688],
       [73.135, 31.4504],
       [74.1945, 32.1877],
@@ -55,6 +56,7 @@ app.post("/api/gisLayer", async (req, res) => {
       [71.5249, 34.0151],
       [73.0169, 33.5651],
       [72.4258, 35.2227],
+      [72.3548, 34.8065],
     ];
 
     var CityOBJ = [];
@@ -124,9 +126,10 @@ app.post("/api/gisLayer", async (req, res) => {
         /*console.log(
           parseInt(minMaxDates[0].minDate.getFullYear()),
           parseInt(minMaxDates[0].maxDate.getFullYear())
-        );*/
+        );
         const Syear = parseInt(minMaxDates[0].minDate.getFullYear());
-        const Fyear = parseInt(minMaxDates[0].maxDate.getFullYear());
+        const Fyear = parseInt(minMaxDates[0].maxDate.getFullYear());*/
+
         var YearOBJ = {
           City: "",
           coordinates: [],
@@ -158,18 +161,18 @@ app.post("/api/gisLayer", async (req, res) => {
         CityOBJ[i].City = YearOBJ.City;
         CityOBJ[i].Date = YearOBJ.Date;
         CityOBJ[i].coordinates = YearOBJ.coordinates;
-        CityOBJ[i].Temperature = YearOBJ.Temperature;
-        CityOBJ[i].RainFall = YearOBJ.RainFall / count;
+        CityOBJ[i].RainFall = YearOBJ.RainFall * 1000;
         CityOBJ[i].Humidity = YearOBJ.Humidity / count;
         CityOBJ[i].Pressure = YearOBJ.Pressure / count;
         CityOBJ[i].WindSpeed = YearOBJ.WindSpeed / count;
         CityOBJ[i].WindDirection = YearOBJ.WindDirection / count;
         CityOBJ[i].Smog = YearOBJ.Smog / count;
+        CityOBJ[i].Smog = CityOBJ[i].Smog / 100000;
         CityOBJ[i].Temperature = YearOBJ.Temperature / count;
         count = 0;
       }
     }
-    console.log(CityOBJ[0].City);
+    console.log(CityOBJ.length);
 
     res.json(CityOBJ);
   } catch (error) {
