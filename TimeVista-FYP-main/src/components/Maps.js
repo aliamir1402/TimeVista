@@ -324,10 +324,21 @@ export default function Maps() {
           "icon-size": 0.35,
         },
       });
-      // Add click event listener
+      let popup; // Declare popup variable outside of event listeners
+
       map.on("click", "points", function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = "City: " + e.features[0].properties.cityName; // You can replace this with your desired popup content
+        var cityName = e.features[0].properties.cityName;
+
+        // Create a button element
+        var button = document.createElement("button");
+        button.textContent = "More Info";
+
+        // Add a click event listener to the button
+        button.addEventListener("click", function () {
+          // Handle button click action, such as opening a modal or navigating to a new page
+          alert("More information about " + cityName);
+        });
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
@@ -336,20 +347,11 @@ export default function Maps() {
           coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
-        new maplibregl.Popup()
+        // Create new popup and assign it to popup variable
+        popup = new maplibregl.Popup()
           .setLngLat(coordinates)
-          .setHTML(description)
+          .setDOMContent(button) // Set the button as the popup content
           .addTo(map);
-      });
-
-      // Change the cursor to a pointer when the mouse is over the places layer.
-      map.on("mouseenter", "points", function () {
-        map.getCanvas().style.cursor = "pointer";
-      });
-
-      // Change it back to a pointer when it leaves.
-      map.on("mouseleave", "points", function () {
-        map.getCanvas().style.cursor = "";
       });
     });
   }, []);

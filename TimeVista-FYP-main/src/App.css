@@ -172,6 +172,8 @@ body {
 .footer {
   margin-top: 5%;
   padding: 10%;
+  padding-left: 0px;
+  padding-right: 0px;
   padding-bottom: 1%;
   padding-top: 5%;
   border-top: 1px solid white;
@@ -184,7 +186,7 @@ body {
   border-top: 10px solid;
   /* Create a linear gradient as a border image */
   border-image: linear-gradient(90deg, #719b5c, #23634b, #23634c6b, #00000067) 1;
-  width: 100vw;
+  width: 100%;
   height: fit-content;
 }
 
@@ -1025,23 +1027,19 @@ input[type="checkbox"] {
 .legend {
   font-weight: 500;
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background-color: rgba(255, 255, 255, 1);
-  padding: 15px;
-  border-radius: 15px;
+  bottom: 40px;
+  left: 30px;
 }
 .legend-item {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  border-radius: 10px;
 }
 .legend-color {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 1px rgb(241, 241, 241);
+  padding: 10px;
+  font-weight: bold;
+  font-family: "Overpass";
+  font-size: 12px;
 }
 
 @media screen and (min-width: 0px) and (max-width: 1250px) {
@@ -1104,4 +1102,17 @@ input[type="checkbox"] {
 #map {
   height: 100%;
   width: 100%;
+}
+
+.pop-up {
+  width: fit-content;
+  height: fit-content;
+  font-size: 14px;
+  font-family: "Overpass";
+  font-weight: 600;
+  border-radius: 15px;
+}
+
+.sub-pop-up {
+  padding: 5px;
 }

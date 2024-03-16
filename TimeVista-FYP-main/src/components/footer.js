@@ -22,7 +22,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="flex_box items-center justify-center text-center mt-8 mb-4">
+        <div className="flex_box items-center justify-center text-center mt-8 mb-4 px-20">
           <div className="flex_item feature-item">
             <a href="">Home</a>
           </div>

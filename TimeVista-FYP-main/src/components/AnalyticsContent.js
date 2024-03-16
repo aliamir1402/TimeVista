@@ -118,15 +118,85 @@ export default function VerticalTabs() {
       const responseData = await response.json();
 
       setArrowData(responseData);
-      console.log("Timer: ", arrowData[0]);
+      console.log("City: ", responseData);
 
       if (feature === 1) {
-        for (let i = 0; i < responseData.length; i++) {
+        for (let i = 1; i < responseData.length; i++) {
           scrollObj.push({
             type: "Feature",
             properties: {
               city: responseData[i].City,
               population: responseData[i].Temperature,
+            },
+            geometry: {
+              type: "Point",
+              coordinates: responseData[i].coordinates,
+            },
+          });
+        }
+      } else if (feature === 2) {
+        for (let i = 1; i < responseData.length; i++) {
+          scrollObj.push({
+            type: "Feature",
+            properties: {
+              city: responseData[i].City,
+              population: responseData[i].RainFall,
+            },
+            geometry: {
+              type: "Point",
+              coordinates: responseData[i].coordinates,
+            },
+          });
+        }
+      } else if (feature === 3) {
+        for (let i = 1; i < responseData.length; i++) {
+          scrollObj.push({
+            type: "Feature",
+            properties: {
+              city: responseData[i].City,
+              population: responseData[i].Humidity,
+            },
+            geometry: {
+              type: "Point",
+              coordinates: responseData[i].coordinates,
+            },
+          });
+        }
+      } else if (feature === 4) {
+        for (let i = 1; i < responseData.length; i++) {
+          scrollObj.push({
+            type: "Feature",
+            properties: {
+              city: responseData[i].City,
+              population: responseData[i].Pressure,
+            },
+            geometry: {
+              type: "Point",
+              coordinates: responseData[i].coordinates,
+            },
+          });
+        }
+      } else if (feature === 5) {
+        for (let i = 1; i < responseData.length; i++) {
+          scrollObj.push({
+            type: "Feature",
+            properties: {
+              city: responseData[i].City,
+              population: responseData[i].WindSpeed,
+            },
+            geometry: {
+              type: "Point",
+              coordinates: responseData[i].coordinates,
+            },
+          });
+        }
+      } else if (feature === 6) {
+        for (let i = 1; i < responseData.length; i++) {
+          scrollObj.push({
+            type: "Feature",
+            properties: {
+              city: responseData[i].City,
+              population: responseData[i].Smog,
             },
             geometry: {
               type: "Point",
@@ -148,6 +218,7 @@ export default function VerticalTabs() {
   };
 
   const DataFetchGISLayer = () => {
+    setGisflag(0);
     if (isSelected1 === true) setFeature(1);
     else if (isSelected2 === true) setFeature(2);
     else if (isSelected3 === true) setFeature(3);
@@ -384,26 +455,6 @@ export default function VerticalTabs() {
                   </button>
                 </div>
               </div>
-              <div className="flex_box">
-                <div
-                  className={`flex_item flex items-center justify-center m-1 ${
-                    isSelected11 ? "selected" : ""
-                  }`}
-                >
-                  <button className="gis-button" onClick={handleButtonClick11}>
-                    Daily
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-end mr-6">
-              <button
-                className="time-stamps-button"
-                onClick={DataFetchGISLayer}
-              >
-                Fetch
-              </button>
             </div>
 
             <div className="flex items-center justify-center m-1 text-xl font-semibold">
@@ -432,7 +483,7 @@ export default function VerticalTabs() {
             </div>
           </div>
           <div id="map-gis">
-            <Map flag={gisflag} data={scrollData}></Map>
+            <Map flag={gisflag} data={scrollData} feature={feature}></Map>
           </div>
         </div>
 
