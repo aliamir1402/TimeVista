@@ -2,8 +2,23 @@ import React from "react";
 import waveHand from "./images/Whand.png";
 
 export default function Welcome(props) {
-  var name = props.name;
-  var flag = props.flag;
+  var name = "",
+    flag = 0;
+  // Check if an item exists in local storage
+  function isLocalStorageItemExists(key) {
+    return localStorage.getItem(key) !== null;
+  }
+
+  // Example usage
+  const itemName = "username"; // Replace with the name of the item you want to check
+  const exists = isLocalStorageItemExists(itemName);
+
+  if (exists) {
+    flag = 1;
+    name = localStorage.getItem(itemName);
+  } else {
+    flag = 0;
+  }
 
   if (flag === 1) {
     return (

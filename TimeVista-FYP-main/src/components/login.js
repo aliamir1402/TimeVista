@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginImage from "../components/images/icons8-irrigation-96.png";
 import Auth from "./Auth";
 import LogoTV from "../components/images/logo.png";
@@ -6,9 +6,22 @@ import userpic from "../components/images/username.svg";
 import passwordpic from "../components/images/password.svg";
 import showeye from "../components/images/visibility.svg";
 import noshoweye from "../components/images/visibility_off.svg";
+import { redirect } from "react-router-dom";
 
 export default function Login() {
   const [passwordEye, setPasswordEye] = useState(noshoweye);
+
+  // Check if an item exists in local storage
+  function isLocalStorageItemExists(key) {
+    return localStorage.getItem(key) !== null;
+  }
+  useEffect(() => {
+    // Example usage
+    const itemName = "username"; // Replace with the name of the item you want to check
+    const exists = isLocalStorageItemExists(itemName);
+
+    if (exists) redirectToLink("/../dashboard", 500);
+  }, []);
 
   var changeImageShow = () => {
     if (passwordEye === noshoweye) {
@@ -25,6 +38,36 @@ export default function Login() {
       window.location.href = url;
     }, delay);
   };
+
+  // Function to generate a random token
+  function generateToken(length) {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let token = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      token += characters[randomIndex];
+    }
+    return token;
+  }
+
+  // Function to generate a random ID
+  function generateId(length) {
+    const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let id = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      id += characters[randomIndex];
+    }
+    return id;
+  }
+
+  // Example usage
+  const token = generateToken(16); // Generate a 16-character token
+  const id = generateId(8); // Generate an 8-character ID
+
+  console.log("Generated Token:", token);
+  console.log("Generated ID:", id);
 
   const LoginFunc = async () => {
     var loginsuccess = document.getElementById("loginsuccess");
@@ -44,7 +87,7 @@ export default function Login() {
         return;
       }
 
-      const response = await fetch("https://time-vista-two.vercel.app:5000/api/login", {
+      const response = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,13 +95,23 @@ export default function Login() {
         body: JSON.stringify(DataInsert),
       });
 
+      var userId, token, expirationTime;
+
       const responseData = await response.json();
       if (responseData[0] === 0) {
+        const expirationTime = Date.now() + 259200 * 1000; // Convert expiresIn to milliseconds and add to current time
+        userId = generateToken(responseData[1].length);
+        token = generateId(responseData[1].length);
         document.getElementById("username").value = "";
         document.getElementById("password").value = "";
         loginsuccess.style.display = "block";
         loginerror.style.display = "none";
-        redirectToLink("/../dashboard?data=" + responseData[1], 5000);
+        localStorage.setItem("username", responseData[1]);
+        localStorage.setItem("user", responseData[2]);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("token", token);
+        localStorage.setItem("tokenExpiration", expirationTime);
+        redirectToLink("/../dashboard", 3000);
       } else if (responseData[0] === 1) {
         loginsuccess.style.display = "none";
         loginsuccess.style.display = "none";

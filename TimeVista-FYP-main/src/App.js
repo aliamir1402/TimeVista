@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard.js";
 import Login from "./components/login.js";
 import Signup from "./components/signUp.js";
 import Analytics from "./components/Analytics.js";
-import ExMAP from "../src/components/Maps.js";
+import ExMAP from "../src/components/ExtremeEventsContent.js";
 import NotFound from "./components/NotFound.js"; // Import your 404 page component
 
 export default function App() {

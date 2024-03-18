@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import DropDownMenu from "./DropDownMenu.js";
 import helpIcon from "./images/help.png";
@@ -8,8 +8,39 @@ import ThemeChange from "./themechange.js";
 import logo from "./images/logo.png";
 import Notifications from "./Notifications.js";
 
-export default function header() {
-  var name = "Ali";
+export default function Header() {
+  var name = "",
+    flag;
+
+  useEffect(() => {
+    // Example usage
+    const itemName = "username"; // Replace with the name of the item you want to check
+    const exists = isLocalStorageItemExists(itemName);
+
+    if (!exists) redirectToLink("/../login", 500);
+  }, []);
+
+  var redirectToLink = (url, delay) => {
+    setTimeout(function () {
+      window.location.href = url;
+    }, delay);
+  };
+  // Check if an item exists in local storage
+  function isLocalStorageItemExists(key) {
+    return localStorage.getItem(key) !== null;
+  }
+
+  // Example usage
+  const itemName = "username"; // Replace with the name of the item you want to check
+  const exists = isLocalStorageItemExists(itemName);
+
+  if (exists) {
+    flag = 1;
+    name = localStorage.getItem(itemName);
+  } else {
+    flag = 0;
+  }
+
   return (
     <>
       <nav className="flex_box p-4 pr-0 pt-1 pb-1 head bor">

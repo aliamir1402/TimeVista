@@ -516,7 +516,7 @@ const GISMap = (props) => {
         // Create a button element
         var coordinates = e.features[0].geometry.coordinates.slice();
         var cityName = e.features[0].properties.city;
-        var cityValue = Math.round(e.features[0].properties.population) + " mm";
+        var cityValue = Math.round(e.features[0].properties.population);
 
         // Create the main div element
         var popupContent = document.createElement("div");

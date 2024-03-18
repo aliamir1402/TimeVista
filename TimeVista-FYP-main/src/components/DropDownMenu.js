@@ -1,8 +1,18 @@
 import React from "react";
 
 export default function DropDownMenu(props) {
-  var obj = {
-    email: "aliamirkhawaja1@gmail.com",
+  var logoutFunc = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+    localStorage.removeItem("tokenExpiration");
+    redirectToLink("/../login", 500);
+  };
+  var redirectToLink = (url, delay) => {
+    setTimeout(function () {
+      window.location.href = url;
+    }, delay);
   };
   return (
     <>
@@ -41,7 +51,7 @@ export default function DropDownMenu(props) {
                 <div class="px-4 py-3">
                   <p class="text-sm leading-5">Signed in as</p>
                   <p class="text-sm font-medium leading-5 text-gray-900 truncate">
-                    {obj.email}
+                    {localStorage.getItem("user")}
                   </p>
                 </div>
                 <div class="py-1">
@@ -63,14 +73,14 @@ export default function DropDownMenu(props) {
                   </a>
                 </div>
                 <div class="py-1">
-                  <a
-                    href="javascript:void(0)"
+                  <button
+                    onClick={logoutFunc}
                     tabindex="3"
                     class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
                     role="menuitem"
                   >
                     Sign out
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .bor {
-  border: 0px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 /* Media query for mobile devices (up to 768px) */
@@ -273,7 +273,7 @@ body {
 }
 
 .space {
-  width: 80%;
+  width: 72%;
 }
 
 .acc-item {
@@ -816,7 +816,6 @@ input[type="checkbox"] {
   padding-top: 2rem; /* Equivalent to .pt-8 */
   padding-left: 3rem; /* Equivalent to .pl-12 */
   width: fit-content; /* Equivalent to .w-fit */
-  margin-top: 1rem; /* Equivalent to .mt-4 */
   margin-left: 1rem; /* Equivalent to .ml-4 */
   margin-bottom: 0.5rem; /* Equivalent to .mb-2 */
   padding-right: 2rem;
@@ -976,10 +975,23 @@ input[type="checkbox"] {
   background-color: rgb(183, 216, 210);
 }
 
+.selected {
+  background-color: #12251e;
+  color: white;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0px 0px 5px 1px rgb(220, 220, 220);
+  margin-left: 5px;
+}
+
 #sidebar-gis {
   margin-left: 1%; /* Set left margin to 1% */
   width: 22vw; /* Set width to 22% of the viewport width */
-  height: fit-content; /* Set height to fit the content inside */
+  height: 550px; /* Set height to fit the content inside */
   background-color: white; /* Set background color to white */
   border-radius: 10px; /* Apply a border radius of 10 pixels */
   box-shadow: 0px 0px 5px 1px rgb(220, 220, 220);
@@ -1010,7 +1022,7 @@ input[type="checkbox"] {
 }
 
 #footer {
-  margin-top: 800px; /* Set top margin to 835 pixels */
+  margin-top: 880px; /* Set top margin to 835 pixels */
   color: white; /* Set text color to white */
 }
 
@@ -1115,4 +1127,15 @@ input[type="checkbox"] {
 
 .sub-pop-up {
   padding: 5px;
+}
+
+/* Extreme Events.js */
+
+#disabled-month {
+  pointer-events: none; /* Disables click events */
+  opacity: 0.5; /* Makes it visually appear disabled */
+}
+#disabled-year {
+  pointer-events: none; /* Disables click events */
+  opacity: 0.5; /* Makes it visually appear disabled */
 }

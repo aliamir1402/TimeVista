@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom"; // Assuming you're using React Router
 import Navbar from "./navbar";
 import Footer from "./footer";
@@ -10,22 +10,31 @@ import { Link } from "react-router-dom";
 import Welcome from "./welcome";
 
 export default function Dashboard() {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const data = queryParams.get("data");
-  var flag;
-  if (data == null) {
-    flag = 0;
-  } else {
-    flag = 1;
+  // Check if an item exists in local storage
+  function isLocalStorageItemExists(key) {
+    return localStorage.getItem(key) !== null;
   }
+  useEffect(() => {
+    // Example usage
+    const itemName = "username"; // Replace with the name of the item you want to check
+    const exists = isLocalStorageItemExists(itemName);
+
+    if (!exists) redirectToLink("/../login", 500);
+  }, []);
+
+  var redirectToLink = (url, delay) => {
+    setTimeout(function () {
+      window.location.href = url;
+    }, delay);
+  };
+
   return (
     <>
       <div className="themeBlack text-white bgcolor-white">
-        <Navbar name={data} flag={flag} />
+        <Navbar />
         <div>
           <div className="mt-2 p-2 bg-line"></div>
-          <Welcome name={data} flag={flag}></Welcome>
+          <Welcome></Welcome>
           <div className="mt-2 p-2 bg-line"></div>
           <div className="flex_box items-center justify-center mt-8">
             <Link to="/analytics">

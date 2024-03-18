@@ -77,8 +77,7 @@ export default function SimpleLineChart(props) {
   return (
     <>
       <div
-        className="area-chart p-4 md:p-6"
-        style={{ boxShadow: "0px 0px 10px 0px rgb(230, 230, 230)" }}
+        className="md:p-6 pb-0"
       >
         <div class="flex justify-between pb-4 mb-4 der-b">
           <div class="flex items-center">
@@ -136,32 +135,6 @@ export default function SimpleLineChart(props) {
             <Area type="monotone" dataKey="y" stroke="#8884d8" fill="#8884d8" />
           </AreaChart>
         </ResponsiveContainer>
-        <div className="flex_box flex justify-end mt-4">
-          <div>
-            <button className="time-stamps-button">1D</button>
-          </div>
-          <div>
-            <button className="time-stamps-button">7D</button>
-          </div>
-          <div>
-            <button className="time-stamps-button">1M</button>
-          </div>
-          <div>
-            <button className="time-stamps-button">1Y</button>
-          </div>
-          <div>
-            <button className="time-stamps-button">5Y</button>
-          </div>
-          <div>
-            <button className="time-stamps-button">10Y</button>
-          </div>
-          <div>
-            <button className="time-stamps-button">25Y</button>
-          </div>
-          <div>
-            <button className="time-stamps-button">MAX</button>
-          </div>
-        </div>
       </div>
     </>
   );

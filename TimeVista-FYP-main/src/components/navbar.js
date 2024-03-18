@@ -7,6 +7,8 @@ import moon from "./images/moon.png";
 export default function Navbar(props) {
   var [im_theme, setim_theme] = useState("sun-logo");
   var [im_name, setim_name] = useState(props.sun);
+  var flag = 0;
+  var name = "";
 
   function revertThemeFunc() {
     const body = document.body;
@@ -21,7 +23,24 @@ export default function Navbar(props) {
       setim_name(props.sun);
     }
   }
-  if (props.flag) {
+
+  // Check if an item exists in local storage
+  function isLocalStorageItemExists(key) {
+    return localStorage.getItem(key) !== null;
+  }
+
+  // Example usage
+  const itemName = "username"; // Replace with the name of the item you want to check
+  const exists = isLocalStorageItemExists(itemName);
+
+  if (exists) {
+    flag = 1;
+    name = localStorage.getItem(itemName);
+  } else {
+    flag = 0;
+  }
+
+  if (flag) {
     return (
       <>
         <div className="ml-4 p-2 main-nav-inline flex_box">
@@ -65,7 +84,7 @@ export default function Navbar(props) {
                 type="button"
                 class="text-white bg-gradient-to-br from-green-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-full text-sm px-7 py-2.5 text-center mr-2 mb-2 mt-5"
               >
-                {props.name}
+                {name}
               </button>
             </Link>
           </div>
