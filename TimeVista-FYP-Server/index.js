@@ -172,7 +172,7 @@ app.post("/api/gisLayer", async (req, res) => {
         count = 0;
       }
     }
-    console.log(CityOBJ.length);
+    console.log(CityOBJ);
 
     res.json(CityOBJ);
   } catch (error) {
@@ -180,48 +180,17 @@ app.post("/api/gisLayer", async (req, res) => {
   }
 });
 
-// Route to add data
-app.post("/api/signup", async (req, res) => {
+app.post("/api/HistoryData", async (req, res) => {
   try {
+    const database = client.db("TimeVista"); // Connect to the "TimeVista" database
+    const collection = database.collection("cityDataset"); // Access the "cityDataset" collection
     const EntryData = req.body;
+    console.log("Running...");
 
-    const database = client.db("TimeVista");
-    const collection = database.collection("users");
-    const FetchDisplay = await collection
-      .find(
-        {
-          $or: [
-            {
-              email: EntryData["email"],
-            },
-            { username: EntryData["username"] },
-          ],
-        },
-        {
-          username: 1,
-          email: 1,
-          _id: 0, // Exclude _id field from the result
-        }
-      )
-      .toArray(); // Convert cursor to array
+    var FetchData = await collection.find({}).toArray();
+    console.log(FetchData);
 
-    console.log(FetchDisplay);
-    if (FetchDisplay.length == 0) {
-      console.log(0);
-
-      const dataDisplay = await collection.insertOne(EntryData);
-      //console.log("Data inserted:", dataDisplay.ops[0]);
-      res.json(0); // Send inserted data back as response
-    } else if (
-      FetchDisplay[0].email == EntryData["email"] &&
-      FetchDisplay[0].username == EntryData["username"]
-    ) {
-      res.json(3);
-    } else if (FetchDisplay[0].email == EntryData["email"]) {
-      res.json(1);
-    } else if (FetchDisplay[0].username == EntryData["username"]) {
-      res.json(2);
-    }
+    res.json(0);
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -255,9 +224,9 @@ app.post("/api/login", async (req, res) => {
 
     //console.log(FetchDisplay);
     if (FetchDisplay.length == 1) {
-      res.json([0, FetchDisplay[0].name]); // Send inserted data back as response
+      res.json([0, FetchDisplay[0].name, FetchDisplay[0].username]); // Send inserted data back as response
     } else if (FetchDisplay.length == 0) {
-      res.json([1, FetchDisplay[0].name]);
+      res.json([1]);
     }
   } catch (error) {
     console.error("Error inserting data:", error);
