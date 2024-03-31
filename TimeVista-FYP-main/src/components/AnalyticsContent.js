@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -54,14 +54,14 @@ function a11yProps(index) {
 export default function VerticalTabs() {
   const [name, setName] = useState("Ali Amir Khawaja");
   const [value, setValue] = useState(0);
-  const [timecounter, setTimecounter] = useState(1980);
-  const [isSelected1, setIsSelected1] = useState(false);
+  const [timecounter, setTimecounter] = useState(1985);
+  const [isSelected1, setIsSelected1] = useState(true);
   const [isSelected2, setIsSelected2] = useState(false);
   const [isSelected3, setIsSelected3] = useState(false);
   const [isSelected4, setIsSelected4] = useState(false);
   const [isSelected5, setIsSelected5] = useState(false);
   const [isSelected6, setIsSelected6] = useState(false);
-  const [isSelected9, setIsSelected9] = useState(false);
+  const [isSelected9, setIsSelected9] = useState(true);
   const [isSelected10, setIsSelected10] = useState(false);
   const [isSelected11, setIsSelected11] = useState(false);
   const [gisflag, setGisflag] = useState(0);
@@ -69,6 +69,10 @@ export default function VerticalTabs() {
   const [arrowData, setArrowData] = useState([]);
   const [feature, setFeature] = useState(0);
   const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    DataFetchGISLayer();
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -227,7 +231,6 @@ export default function VerticalTabs() {
     else if (isSelected6 === true) setFeature(6);
     if (isSelected9 === true) setTime(1);
     else if (isSelected10 === true) setTime(2);
-    else if (isSelected11 === true) setTime(3);
 
     let Reqobj = {
       feature: feature,
@@ -354,7 +357,7 @@ export default function VerticalTabs() {
               <div className="flex_box">
                 <div
                   className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected1 ? "selected" : ""
+                    isSelected1 ? "selected-1" : ""
                   }`}
                 >
                   <button className="gis-button" onClick={handleButtonClick1}>
@@ -363,7 +366,7 @@ export default function VerticalTabs() {
                 </div>
                 <div
                   className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected2 ? "selected" : ""
+                    isSelected2 ? "selected-1" : ""
                   }`}
                 >
                   <button className="gis-button" onClick={handleButtonClick2}>
@@ -374,7 +377,7 @@ export default function VerticalTabs() {
               <div className="flex_box">
                 <div
                   className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected3 ? "selected" : ""
+                    isSelected3 ? "selected-1" : ""
                   }`}
                 >
                   <button className="gis-button" onClick={handleButtonClick3}>
@@ -383,7 +386,7 @@ export default function VerticalTabs() {
                 </div>
                 <div
                   className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected4 ? "selected" : ""
+                    isSelected4 ? "selected-1" : ""
                   }`}
                 >
                   <button className="gis-button" onClick={handleButtonClick4}>
@@ -394,7 +397,7 @@ export default function VerticalTabs() {
               <div className="flex_box">
                 <div
                   className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected5 ? "selected" : ""
+                    isSelected5 ? "selected-1" : ""
                   }`}
                 >
                   <button className="gis-button" onClick={handleButtonClick5}>
@@ -403,7 +406,7 @@ export default function VerticalTabs() {
                 </div>
                 <div
                   className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected6 ? "selected" : ""
+                    isSelected6 ? "selected-1" : ""
                   }`}
                 >
                   <button className="gis-button" onClick={handleButtonClick6}>
@@ -438,7 +441,7 @@ export default function VerticalTabs() {
               <div className="flex_box">
                 <div
                   className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected9 ? "selected" : ""
+                    isSelected9 ? "selected-1" : ""
                   }`}
                 >
                   <button className="gis-button" onClick={handleButtonClick9}>
@@ -447,7 +450,7 @@ export default function VerticalTabs() {
                 </div>
                 <div
                   className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected10 ? "selected" : ""
+                    isSelected10 ? "selected-1" : ""
                   }`}
                 >
                   <button className="gis-button" onClick={handleButtonClick10}>
