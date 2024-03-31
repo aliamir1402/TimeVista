@@ -185,12 +185,56 @@ app.post("/api/HistoryData", async (req, res) => {
     const database = client.db("TimeVista"); // Connect to the "TimeVista" database
     const collection = database.collection("cityDataset"); // Access the "cityDataset" collection
     const EntryData = req.body;
-    console.log("Running...");
+    console.log("Running-2...");
+    var feature;
+    if (EntryData.feature === 1) feature = "temperature_2m_mean";
+    else if (EntryData.feature === 2) feature = "total_precipitation_mean";
+    else if (EntryData.feature === 3) feature = "Humidity";
+    else if (EntryData.feature === 4) feature = "surface_pressure_mean";
+    else if (EntryData.feature === 5) feature = "Wind Speed";
+    else if (EntryData.feature === 6)
+      feature = "surface_thermal_radiation_downwards_mean";
 
-    var FetchData = await collection.find({}).toArray();
+    var projection = { CityID: 1, date: 1, _id: 0 }; // Always include CityID and date
+    projection[feature] = 1; // Dynamically include the selected feature
+
+    var FetchData = await collection
+      .aggregate([
+        {
+          $match: { CityID: EntryData.city },
+        },
+        {
+          $addFields: {
+            formatted_date: {
+              $dateFromString: {
+                dateString: "$date",
+                format: "%d-%m-%Y",
+              },
+            },
+          },
+        },
+        {
+          $project: {
+            CityID: 1,
+            date: 1,
+            formatted_date: 1,
+            [feature]: 1,
+            _id: 0,
+          },
+        },
+        {
+          $sort: { formatted_date: -1 },
+        },
+        {
+          $limit: EntryData.days,
+        },
+      ])
+      .toArray();
     console.log(FetchData);
 
-    res.json(0);
+    
+
+    res.json(FetchData);
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -200,7 +244,7 @@ app.post("/api/HistoryData", async (req, res) => {
 // Route to add data
 app.post("/api/login", async (req, res) => {
   try {
-    const EntryData = req.body;
+    const EntryData = req.body;                                                            
 
     const database = client.db("TimeVista");
     const collection = database.collection("users");
