@@ -280,7 +280,7 @@ app.post("/api/login", async (req, res) => {
 
 
 // Handle the root path with a simple message
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
  console.log("Server is Listening...");
 });
 
