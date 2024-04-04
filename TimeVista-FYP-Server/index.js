@@ -278,10 +278,21 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+
 // Handle the root path with a simple message
-app.get("/", (req, res) => {
-  res.send("Welcome to your Express serverr!");
+app.get("/", async (req, res) => {
+  try {
+    const database = client.db("TimeVista");
+    const collection = database.collection("natural disaster info");
+    const FetchDisplay = await collection.find({}).toArray(); // Convert cursor to array
+    console.log(FetchDisplay);
+    res.json(FetchDisplay);
+  } catch (error) {
+    console.error("Error inserting data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
+
 
 // Close the MongoDB connection when the server stops
 process.on("SIGINT", () => {
