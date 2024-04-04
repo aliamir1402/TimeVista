@@ -281,7 +281,7 @@ app.post("/api/login", async (req, res) => {
 
 // Handle the root path with a simple message
 app.get("/", (req, res) => {
- console.log("Server is Listening...");
+ res.send("Welcome to your Express serverr!");
 });
 
 
