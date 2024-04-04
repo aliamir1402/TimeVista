@@ -5,44 +5,107 @@ import FloodIcon from "../components/images/flood_11518282.png"; // Import anoth
 import WindIcon from "../components/images/windstorm_2480645.png";
 import DroughtIcon from "../components/images/desert_11056941.png";
 import SnowIcon from "../components/images/desert_11056941.png";
+import Loader from "./loader.js";
 
-export default function Maps() {
+export default function Maps(props) {
   useEffect(() => {
-    const map = new maplibregl.Map({
-      container: "map-markers",
-      style:
-        "https://api.maptiler.com/maps/streets/style.json?key=ub6D6mcohLuVpSQqkHI2",
-      center: [70.0479, 30.6844],
-      zoom: 5,
-    });
+    if (props.gisflag) {
+      const map = new maplibregl.Map({
+        container: "map-markers",
+        style:
+          "https://api.maptiler.com/maps/streets/style.json?key=ub6D6mcohLuVpSQqkHI2",
+        center: [70.0479, 30.6844],
+        zoom: 5,
+      });
 
-    map.on("load", async () => {
-      var rainImage = await map.loadImage(RainIcon);
-      var floodImage = await map.loadImage(FloodIcon);
-      var windImage = await map.loadImage(WindIcon);
-      var DroughtImage = await map.loadImage(DroughtIcon);
-      var SnowImage = await map.loadImage(SnowIcon);
+      map.on("load", async () => {
+        var rainImage = await map.loadImage(RainIcon);
+        var floodImage = await map.loadImage(FloodIcon);
+        var windImage = await map.loadImage(WindIcon);
+        var DroughtImage = await map.loadImage(DroughtIcon);
+        var SnowImage = await map.loadImage(SnowIcon);
 
-      map.addImage("rain", rainImage.data);
-      map.addImage("flood", floodImage.data);
-      map.addImage("wind", windImage.data);
-      map.addImage("Drought", DroughtImage.data);
-      map.addImage("Snow", SnowImage.data);
+        map.addImage("RainFall", rainImage.data);
+        map.addImage("Floods", floodImage.data);
+        map.addImage("Winds", windImage.data);
+        map.addImage("Drought", DroughtImage.data);
+        map.addImage("Snow", SnowImage.data);
 
-      map.addControl(
-        new maplibregl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true,
+        map.addControl(
+          new maplibregl.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: true,
+            },
+            trackUserLocation: true,
+          })
+        );
+
+        map.addSource("point", {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: props.mapsData,
           },
-          trackUserLocation: true,
-        })
-      );
+        });
 
-      map.addSource("point", {
-        type: "geojson",
-        data: {
-          type: "FeatureCollection",
-          features: [
+        map.addLayer({
+          id: "points",
+          type: "symbol",
+          source: "point",
+          layout: {
+            "icon-image": ["get", "icon"], // Use the "icon" property from GeoJSON
+            "icon-size": 0.35,
+          },
+        });
+        let popup; // Declare popup variable outside of event listeners
+
+        map.on("click", "points", function (e) {
+          var coordinates = e.features[0].geometry.coordinates.slice();
+          var cityName = e.features[0].properties.cityName;
+
+          // Create a button element
+          var button = document.createElement("button");
+          button.textContent = "More Info";
+
+          // Add a click event listener to the button
+          button.addEventListener("click", function () {
+            // Handle button click action, such as opening a modal or navigating to a new page
+            alert("More information about " + cityName);
+          });
+
+          // Ensure that if the map is zoomed out such that multiple
+          // copies of the feature are visible, the popup appears
+          // over the copy being pointed to.
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+          }
+
+          // Create new popup and assign it to popup variable
+          popup = new maplibregl.Popup()
+            .setLngLat(coordinates)
+            .setDOMContent(button) // Set the button as the popup content
+            .addTo(map);
+        });
+      });
+    }
+  }, [props.gisflag, props.mapsData]);
+  if (props.gisflag) {
+    return (
+      <>
+        <div id="map-markers" className="map-markers"></div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
+}
+
+/*
+[
             {
               type: "Feature",
               geometry: {
@@ -51,7 +114,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Sialkot",
-                icon: "rain",
+                icon: "RainFall",
               },
             },
             {
@@ -62,7 +125,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Bahawalpur",
-                icon: "flood",
+                icon: "Floods",
               },
             },
             {
@@ -73,7 +136,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Rahim Yar Khan",
-                icon: "wind",
+                icon: "Winds",
               },
             },
             {
@@ -84,7 +147,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Jhelum",
-                icon: "rain",
+                icon: "RainFall",
               },
             },
             {
@@ -95,7 +158,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Hyderabad",
-                icon: "flood",
+                icon: "Floods",
               },
             },
             {
@@ -106,7 +169,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Sheikhupura",
-                icon: "wind",
+                icon: "Winds",
               },
             },
             {
@@ -117,7 +180,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Dera Ghazi Khan",
-                icon: "rain",
+                icon: "RainFall",
               },
             },
             {
@@ -128,7 +191,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Sukkur",
-                icon: "flood",
+                icon: "Floods",
               },
             },
             {
@@ -139,7 +202,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Muzaffargarh",
-                icon: "wind",
+                icon: "Winds",
               },
             },
             {
@@ -150,7 +213,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Chakwal",
-                icon: "rain",
+                icon: "RainFall",
               },
             },
             {
@@ -161,7 +224,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Larkana",
-                icon: "flood",
+                icon: "Floods",
               },
             },
             {
@@ -172,7 +235,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Nawabshah",
-                icon: "wind",
+                icon: "Winds",
               },
             },
             {
@@ -183,7 +246,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Khushab",
-                icon: "rain",
+                icon: "RainFall",
               },
             },
             {
@@ -194,7 +257,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Rajanpur",
-                icon: "flood",
+                icon: "Floods",
               },
             },
             {
@@ -205,7 +268,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Mandi Bahauddin",
-                icon: "wind",
+                icon: "Winds",
               },
             },
             {
@@ -216,7 +279,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Okara",
-                icon: "rain",
+                icon: "RainFall",
               },
             },
             {
@@ -227,7 +290,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Mianwali",
-                icon: "flood",
+                icon: "Floods",
               },
             },
             {
@@ -238,7 +301,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Jacobabad",
-                icon: "wind",
+                icon: "Winds",
               },
             },
             {
@@ -249,7 +312,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Gujrat",
-                icon: "rain",
+                icon: "RainFall",
               },
             },
             {
@@ -260,7 +323,7 @@ export default function Maps() {
               },
               properties: {
                 cityName: "Bhakkar",
-                icon: "flood",
+                icon: "Floods",
               },
             },
             {
@@ -312,53 +375,4 @@ export default function Maps() {
               },
             },
           ],
-        },
-      });
-
-      map.addLayer({
-        id: "points",
-        type: "symbol",
-        source: "point",
-        layout: {
-          "icon-image": ["get", "icon"], // Use the "icon" property from GeoJSON
-          "icon-size": 0.35,
-        },
-      });
-      let popup; // Declare popup variable outside of event listeners
-
-      map.on("click", "points", function (e) {
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var cityName = e.features[0].properties.cityName;
-
-        // Create a button element
-        var button = document.createElement("button");
-        button.textContent = "More Info";
-
-        // Add a click event listener to the button
-        button.addEventListener("click", function () {
-          // Handle button click action, such as opening a modal or navigating to a new page
-          alert("More information about " + cityName);
-        });
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        // Create new popup and assign it to popup variable
-        popup = new maplibregl.Popup()
-          .setLngLat(coordinates)
-          .setDOMContent(button) // Set the button as the popup content
-          .addTo(map);
-      });
-    });
-  }, []);
-
-  return (
-    <>
-      <div id="map-markers" className="map-markers"></div>
-    </>
-  );
-}
+*/

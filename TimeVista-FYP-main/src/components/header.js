@@ -57,17 +57,31 @@ export default function Header() {
             </div>
           </Link>
         </div>
-        <div className="flex bor">
-          <button>
-            <img src={SearchIcon} alt="Profile Pic" className="commonicon" />
-          </button>
-          <Notifications></Notifications>
-          <button>
-            <img src={helpIcon} alt="Profile Pic" className="commonicon" />
-          </button>
+        <div className="bor w-fit pt-6 flex_item">
+          <a href="#" className="wavy-underline nav-effects">
+            Home
+          </a>
+          <a href="#" className="wavy-underline nav-effects">
+            Products
+          </a>
+          <a href="#" className="wavy-underline nav-effects">
+            About
+          </a>
+          <a href="#" className="wavy-underline nav-effects">
+            Articles
+          </a>
+          <a href="#" className="wavy-underline nav-effects">
+            Contact Us
+          </a>
+          <a href="#" className="wavy-underline nav-effects">
+            FAQs
+          </a>
+          <a href="#" className="wavy-underline nav-effects">
+            Subscribe
+          </a>
         </div>
         <div className="divider flex"></div>
-        <div className="flex bor">
+        <div className="flex bor flex_item">
           <div className="mr-2 mt-3.5">
             <img src={ppic} alt="Profile Pic" className="ppic" />
           </div>
