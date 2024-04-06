@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Map from "./Maps.js";
 import Loader from "../components/loader.js";
 import Header from "../components/header.js";
+import { gsap } from "gsap";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,8 +43,9 @@ function a11yProps(index) {
 export default function VerticalTabs() {
   const [name, setName] = useState("Ali Amir Khawaja");
   const [value, setValue] = useState(0);
+  const [mapsData, setMapsData] = useState(null);
+  const [eventsData, setEventsData] = useState(null);
   const [loaderFlag, setLoaderFlag] = useState(false);
-  const [eventsData, setEventsData] = useState([]);
   const [timecounter, setTimecounter] = useState(1980);
   const [isSelected1, setIsSelected1] = useState(false);
   const [isSelected2, setIsSelected2] = useState(false);
@@ -63,10 +65,10 @@ export default function VerticalTabs() {
   const [time, setTime] = useState(0);
   const [monthcounter, setMonthcounter] = useState(0);
   const [selectPrompt, setSelectPrompt] = useState(" Select All");
-  const [mapsData, setMapsData] = useState([]);
+  const [dataAnalytics, setDataAnalytics] = useState({});
 
   useEffect(() => {
-    const fetchData = async (reqObj) => {
+    async function fetchData(reqObj) {
       try {
         const response = await fetch("http://localhost:5000/api/ExEvents", {
           method: "POST",
@@ -75,22 +77,77 @@ export default function VerticalTabs() {
           },
           body: JSON.stringify(reqObj),
         });
-        const responseData = await response.json();
-        console.log(responseData);
-
-        setEventsData(responseData);
-        console.log(eventsData);
+        var data = await response.json();
+        setEventsData(data);
         // Process responseData as needed
+        let regions = [],
+          cities = [],
+          disasters = [],
+          drought = 0,
+          earthquake = 0,
+          winds = 0,
+          rainfall = 0,
+          floods = 0,
+          heatwave = 0,
+          locust = 0,
+          cyclone = 0,
+          snow = 0,
+          hailstorm = 0;
+        for (let i = 0; i < data.length; i++) {
+          regions.push(data[i].region);
+          cities.push(data[i].city);
+          disasters.push(data[i].icon);
+          if (data[i].icon === "Drought") drought += 1;
+          else if (data[i].icon === "Earthquake") earthquake += 1;
+          else if (data[i].icon === "Winds") winds += 1;
+          else if (data[i].icon === "RainFall") rainfall += 1;
+          else if (data[i].icon === "Floods") floods += 1;
+          else if (data[i].icon === "HeatWave") heatwave += 1;
+          else if (data[i].icon === "Locust") locust += 1;
+          else if (data[i].icon === "Cyclone") cyclone += 1;
+          else if (data[i].icon === "Snow") snow += 1;
+          else if (data[i].icon === "Hailstorm") hailstorm += 1;
+        }
+        regions = [...new Set(regions)];
+        cities = [...new Set(cities)];
+        disasters = [...new Set(disasters)];
+        setDataAnalytics({
+          regions: regions,
+          cities: cities,
+          disasters: disasters,
+          numDrought: drought,
+          numEarthquake: earthquake,
+          numWinds: winds,
+          numRainfall: rainfall,
+          numHeatwave: heatwave,
+          numLocust: locust,
+          numCyclone: cyclone,
+          numSnow: snow,
+          numHailstorm: hailstorm,
+          numFloods: floods,
+        });
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
         setLoaderFlag(true);
       }
-    };
+    }
     fetchData({});
     // Call fetchData function here with necessary request object
     // Example: fetchData({ /* your request object */ });
   }, []); // Empty dependency array means this effect runs only once after initial render
+
+  useEffect(() => {
+    console.log(eventsData);
+  }, [eventsData]);
+
+  useEffect(() => {
+    console.log(timecounter);
+  }, [timecounter]);
+
+  useEffect(() => {
+    console.log(dataAnalytics);
+  }, [dataAnalytics]);
 
   const Month = [
     "Jan",
@@ -185,10 +242,14 @@ export default function VerticalTabs() {
     if (isSelected12) setTime(1);
 
     for (let i = 0; i < eventsData.length; i++) {
-      if (eventsData[i].Event in feature) {
+      if (
+        feature.includes(eventsData[i].icon) &&
+        eventsData[i].year === timecounter
+      ) {
         filterArray.push(eventsData[i]);
       }
     }
+    console.log(filterArray);
 
     let arr = [];
 
@@ -200,8 +261,15 @@ export default function VerticalTabs() {
           coordinates: filterArray[i].coordinates, // Coordinates for Sialkot
         },
         properties: {
+          EventId: filterArray[i].EventId,
           cityName: filterArray[i].city,
           icon: filterArray[i].icon,
+          year: filterArray[i].year,
+          duration: filterArray[i].duration,
+          Event: filterArray[i].Event,
+          region: filterArray[i].region,
+          notes: filterArray[i].notes,
+          url: filterArray[i].url,
         },
       });
     }
@@ -212,6 +280,10 @@ export default function VerticalTabs() {
     });
     setGisflag(1);
   };
+
+  useEffect(() => {
+    console.log(mapsData);
+  }, [mapsData]);
 
   const handleButtonClick1 = () => {
     setIsSelected1(!isSelected1); // Toggle isSelected state
@@ -249,7 +321,7 @@ export default function VerticalTabs() {
 
   const handleButtonClick12 = () => {
     setIsSelected12(!isSelected12); // Toggle isSelected state
-    if (!isSelected9) {
+    if (!isSelected12) {
       document.getElementById("disabled-year").style.pointerEvents = "all";
       document.getElementById("disabled-year").style.opacity = "1";
       //document.getElementById("disabled-month").style.pointerEvents = "none";
@@ -307,11 +379,27 @@ export default function VerticalTabs() {
     }
   };*/
 
+  const counterFunc = (newVal, index) => {
+    var count = { val: 0 };
+    var counter = document.getElementsByClassName("counter");
+
+    gsap.to(count, {
+      duration: 3, // duration in seconds
+      val: newVal,
+      roundProps: { val: 1 }, // Round the value to integer
+      onUpdate: function () {
+        counter[index].innerHTML = count.val;
+      },
+    });
+  };
+
+  const showBoxFunc = (OBJ) => {};
+
   if (loaderFlag) {
     return (
       <>
-        <Header></Header>
         <div className="analytics-main">
+          <Header></Header>
           <div className="welcome-box-analytics">
             <div className="text-md font-normal">Welcome, {name}</div>
             <div className="text-3xl font-bold">
@@ -341,71 +429,119 @@ export default function VerticalTabs() {
             ></div>
             <div>Extreme Events Screener</div>
           </div>
-
-          <div className="bor flex_box pl-12 pr-12">
-            <div className="bor flex_item">
-              <div>Pakistan - 1980 Onwards...</div>
-              <div className="bor flex_box">
-                <div className="bor flex_item">
-                  <div className="bor">Regions</div>
-                  <div className="bor flex justify-center items-center">5</div>
-                </div>
-                <div className="bor flex_item">
-                  <div className="bor">Cities</div>
-                  <div className="bor flex justify-center items-center">40</div>
-                </div>
-              </div>
-              <div className="bor flex_box">
-                <div className="bor flex_item">
-                  <div className="bor">Disasters</div>
-                  <div className="bor flex justify-center items-center">5</div>
-                </div>
-                <div className="bor flex_item">
-                  <div className="bor">Affectees</div>
-                  <div className="bor flex justify-center items-center">40</div>
-                </div>
+          <div
+            className="ml-7"
+            style={{
+              borderRadius: "10px 10px 10px 0px",
+              backgroundColor: "#454545",
+              width: "fit-content",
+              padding: "5px",
+              color: "white",
+              paddingLeft: "30px",
+              paddingRight: "30px",
+            }}
+          >
+            Pakistan - 1980 Onwards...
+          </div>
+          <div className="flex_box ml-4 mt-2 mb-2" style={{ width: "95%" }}>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Regions</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.regions.length, 0)}
+                ></div>
               </div>
             </div>
-            <div className="bor flex_item">
-              <div className="flex">
-                <div className="bor flex_item">
-                  <div>Drought</div>
-                  <div className="bor flex justify-center items-center">40</div>
-                </div>
-                <div className="bor flex_item">
-                  <div>Earthquake</div>
-                  <div className="bor flex justify-center items-center">40</div>
-                </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Cities</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.cities.length, 1)}
+                ></div>
               </div>
-              <div className="flex">
-                <div className="bor flex_item">
-                  <div>Winds</div>
-                  <div className="bor flex justify-center items-center">50</div>
-                </div>
-                <div className="bor flex_item">
-                  <div>RainFall</div>
-                  <div className="bor flex justify-center items-center">50</div>
-                </div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Disasters</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.disasters.length, 2)}
+                ></div>
               </div>
-              <div className="flex">
-                <div className="bor flex_item">
-                  <div>Floods</div>
-                  <div className="bor flex justify-center items-center">50</div>
-                </div>
-                <div className="bor flex_item">
-                  <div>Heatwave</div>
-                  <div className="bor flex justify-center items-center">50</div>
-                </div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Drought</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.numDrought, 3)}
+                ></div>
               </div>
-              <div className="flex">
-                <div className="bor flex_item">
-                  <div>Snow</div>
-                  <div className="bor flex justify-center items-center">50</div>
-                </div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Earthquake</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.numEarthquake, 4)}
+                ></div>
+              </div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Winds</div>
+              <div
+                className="counter pt-2 text-4xl flex justify-center items-center"
+                onLoad={counterFunc(dataAnalytics.numWinds, 5)}
+              ></div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">RainFall</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.numRainfall, 6)}
+                ></div>
+              </div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Floods</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.numFloods, 7)}
+                ></div>
+              </div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Heatwave</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.numHeatwave, 8)}
+                ></div>
+              </div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">Snow</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.numSnow, 9)}
+                ></div>
+              </div>
+            </div>
+            <div id="Box_1" className="flex_item">
+              <div className="flex justify-center items-center">HailStorm</div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="counter pt-2 text-4xl"
+                  onLoad={counterFunc(dataAnalytics.numHailstorm, 10)}
+                ></div>
               </div>
             </div>
           </div>
-
           <div id="gis-layer" className="flex_box">
             <div id="sidebar-gis" className="bor">
               <div className="mt-4">
@@ -644,29 +780,15 @@ export default function VerticalTabs() {
               </div>
             </div>
             <div id="map-gis" className="flex justify-center items-center">
-              <Map flag={gisflag} data={mapsData} feature={feature}></Map>
+              <Map
+                flag={gisflag}
+                data={mapsData}
+                feature={feature}
+                showBox={showBoxFunc}
+              ></Map>
             </div>
           </div>
-          <div id="info_box_show" className="bor flex_box ml-4 mr-8 mb-4">
-            <div className="bor flex justify-center text-center text-3xl flex_item">
-              <img src="" alt="Image" />
-            </div>
-            <div className="bor flex_item">
-              <div className="bor justify-center text-center">Title</div>
-              <div className="bor flex">
-                <div className="bor justify-center text-center flex_item">
-                  Category
-                </div>
-                <div className="bor justify-center text-center flex_item">
-                  Location
-                </div>
-              </div>
-              <div className="bor">
-                <div className="bor">Description</div>
-                <div>References</div>
-              </div>
-            </div>
-          </div>
+
           <div
             className="pt-8 pl-12 flex_box"
             style={{
