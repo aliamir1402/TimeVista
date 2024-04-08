@@ -448,15 +448,7 @@ export default function VerticalTabs() {
                     Year
                   </button>
                 </div>
-                <div
-                  className={` flex_item flex items-center justify-center m-1 ${
-                    isSelected10 ? "selected-1" : ""
-                  }`}
-                >
-                  <button className="gis-button" onClick={handleButtonClick10}>
-                    Month
-                  </button>
-                </div>
+                
               </div>
             </div>
 

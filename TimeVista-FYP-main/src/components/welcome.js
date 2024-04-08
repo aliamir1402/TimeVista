@@ -1,5 +1,5 @@
 import React from "react";
-import waveHand from "./images/Whand.png";
+import waveHand from "../components/images/Whand.png";
 
 export default function Welcome(props) {
   var name = "",

@@ -112,7 +112,7 @@ export default function Dashboard() {
               </div>
             </Link>
 
-            <Link to="/analytics">
+            <Link to="/datasets">
               <div className="box-1-selection  flex_item mx-5">
                 <div className="flex_box">
                   <div className="flex_item">

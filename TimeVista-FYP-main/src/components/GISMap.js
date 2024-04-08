@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import maplibregl from "maplibre-gl";
 import PopulationData from "../components/population.geojson";
-import Loader from "../components/images/Loader.gif";
+import Loader from "../components/loader";
 
 const GISMap = (props) => {
   var x = props.flag;

@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import maplibregl from "maplibre-gl";
-import RainFallIcon from "../images/rain.png";
-import FloodsIcon from "../images/flooded-house.png"; // Import another image for cat icon
-import WindsIcon from "../images/wind.png";
-import DroughtIcon from "../images/drought.png";
-import SnowIcon from "../images/snow.png";
-import EarthquakeIcon from "../images/earthquake.png";
-import HailStormIcon from "../images/hailstorm.png"; // Import another image for cat icon
-import HeatWaveIcon from "../images/global-warming.png";
-import CycloneIcon from "../images/tornado.png";
-import LocustIcon from "../images/locust.png";
+import RainFallIcon from "../components/images/rain.png";
+import FloodsIcon from "../components/images/flooded-house.png"; // Import another image for cat icon
+import WindsIcon from "../components/images/wind.png";
+import DroughtIcon from "../components/images/drought.png";
+import SnowIcon from "../components/images/snow.png";
+import EarthquakeIcon from "../components/images/earthquake.png";
+import HailStormIcon from "../components/images/hailstorm.png"; // Import another image for cat icon
+import HeatWaveIcon from "../components/images/global-warming.png";
+import CycloneIcon from "../components/images/tornado.png";
+import LocustIcon from "../components/images/locust.png";
 import Loader from "./loader.js";
-import InfoImage from "../images/LandScapeImg.jpg";
-import CloseIcon from "../images/close.svg";
+import InfoImage from "../components/images/LandScapeImg.jpg";
+import CloseIcon from "../components/images/close.svg";
 import { Notes } from "@mui/icons-material";
 
 export default function Maps(props) {
