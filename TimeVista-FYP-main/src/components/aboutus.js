@@ -52,7 +52,7 @@ export default function Aboutus() {
             <img src={AboutUsCover} alt="AboutUs" />
           </div>
         </div>
-        <div className="flex_box pt-12 pb-20" style={{ height: "100%" }}>
+        <div className="flex_box pt-12 pb-12" style={{ height: "100%" }}>
           <div style={{ width: "50%" }}>
             <img src={AboutUsCover} alt="AboutUsCover" />
           </div>
@@ -103,9 +103,7 @@ export default function Aboutus() {
             </div>
           </div>
         </div>
-        <div>
-          
-        </div>
+        <hr />
         <Accodation></Accodation>
         <Footer></Footer>
       </div>
