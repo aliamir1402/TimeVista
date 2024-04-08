@@ -69,6 +69,8 @@ export default function Aboutus() {
                     paddingLeft: "15px",
                     paddingRight: "15px",
                     borderRadius: "10px",
+                    width: "fit-content",
+                    margin: "10px",
                   }}
                 >
                   <div>
@@ -87,6 +89,8 @@ export default function Aboutus() {
                     paddingLeft: "15px",
                     paddingRight: "15px",
                     borderRadius: "10px",
+                    width: "fit-content",
+                    margin: "10px",
                   }}
                 >
                   <div>
@@ -107,6 +111,8 @@ export default function Aboutus() {
                     paddingLeft: "15px",
                     paddingRight: "15px",
                     borderRadius: "10px",
+                    width: "fit-content",
+                    margin: "10px",
                   }}
                 >
                   <div>
@@ -125,6 +131,8 @@ export default function Aboutus() {
                     paddingLeft: "15px",
                     paddingRight: "15px",
                     borderRadius: "10px",
+                    width: "fit-content",
+                    margin: "10px",
                   }}
                 >
                   <div>
