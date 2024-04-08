@@ -61,7 +61,15 @@ export default function Aboutus() {
             <div className="about-description-2">Description</div>
             <div className="">
               <div className="flex_box mb-8">
-                <div className="flex_box flex_item">
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "2px solid #e9e9e9",
+                    padding: "10px",
+                    paddingLeft: "15px",
+                    paddingRight: "15px",
+                  }}
+                >
                   <div>
                     <img src={Icon} alt="icon" height={80} width={80} />
                   </div>
@@ -70,7 +78,15 @@ export default function Aboutus() {
                     <div className="section-2-description">Description</div>
                   </div>
                 </div>
-                <div className="flex_box flex_item">
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "2px solid #e9e9e9",
+                    padding: "10px",
+                    paddingLeft: "15px",
+                    paddingRight: "15px",
+                  }}
+                >
                   <div>
                     <img src={Icon} alt="icon" height={80} width={80} />
                   </div>
@@ -81,7 +97,15 @@ export default function Aboutus() {
                 </div>
               </div>
               <div className="flex_box mb-8">
-                <div className="flex_box flex_item">
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "2px solid #e9e9e9",
+                    padding: "10px",
+                    paddingLeft: "15px",
+                    paddingRight: "15px",
+                  }}
+                >
                   <div>
                     <img src={Icon} alt="icon" height={80} width={80} />
                   </div>
@@ -90,7 +114,15 @@ export default function Aboutus() {
                     <div className="section-2-description">Description</div>
                   </div>
                 </div>
-                <div className="flex_box flex_item">
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "2px solid #e9e9e9",
+                    padding: "10px",
+                    paddingLeft: "15px",
+                    paddingRight: "15px",
+                  }}
+                >
                   <div>
                     <img src={Icon} alt="icon" height={80} width={80} />
                   </div>
