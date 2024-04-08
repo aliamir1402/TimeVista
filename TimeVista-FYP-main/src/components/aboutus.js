@@ -64,7 +64,7 @@ export default function Aboutus() {
                 <div
                   className="flex_box flex_item"
                   style={{
-                    border: "2px solid #e9e9e9",
+                    border: "3px solid #fdfdfd",
                     padding: "10px",
                     paddingLeft: "15px",
                     paddingRight: "15px",
@@ -84,7 +84,7 @@ export default function Aboutus() {
                 <div
                   className="flex_box flex_item"
                   style={{
-                    border: "2px solid #e9e9e9",
+                    border: "3px solid #fdfdfd",
                     padding: "10px",
                     paddingLeft: "15px",
                     paddingRight: "15px",
@@ -106,7 +106,7 @@ export default function Aboutus() {
                 <div
                   className="flex_box flex_item"
                   style={{
-                    border: "2px solid #e9e9e9",
+                    border: "3px solid #fdfdfd",
                     padding: "10px",
                     paddingLeft: "15px",
                     paddingRight: "15px",
@@ -126,7 +126,7 @@ export default function Aboutus() {
                 <div
                   className="flex_box flex_item"
                   style={{
-                    border: "2px solid #e9e9e9",
+                    border: "3px solid #fdfdfd",
                     padding: "10px",
                     paddingLeft: "15px",
                     paddingRight: "15px",
