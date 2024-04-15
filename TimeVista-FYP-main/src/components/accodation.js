@@ -11,7 +11,7 @@ import {
 export default function Accodation() {
   return (
     <>
-      <div className="m-16">
+      <div className="p-16">
         <div className="flex flex-col items-center justify-center text-center mb-10">
           <p className="text-4xl">Frequently Asked Questions</p>
           <p className="mx-0 my-4 mb-0">

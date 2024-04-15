@@ -170,7 +170,6 @@ body {
 }
 
 .footer {
-  margin-top: 5%;
   padding: 10%;
   padding-left: 0px;
   padding-right: 0px;
@@ -278,16 +277,19 @@ body {
 }
 
 .acc-item {
-  border: 2px solid #dadada;
-  border-radius: 15px 15px 0px 15px;
+  border-radius: 15px;
   font-size: 24px;
   color: black;
-  margin: 10px;
+  margin: 20px;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  border-bottom: 3px solid #353535;
+  border-top: 3px solid #353535;
 }
 
 .acc-item:hover {
-  background-color: #dadada;
-  border-radius: 15px 15px 0px 15px;
+  background-color: #353535;
+  color: white;
 }
 
 .maps {
@@ -542,9 +544,9 @@ body {
 
 .themeBlack {
   color: white;
-  background-color: #1d312e;
-  /*background-image: url("../src/components/images/bgimg.png"); /* Specify the path to your image */
-  /*background-size: cover; /* This property ensures the image covers the entire background */
+  /*background-color: #1d312e;*/
+  background-image: url("../src/components/images/Home_Cover.svg");
+  background-size: cover; /*This property ensures the image covers the entire background 
   /*background-repeat: no-repeat; /* Prevents the background image from repeating */
   /*background-position: center center; /* Center the background image */
 }
@@ -1437,13 +1439,12 @@ input[type="checkbox"] {
 /* About Us.js */
 
 .section-one {
-  background: linear-gradient(to right, #12251e, #274137);
+  background-image: url("../src/components/images/Home_Cover.svg");
   color: white;
-  width: 100vw;
 }
 
 .sub-section-one {
-  width: 50%;
+  width: 72%;
 }
 
 .about-title-section-one {
@@ -1451,14 +1452,19 @@ input[type="checkbox"] {
   font-weight: 600;
   padding-left: 10%;
   padding-top: 15%;
+  opacity: 0; /* Set initial opacity to 0 */
+  animation: slideInLeft 1s ease forwards; /* Apply slide-in animation */
 }
 
 .about-description-section-one {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 500;
   padding-left: 10%;
   padding-top: 5%;
   padding-bottom: 15%;
+  opacity: 0; /* Set initial opacity to 0 */
+  animation: slideInLeft 1s ease forwards; /* Apply slide-in animation */
+  width: 80%;
 }
 
 .about-title-2 {
@@ -1475,6 +1481,33 @@ input[type="checkbox"] {
   margin-left: 1%;
 }
 
+.section-2-title,
+.section-2-description {
+  opacity: 0; /* Set initial opacity to 0 */
+  animation: slideInLeft 1s ease forwards; /* Apply slide-in animation */
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%); /* Start position off-screen to the left */
+    opacity: 0; /* Start with opacity 0 */
+  }
+  to {
+    transform: translateX(0); /* End position, fully visible */
+    opacity: 1; /* Fully visible */
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%); /* Start position off-screen to the left */
+    opacity: 0; /* Start with opacity 0 */
+  }
+  to {
+    transform: translateX(0); /* End position, fully visible */
+    opacity: 1; /* Fully visible */
+  }
+}
+
 .section-2-title {
   font-size: 25px;
   padding: 12px;
@@ -1485,6 +1518,25 @@ input[type="checkbox"] {
   font-size: 15px;
   padding: 12px;
   padding-top: 2px;
+}
+
+.item-about {
+  background-color: #85ffbd;
+  background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
+  width: 40%;
+  border-radius: 15px;
+  padding: 7px;
+  padding-top: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  text-align: center; /* Center the content horizontally */
+  font-size: 15px; /* Increase font size for better readability */
+  color: #000000;
+  font-weight: 600;
+}
+
+#accordation-about {
+  background-color: #85ffbd;
+  background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
 }
 
 /* Contact.js */
@@ -1599,4 +1651,29 @@ input[type="checkbox"] {
   background-color: #333333;
   color: white;
   border: none;
+}
+
+#displayMessage {
+  display: none;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 2%;
+  margin-bottom: 0%;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid rgb(32, 32, 32);
+  width: 90%;
+  text-align: center;
+  color: #ffffff;
+  background-color: black;
+  animation: slideInFromRight 1s forwards; /* Apply animation */
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

@@ -8,10 +8,28 @@ import SocialIcon1 from "../components/images/twitterx.svg";
 import SocialIcon2 from "../components/images/facebook-icon.svg";
 import SocialIcon3 from "../components/images/youtube.svg";
 import Send from "../components/images/sendarrow.png";
+import { documentId } from "firebase/firestore";
 
 export default function Contact() {
-  const ContactUsFunc = async (Reqobj) => {
+  const ContactUsFunc = async () => {
     try {
+      var Reqobj = {};
+      const fname = document.getElementById("fname").value,
+        lname = document.getElementById("lname").value,
+        email = document.getElementById("email").value,
+        phone = document.getElementById("phone").value,
+        subject = document.getElementById("subject").value,
+        message = document.getElementById("message").value;
+
+      Reqobj = {
+        fname: fname,
+        lname: lname,
+        email: email,
+        phone: phone,
+        subject: subject,
+        message: message,
+      };
+
       const response = await fetch("http://localhost:5000/api/Contact", {
         method: "POST",
         headers: {
@@ -20,8 +38,20 @@ export default function Contact() {
         body: JSON.stringify(Reqobj),
       });
       const responseData = await response.json();
-
-      console.log("City: ", responseData);
+      if (responseData === 1) {
+        document.getElementById("displayMessage").innerText = "Message Sent!";
+        document.getElementById("displayMessage").style.display="block";
+        setTimeout(() => {
+          document.getElementById("displayMessage").style.display="none";
+        }, 2000);
+      } else {
+        document.getElementById("displayMessage").innerText =
+          "Error Sending Message!";
+          setTimeout(() => {
+            document.getElementById("displayMessage").style.display="none";
+          }, 2000);
+      }
+      console.log("Return Message: ", responseData);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -98,15 +128,17 @@ export default function Contact() {
             marginRight: "2%",
           }}
         ></div>
-        <div className="flex_item">
+        <form onSubmit={ContactUsFunc} className="flex_item">
           <div className="flex_box mt-10">
             <div>
               <div className="label-contact">First Name:</div>
               <div style={{ width: "90%" }}>
                 <input
+                  id="fname"
                   className="input-contact"
                   type="text"
                   placeholder="Your First Name"
+                  required
                 />
               </div>
             </div>
@@ -114,9 +146,11 @@ export default function Contact() {
               <div className="label-contact">Last Name:</div>
               <div style={{ width: "90%" }}>
                 <input
+                  id="lname"
                   className="input-contact"
                   type="text"
                   placeholder="Your Last Name"
+                  required
                 />
               </div>
             </div>
@@ -125,9 +159,11 @@ export default function Contact() {
             <div className="label-contact">Email:</div>
             <div style={{ width: "90%" }}>
               <input
+                id="email"
                 className="input-contact"
-                type="text"
+                type="email"
                 placeholder="youremail@gmail.com"
+                required
               />
             </div>
           </div>
@@ -135,9 +171,23 @@ export default function Contact() {
             <div className="label-contact">Phone Number:</div>
             <div style={{ width: "90%" }}>
               <input
+                id="phone"
                 className="input-contact"
                 type="text"
                 placeholder="e.g. 033355530116"
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <div className="label-contact">Subject:</div>
+            <div style={{ width: "90%" }}>
+              <input
+                id="subject"
+                className="input-contact"
+                type="text"
+                placeholder="Subject"
+                required
               />
             </div>
           </div>
@@ -147,20 +197,26 @@ export default function Contact() {
               <textarea
                 className="input-contact"
                 name=""
-                id=""
+                id="message"
                 rows="2"
                 style={{ width: "100%" }}
                 placeholder="Type your message here..."
+                required
               ></textarea>
             </div>
           </div>
-          <div className="contact-button flex justify-center items-center">
+
+          <button
+            type="submit"
+            className="contact-button flex justify-center items-center"
+          >
             <div>Send Message</div>
             <div>
               <img src={Send} alt="sendpic" className="ml-2" />
             </div>
-          </div>
-        </div>
+          </button>
+          <div id="displayMessage"></div>
+        </form>
       </div>
       <Footer></Footer>
     </>

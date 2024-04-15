@@ -8,7 +8,7 @@ import usernamepic from "../components/images/mail.svg";
 import showeye from "../components/images/visibility.svg";
 import noshoweye from "../components/images/visibility_off.svg";
 
-export default function Login() {
+export default function SignUp() {
   const [passwordEye, setPasswordEye] = useState(noshoweye);
 
   var changeImageShow = () => {

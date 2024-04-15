@@ -12,25 +12,25 @@ import extremeevents from "./images/icons8-climate-change-100.png";
 import cropsinsights from "./images/icons8-forage-mixed-96.png";
 import irrigation from "./images/icons8-irrigation-96.png";
 import datavisual from "./images/icons8-data-visualization-68.png";
-import Btick from "./images/bluetick.png";
-import Ytick from "./images/yellowtick.png";
 import Gtick from "./images/greentick.png";
 import Footer from "./footer.js";
 
 export default function Home() {
   return (
     <>
-      <div className="themeBlack">
-        <Navbar
-          l={logo}
-          navA={"Feature A"}
-          navB={"Feature B"}
-          navC={"Feature C"}
-          navD={"Feature D"}
-          sun={sun}
-          moon={moon}
-        ></Navbar>
-        <Cover Earth={earth}></Cover>
+      <div className="">
+        <div className="themeBlack">
+          <Navbar
+            l={logo}
+            navA={"Feature A"}
+            navB={"Feature B"}
+            navC={"Feature C"}
+            navD={"Feature D"}
+            sun={sun}
+            moon={moon}
+          ></Navbar>
+          <Cover Earth={earth}></Cover>
+        </div>
 
         <div className="bor mt-32">
           <div className="flex flex-col items-center justify-center text-center">

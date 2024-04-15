@@ -58,19 +58,19 @@ export default function Header() {
           </Link>
         </div>
         <div className="bor w-fit pt-6 flex_item">
-          <a href="#" className="wavy-underline nav-effects">
+          <a href="/../" className="wavy-underline nav-effects">
             Home
           </a>
           <a href="#" className="wavy-underline nav-effects">
             Products
           </a>
-          <a href="#" className="wavy-underline nav-effects">
+          <a href="/../aboutus" className="wavy-underline nav-effects">
             About
           </a>
           <a href="#" className="wavy-underline nav-effects">
             Articles
           </a>
-          <a href="#" className="wavy-underline nav-effects">
+          <a href="/../contact" className="wavy-underline nav-effects">
             Contact Us
           </a>
           <a href="#" className="wavy-underline nav-effects">
