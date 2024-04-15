@@ -1,6 +1,8 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
+const nodemailer = require("nodemailer");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 const PORT = process.env.PORT || 5000; // Use process.env.PORT or default to 5000
@@ -10,7 +12,7 @@ app.use(
   cors({
     origin: ["https://time-vista-two.vercel.app/"],
     method: ["POST", "GET"],
-    credentials: true,
+    credentials: true,``
   })
 );*/
 
@@ -292,6 +294,82 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+// Route to add data
+app.post("/api/signup", async (req, res) => {
+  try {
+    const EntryData = req.body;
+    const database = client.db("TimeVista");
+    const collection = database.collection("users");
+    const FetchDisplay = await collection.insertOne(EntryData);
+  } catch (error) {
+    console.error("Error inserting data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Route to add data
+app.post("/api/contact", async (req, res) => {
+  try {
+    const EntryData = req.body;
+    const database = client.db("TimeVista");
+    const collection = database.collection("UserFeedback");
+    const FetchDisplay = await collection.insertOne(EntryData);
+    const email = "aliamirkhawaja6@gmail.com",
+      password = "Computer123456789***";
+    const recipient = EntryData.email;
+    const subject = EntryData.subject;
+    const body =
+      `Dear ` +
+      EntryData.fname +
+      `,
+
+    Thank you for reaching out to us. We appreciate you taking the time to send us your message.
+    
+    Message:
+    ` +
+      EntryData.message +
+      `
+    
+    We have received your message and will get back to you as soon as possible. If you have any further questions or concerns, feel free to reply to this email.
+    
+    Thank you again for contacting us.
+    
+    Best regards,
+    Team TimeVista.
+    `;
+    const message = "Error sending mail.";
+    // Create a Nodemailer transporter using SMTP transport
+    const transporter = nodemailer.createTransport({
+      host: "smtp.elasticemail.com",
+      port: 2525, // Elastic Email SMTP port
+      auth: {
+        user: "aliamirkhawaja6@gmail.com",
+        pass: "45634F295447BFCDF8E801F402E61F837808",
+      },
+    });
+
+    // Define email options
+    const mailOptions = {
+      from: email,
+      to: recipient,
+      subject: subject,
+      text: body,
+    };
+
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error occurred:", error);
+      } else {
+        console.log("Email sent:", info.response);
+      }
+    });
+  } catch (error) {
+    console.error("Error inserting data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // Handle the root path with a simple message
 app.get("/", (req, res) => {
   res.send("Welcome to your Express serverr!");
@@ -308,3 +386,7 @@ process.on("SIGINT", () => {
 app.listen(PORT, () =>
   console.log(`Server is running on port ${process.env.PORT || PORT}`)
 );
+
+/*74LX56F7V5142MBJGXFKGRAV
+
+45634F295447BFCDF8E801F402E61F837808*/
