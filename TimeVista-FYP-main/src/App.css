@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .bor {
-  border: 1px solid rgb(0, 0, 0);
+  border: 0px solid rgb(0, 0, 0);
 }
 
 /* Media query for mobile devices (up to 768px) */
@@ -133,6 +133,7 @@ body {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   padding-left: 8%;
+  padding-right: 6%;
   height: 500px;
   font-weight: 900;
   font-family: "Overpass";
@@ -197,10 +198,20 @@ body {
   margin: 2px;
   padding: 2px;
 }
-
-.container {
+themeBlack .container {
   height: 500px;
   width: 49.5%;
+}
+
+.bgimg {
+  background-image: url("../src/components/images/blurbg.jpg"); /* Replace 'path/to/your/image.jpg' with the path to your image file */
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the background image */
+  /* Additional styles if needed */
+  color: white;
+  border-top: 10px solid;
+  /* Create a linear gradient as a border image */
+  border-image: linear-gradient(90deg, #719b5c, #23634b, #23634c6b, #00000067) 1;
 }
 
 .centered-image {
@@ -279,7 +290,6 @@ body {
 .acc-item {
   border-radius: 15px;
   font-size: 24px;
-  color: black;
   margin: 20px;
   margin-left: 1vw;
   margin-right: 1vw;
@@ -548,7 +558,18 @@ body {
   background-image: url("../src/components/images/Home_Cover.svg");
   background-size: cover; /*This property ensures the image covers the entire background 
   /*background-repeat: no-repeat; /* Prevents the background image from repeating */
-  /*background-position: center center; /* Center the background image */
+  background-position: center center; /* Center the background image */
+  height: 100vh;
+}
+
+.cover-img-dashboard {
+  color: white;
+  /*background-color: #1d312e;*/
+  background-image: url("../src/components/images/Home_Cover.svg");
+  background-size: cover; /*This property ensures the image covers the entire background 
+  /*background-repeat: no-repeat; /* Prevents the background image from repeating */
+  background-position: center center; /* Center the background image */
+  height: 100vh;
 }
 
 /*-----------------------------------*/
@@ -1338,6 +1359,7 @@ input[type="checkbox"] {
 
 /* Container styles */
 .container {
+  width: 10vw;
 }
 
 .section-dataset {
@@ -1440,6 +1462,8 @@ input[type="checkbox"] {
 
 .section-one {
   background-image: url("../src/components/images/Home_Cover.svg");
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the background image */
   color: white;
 }
 
@@ -1537,6 +1561,7 @@ input[type="checkbox"] {
 #accordation-about {
   background-color: #85ffbd;
   background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
+  color: #000000;
 }
 
 /* Contact.js */
@@ -1676,4 +1701,109 @@ input[type="checkbox"] {
   100% {
     transform: translateX(0);
   }
+}
+
+/* Articles.js */
+
+.blog-title {
+  color: #1c4f4a;
+  margin: 3%;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.blog-bar {
+  margin: 3%;
+  background-color: #1c4f4a;
+  border-radius: 35px;
+  padding-left: 1%;
+  padding-right: 1%;
+  font-size: 15px;
+  width: 40vw;
+}
+
+.blog-bar-item {
+  margin: 10px;
+  margin-left: 1%;
+  margin-right: 1%;
+  padding: 1%;
+  padding-bottom: 0%;
+  color: white;
+}
+
+.selected-blog-bar-item {
+  margin: 7px;
+  margin-left: 1%;
+  margin-right: 1%;
+  padding: 1%;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+  background-color: #dee3de;
+  color: #1c4f4a;
+  border-radius: 35px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.main-blog {
+  border-radius: 70px;
+  margin-left: 4%;
+  width: 90vw;
+  box-shadow: 0px 0px 10px 0px rgb (204, 209, 204);
+}
+
+.blog-sub-section-1 {
+  background-color: #1c4f4a;
+  border-radius: 70px 0px 0px 70px;
+  color: #dee3de;
+  padding: 3vw;
+  padding-top: 5vw;
+  padding-bottom: 5vw;
+  width: 40%;
+}
+
+.blog-sub-section-2 {
+  background-color: white;
+  width: 60%;
+  border-radius: 0px 70px 70px 0px;
+}
+
+.blog-title-main {
+  font-weight: 900;
+  font-size: 50px;
+  letter-spacing: normal;
+}
+
+.blog-description-main {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: normal;
+}
+
+.blog-item-1 {
+  font-size: small;
+  padding: 10px;
+  padding-top: 4px;
+  padding-bottom: 2px;
+  border-radius: 7px;
+  color: pink;
+  background-color: rgb(177, 19, 45);
+}
+
+.blog-item-2 {
+  font-size: small;
+  padding: 10px;
+  padding-top: 4px;
+  padding-bottom: 2px;
+  border-radius: 7px;
+  color: rgb(19, 238, 136);
+  background-color: rgb(53, 53, 53);
+}
+
+.title-item-blog {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: 600;
 }

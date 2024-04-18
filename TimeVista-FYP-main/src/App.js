@@ -11,6 +11,7 @@ import DatasetPage from "./components/datasets.js";
 import AboutUs from "./components/aboutus.js";
 import Contact from "./components/contact.js";
 import Carbontracker from "./components/carbontracker.js";
+import Articles from "./components/articles.js";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/datasets" element={<DatasetPage />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/articles" element={<Articles />} />
           <Route path="/carbon-tracker" element={<Carbontracker />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
