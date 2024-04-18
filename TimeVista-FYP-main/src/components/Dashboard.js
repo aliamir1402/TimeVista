@@ -39,7 +39,7 @@ export default function Dashboard() {
           <div className="mt-2 p-2 bg-line"></div>
           <div className="cover-img-dashboard"> 
             <div className="flex_box items-center justify-center mt-8">
-              <Link to="/analytics">
+              <Link to="/../analytics">
                 <div className="box-1-selection flex_item mx-5">
                   <div className="flex_box">
                     <div className="">
@@ -64,7 +64,7 @@ export default function Dashboard() {
                 </div>
               </Link>
 
-              <Link to="/extreme-events-map">
+              <Link to="/../extreme-events-map">
                 <div className="box-1-selection flex_item mx-5">
                   <div className="flex_box">
                     <div className="flex_item">
@@ -91,7 +91,7 @@ export default function Dashboard() {
                 </div>
               </Link>
 
-              <Link to="/extreme-events-map">
+              <Link to="/../crop-tracker">
                 <div className="box-1-selection flex_item mx-5">
                   <div className="flex_box">
                     <div className="flex_item">
@@ -114,7 +114,7 @@ export default function Dashboard() {
                 </div>
               </Link>
 
-              <Link to="/datasets">
+              <Link to="/../datasets">
                 <div className="box-1-selection  flex_item mx-5">
                   <div className="flex_box">
                     <div className="flex_item">

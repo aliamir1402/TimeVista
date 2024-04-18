@@ -1807,3 +1807,10 @@ input[type="checkbox"] {
   font-size: 25px;
   font-weight: 600;
 }
+
+/* Crops.js */
+
+#CropsMap {
+  width: 100vw;
+  height: 700px;
+}
