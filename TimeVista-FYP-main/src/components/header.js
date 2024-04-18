@@ -67,7 +67,7 @@ export default function Header() {
           <a href="/../aboutus" className="wavy-underline nav-effects">
             About
           </a>
-          <a href="#" className="wavy-underline nav-effects">
+          <a href="/../articles" className="wavy-underline nav-effects">
             Articles
           </a>
           <a href="/../contact" className="wavy-underline nav-effects">

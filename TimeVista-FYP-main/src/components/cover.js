@@ -10,7 +10,7 @@ export default function cover(props) {
   return (
     <>
       <div className="mt-4 flex_box bor">
-        <div className="pt-12 sec-1 bor flex_item">
+        <div className="pt-12 sec-1 bor ">
           <div className="flex_box">
             <div className="p-1">
               <img src={X} alt="" height={32} width={32} />
@@ -62,7 +62,7 @@ export default function cover(props) {
             </button>
           </div>
         </div>
-        <div className="p-4 container flex_item bor">
+        <div className="container flex_item bor">
           <img className="centered-image" src={props.Earth} alt="graphics" />
         </div>
       </div>

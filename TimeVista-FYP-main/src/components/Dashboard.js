@@ -30,131 +30,111 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="themeBlack text-white bgcolor-white">
+      <div className="themeBlack text-white">
         <Navbar />
         <div>
           <div className="mt-2 p-2 bg-line"></div>
           <Welcome></Welcome>
+
           <div className="mt-2 p-2 bg-line"></div>
-          <div className="flex_box items-center justify-center mt-8">
-            <Link to="/analytics">
-              <div className="box-1-selection flex_item mx-5">
-                <div className="flex_box">
-                  <div className="">
-                    <img
-                      src={climateanalytics}
-                      alt="fOneImg"
-                      className="fOneImg"
-                    />
-                  </div>
-                  <div className="flex">
-                    <div className="custom-box"></div>
-                    <div class="p-4 flex flex-col feature">
-                      <div className="title-feature">Climate Analytics</div>
-                      <div className="des-feature">
-                        Analytics is the systematic exploration, interpretation,
-                        and communication of meaningful patterns and insights
-                        derived from data.
+          <div className="cover-img-dashboard"> 
+            <div className="flex_box items-center justify-center mt-8">
+              <Link to="/analytics">
+                <div className="box-1-selection flex_item mx-5">
+                  <div className="flex_box">
+                    <div className="">
+                      <img
+                        src={climateanalytics}
+                        alt="fOneImg"
+                        className="fOneImg"
+                      />
+                    </div>
+                    <div className="flex">
+                      <div className="custom-box"></div>
+                      <div class="p-4 flex flex-col feature">
+                        <div className="title-feature">Climate Analytics</div>
+                        <div className="des-feature">
+                          Analytics is the systematic exploration,
+                          interpretation, and communication of meaningful
+                          patterns and insights derived from data.
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
 
-            <Link to="/extreme-events-map">
-              <div className="box-1-selection flex_item mx-5">
-                <div className="flex_box">
-                  <div className="flex_item">
-                    <img
-                      src={extremeEvents}
-                      alt="fOneImg"
-                      className="fOneImg"
-                    />
-                  </div>
-                  <div className="flex_item flex">
-                    <div className="custom-box"></div>
-                    <div class="p-4 flex flex-col feature">
-                      <div className="title-feature">
-                        Ex. Events Predictions
-                      </div>
-                      <div className="des-feature">
-                        Analytics is the systematic exploration, interpretation,
-                        and communication of meaningful patterns and insights
-                        derived from data.
+              <Link to="/extreme-events-map">
+                <div className="box-1-selection flex_item mx-5">
+                  <div className="flex_box">
+                    <div className="flex_item">
+                      <img
+                        src={extremeEvents}
+                        alt="fOneImg"
+                        className="fOneImg"
+                      />
+                    </div>
+                    <div className="flex_item flex">
+                      <div className="custom-box"></div>
+                      <div class="p-4 flex flex-col feature">
+                        <div className="title-feature">
+                          Ex. Events Predictions
+                        </div>
+                        <div className="des-feature">
+                          Analytics is the systematic exploration,
+                          interpretation, and communication of meaningful
+                          patterns and insights derived from data.
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
 
-            <Link to="/extreme-events-map">
-              <div className="box-1-selection flex_item mx-5">
-                <div className="flex_box">
-                  <div className="flex_item">
-                    <img src={cropyield} alt="fOneImg" className="fOneImg" />
-                  </div>
-                  <div className="flex_item flex">
-                    <div className="custom-box"></div>
-                    <div class="p-4 flex flex-col feature">
-                      <div className="title-feature">
-                        Crop yield Estimations{" "}
-                      </div>
-                      <div className="des-feature">
-                        Analytics is the systematic exploration, interpretation,
-                        and communication of meaningful patterns and insights
-                        derived from data.
+              <Link to="/extreme-events-map">
+                <div className="box-1-selection flex_item mx-5">
+                  <div className="flex_box">
+                    <div className="flex_item">
+                      <img src={cropyield} alt="fOneImg" className="fOneImg" />
+                    </div>
+                    <div className="flex_item flex">
+                      <div className="custom-box"></div>
+                      <div class="p-4 flex flex-col feature">
+                        <div className="title-feature">
+                          Crop yield Estimations{" "}
+                        </div>
+                        <div className="des-feature">
+                          Analytics is the systematic exploration,
+                          interpretation, and communication of meaningful
+                          patterns and insights derived from data.
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
 
-            <Link to="/datasets">
-              <div className="box-1-selection  flex_item mx-5">
-                <div className="flex_box">
-                  <div className="flex_item">
-                    <img src={datasets} alt="fOneImg" className="fOneImg" />
-                  </div>
-                  <div className="flex_item flex">
-                    <div className="custom-box"></div>
-                    <div class="p-4 flex flex-col feature">
-                      <div className="title-feature">Climate Datasets </div>
-                      <div className="des-feature">
-                        Analytics is the systematic exploration, interpretation,
-                        and communication of meaningful patterns and insights
-                        derived from data.
+              <Link to="/datasets">
+                <div className="box-1-selection  flex_item mx-5">
+                  <div className="flex_box">
+                    <div className="flex_item">
+                      <img src={datasets} alt="fOneImg" className="fOneImg" />
+                    </div>
+                    <div className="flex_item flex">
+                      <div className="custom-box"></div>
+                      <div class="p-4 flex flex-col feature">
+                        <div className="title-feature">Climate Datasets </div>
+                        <div className="des-feature">
+                          Analytics is the systematic exploration,
+                          interpretation, and communication of meaningful
+                          patterns and insights derived from data.
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-
-            <Link to="/analytics">
-              <div className="box-1-selection  flex_item mx-5">
-                <div className="flex_box">
-                  <div className="flex_item">
-                    <img src={datasets} alt="fOneImg" className="fOneImg" />
-                  </div>
-                  <div className="flex_item flex">
-                    <div className="custom-box"></div>
-                    <div class="p-4 flex flex-col feature">
-                      <div className="title-feature">
-                        Water Availibilty Forcasting
-                      </div>
-                      <div className="des-feature">
-                        Analytics is the systematic exploration, interpretation,
-                        and communication of meaningful patterns and insights
-                        derived from data.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
         <Footer></Footer>

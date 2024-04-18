@@ -14,6 +14,8 @@ import irrigation from "./images/icons8-irrigation-96.png";
 import datavisual from "./images/icons8-data-visualization-68.png";
 import Gtick from "./images/greentick.png";
 import Footer from "./footer.js";
+import AboutUsCover from "../components/images/climatecover.png";
+import Icon from "../components/images/tornado.png";
 
 export default function Home() {
   return (
@@ -32,7 +34,7 @@ export default function Home() {
           <Cover Earth={earth}></Cover>
         </div>
 
-        <div className="bor mt-32">
+        <div className="bor pt-24 bgimg">
           <div className="flex flex-col items-center justify-center text-center">
             <p className="text-4xl">
               TimeVista{" "}
@@ -162,7 +164,123 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center text-center">
+          <div
+            className="flex_box pt-16 pb-16"
+            style={{
+              height: "100%",
+              backgroundColor: "#333333",
+              color: "white",
+              borderTop: "10px solid",
+              borderImage:
+                "linear-gradient(90deg, #719b5c, #23634b, #23634c6b, #00000067) 1",
+            }}
+          >
+            <div style={{ width: "50%", paddingLeft: "5vw" }}>
+              <img
+                src={AboutUsCover}
+                alt="AboutUsCover"
+                width="90%"
+                height="90%"
+              />
+            </div>
+            <div style={{ width: "50%" }}>
+              <div className="about-title-2">App Features</div>
+              <div className="about-description-2">Description</div>
+              <div className="flex_box mb-8">
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "3px solid #fdfdfd",
+                    padding: "7px",
+                    margin: "1%",
+                    borderRadius: "10px",
+                    width: "fit-content",
+                  }}
+                >
+                  <div>
+                    <img src={Icon} alt="icon" height={80} width={80} />
+                  </div>
+                  <div>
+                    <div className="section-2-title">Events Analytics</div>
+                    <div className="section-2-description">
+                      Charts/Dashboards
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "3px solid #fdfdfd",
+                    padding: "7px",
+                    margin: "1%",
+                    borderRadius: "10px",
+                    width: "fit-content",
+                  }}
+                >
+                  <div>
+                    <img src={Icon} alt="icon" height={80} width={80} />
+                  </div>
+                  <div>
+                    <div className="section-2-title">Forecast Ex.Events</div>
+                    <div className="section-2-description">
+                      Usage of LSTM Models
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex_box mb-8">
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "3px solid #fdfdfd",
+                    padding: "7px",
+                    margin: "1%",
+                    borderRadius: "10px",
+                    width: "fit-content",
+                  }}
+                >
+                  <div>
+                    <img src={Icon} alt="icon" height={80} width={80} />
+                  </div>
+                  <div>
+                    <div className="section-2-title">Events Analytics</div>
+                    <div className="section-2-description">
+                      Charts/Dashboards
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "3px solid #fdfdfd",
+                    padding: "7px",
+                    margin: "1%",
+                    borderRadius: "10px",
+                    width: "fit-content",
+                  }}
+                >
+                  <div>
+                    <img src={Icon} alt="icon" height={80} width={80} />
+                  </div>
+                  <div>
+                    <div className="section-2-title">Forecast Ex.Events</div>
+                    <div className="section-2-description">
+                      Usage of LSTM Models
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="flex flex-col items-center justify-center text-center pt-16"
+            style={{
+              borderTop: "10px solid",
+              borderImage:
+                "linear-gradient(90deg, #719b5c, #23634b, #23634c6b, #00000067) 1",
+            }}
+          >
             <p className="text-4xl">
               System{" "}
               <span class="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
@@ -318,8 +436,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <Accordion></Accordion>
+          <div style={{ color: "white" }}>
+            <Accordion></Accordion>
+          </div>
           <Footer></Footer>
         </div>
       </div>
