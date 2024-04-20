@@ -307,6 +307,36 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
+app.post("/api/crop", async (req, res) => {
+  try {
+    const EntryData = req.body;
+    const database = client.db("TimeVista");
+    const collection = database.collection("CropsDetails");
+    const FetchDisplay = await collection
+      .find(
+        {
+          $and: [{ Crop: EntryData.Crop }, { Type: EntryData.Type }],
+        },
+        {
+          projection: {
+            Crop: 1,
+            Type: 1,
+            Coordinates: 1,
+            Districts: 1,
+            [EntryData.Year]: 1, // Dynamic field name
+          },
+        }
+      )
+      .toArray();
+
+    console.log(FetchDisplay);
+    res.json(FetchDisplay);
+  } catch (error) {
+    console.error("Error inserting data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // Route to add data
 app.post("/api/contact", async (req, res) => {
   try {
@@ -372,7 +402,75 @@ app.post("/api/contact", async (req, res) => {
 
 // Handle the root path with a simple message
 app.get("/", (req, res) => {
-  res.send("Welcome to your Express serverr!");
+  //console.log("Server Started...");
+  try {
+    const EntryData = {
+      Crop: "Cotton",
+      Type: "Area",
+      Year: "2000",
+    };
+    var DataFormat = [];
+    const database = client.db("TimeVista");
+    const collection = database.collection("CropsDetails");
+
+    // Define an async function to use await
+    const fetchData = async () => {
+      try {
+        const FetchDisplay = await collection
+          .find(
+            {
+              $and: [{ Crop: EntryData.Crop }, { Type: EntryData.Type }],
+            },
+            {
+              projection: {
+                Crop: 1,
+                Type: 1,
+                Coordinates: 1,
+                Districts: 1,
+                [EntryData.Year]: 1, // Dynamic field name
+              },
+            }
+          )
+          .toArray();
+        const LengthArray = FetchDisplay.length;
+        for (let i = 0; i < LengthArray; i++) {
+          DataFormat.push({
+            type: "Feature",
+            properties: {
+              mag: FetchDisplay[i][EntryData.Year],
+              type: FetchDisplay[i].Type,
+              crop: FetchDisplay[i].Crop,
+              districts: FetchDisplay[i].Districts,
+            },
+            geometry: {
+              type: "Point",
+              coordinates: FetchDisplay[i].Coordinates,
+            },
+          });
+        }
+        console.log("Fetched Documents:", FetchDisplay);
+        res.json({
+          type: "FeatureCollection",
+          crs: {
+            type: "name",
+            properties: {
+              name: "urn:ogc:def:crs:OGC:1.3:CRS84",
+            },
+          },
+          features: DataFormat,
+        });
+      } catch (error) {
+        console.error("Error retrieving data:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
+    };
+
+    // Call the async function
+    fetchData();
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 // Close the MongoDB connection when the server stops
