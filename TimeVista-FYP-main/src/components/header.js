@@ -43,7 +43,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className="flex_box p-4 pr-0 pt-1 pb-1 head bor">
+      <nav className="flex_box head bor">
         <div className="space flex">
           <Link to="/">
             <div className="flex items-center flex-shrink-0 bor">
