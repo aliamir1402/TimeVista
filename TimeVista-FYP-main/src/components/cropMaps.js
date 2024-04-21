@@ -17,7 +17,7 @@ export default function CropMaps(props) {
       // Heatmap layers also work with a vector tile source.
       map.addSource("earthquakes", {
         type: "geojson",
-        data: Data,
+        data: props.Data,
       });
 
       map.addControl(
