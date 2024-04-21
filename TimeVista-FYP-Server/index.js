@@ -310,6 +310,12 @@ app.post("/api/signup", async (req, res) => {
 app.post("/api/crop", async (req, res) => {
   try {
     const EntryData = req.body;
+    console.log("Original OBJ: " + EntryData.Type);
+    if (EntryData.Type === "Area Covered (Acres)") EntryData.Type = "Area";
+    else if (EntryData.Type === "Crop Yield (Kg)")
+      EntryData.Type = "Production";
+    else EntryData.Type = "Yield";
+    
     const database = client.db("TimeVista");
     const collection = database.collection("CropsDetails");
     const FetchDisplay = await collection
@@ -328,9 +334,44 @@ app.post("/api/crop", async (req, res) => {
         }
       )
       .toArray();
+    console.log("Fetched Documents:", FetchDisplay);
+    const LengthArray = FetchDisplay.length;
+    var LowestMag = 10000000000000000,
+      HighestMag = 0;
+    var DataFormat = [];
 
-    console.log(FetchDisplay);
-    res.json(FetchDisplay);
+    for (let i = 0; i < LengthArray; i++) {
+      if (FetchDisplay[i][EntryData.Year] > HighestMag)
+        HighestMag = FetchDisplay[i][EntryData.Year];
+      if (FetchDisplay[i][EntryData.Year] < LowestMag)
+        LowestMag = FetchDisplay[i][EntryData.Year];
+
+      DataFormat.push({
+        type: "Feature",
+        properties: {
+          mag: FetchDisplay[i][EntryData.Year],
+          type: FetchDisplay[i].Type,
+          crop: FetchDisplay[i].Crop,
+          districts: FetchDisplay[i].Districts,
+        },
+        geometry: {
+          type: "Point",
+          coordinates: FetchDisplay[i].Coordinates,
+        },
+      });
+    }
+    res.json({
+      type: "FeatureCollection",
+      crs: {
+        type: "name",
+        properties: {
+          name: "urn:ogc:def:crs:OGC:1.3:CRS84",
+        },
+      },
+      features: DataFormat,
+      Low: LowestMag,
+      High: HighestMag,
+    });
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -402,75 +443,7 @@ app.post("/api/contact", async (req, res) => {
 
 // Handle the root path with a simple message
 app.get("/", (req, res) => {
-  //console.log("Server Started...");
-  try {
-    const EntryData = {
-      Crop: "Cotton",
-      Type: "Area",
-      Year: "2000",
-    };
-    var DataFormat = [];
-    const database = client.db("TimeVista");
-    const collection = database.collection("CropsDetails");
-
-    // Define an async function to use await
-    const fetchData = async () => {
-      try {
-        const FetchDisplay = await collection
-          .find(
-            {
-              $and: [{ Crop: EntryData.Crop }, { Type: EntryData.Type }],
-            },
-            {
-              projection: {
-                Crop: 1,
-                Type: 1,
-                Coordinates: 1,
-                Districts: 1,
-                [EntryData.Year]: 1, // Dynamic field name
-              },
-            }
-          )
-          .toArray();
-        const LengthArray = FetchDisplay.length;
-        for (let i = 0; i < LengthArray; i++) {
-          DataFormat.push({
-            type: "Feature",
-            properties: {
-              mag: FetchDisplay[i][EntryData.Year],
-              type: FetchDisplay[i].Type,
-              crop: FetchDisplay[i].Crop,
-              districts: FetchDisplay[i].Districts,
-            },
-            geometry: {
-              type: "Point",
-              coordinates: FetchDisplay[i].Coordinates,
-            },
-          });
-        }
-        console.log("Fetched Documents:", FetchDisplay);
-        res.json({
-          type: "FeatureCollection",
-          crs: {
-            type: "name",
-            properties: {
-              name: "urn:ogc:def:crs:OGC:1.3:CRS84",
-            },
-          },
-          features: DataFormat,
-        });
-      } catch (error) {
-        console.error("Error retrieving data:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-      }
-    };
-
-    // Call the async function
-    fetchData();
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
+  console.log("Server Started...");
 });
 
 // Close the MongoDB connection when the server stops
