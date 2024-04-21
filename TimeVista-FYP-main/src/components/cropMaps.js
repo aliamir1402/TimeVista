@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import maplibregl from "maplibre-gl";
 import Data from "./data.geojson";
 
-export default function CropMaps() {
+export default function CropMaps(props) {
   useEffect(() => {
     const map = new maplibregl.Map({
       container: "CropsMap",
       style:
         "https://api.maptiler.com/maps/basic/style.json?key=ub6D6mcohLuVpSQqkHI2",
-      center: [-120, 50],
-      zoom: 2,
+      center: [71, 31],
+      zoom: 5,
     });
 
     map.on("load", () => {
@@ -19,6 +19,15 @@ export default function CropMaps() {
         type: "geojson",
         data: Data,
       });
+
+      map.addControl(
+        new maplibregl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true,
+          },
+          trackUserLocation: true,
+        })
+      );
 
       map.addLayer(
         {
@@ -34,7 +43,7 @@ export default function CropMaps() {
               ["get", "mag"],
               0,
               0,
-              6,
+              1000,
               1,
             ],
             // Increase the heatmap color weight weight by zoom level
@@ -56,28 +65,25 @@ export default function CropMaps() {
               ["linear"],
               ["heatmap-density"],
               0,
-              "#333333", // Transparent
+              "#333333",
+              0.1,
+              "rgb(255, 165, 0)", // Orange
+              0.2,
+              "rgb(255, 255, 0)", // Yellow
+              0.3,
+              "rgb(0, 255, 0)", // Lime Green
+              0.4,
+              "rgb(0, 0, 255)", // Blue
               0.5,
-              "rgb(144,238,144)", // Light Green
-              1,
-              "rgb(255,255,0)", // Light Yellow
-              1.5,
-              "rgb(60,179,113)", // Medium Green
-              2,
-              "rgb(255,215,0)", // Medium Yellow
-              2.5,
-              "rgb(0,100,0)", // Dark Green
-              3,
-              "rgb(255,165,0)", // Dark Yellow
-              3.5,
-              "rgb(178,24,43)", // Assuming it continues with Dark Red
-              4,
-              "rgb(253,219,199)",
-              4.5,
-              "rgb(239,138,98)",
-              5,
-              "rgb(178,24,43)",
-              // Continue as necessary
+              "rgb(128, 0, 128)", // Purple
+              0.6,
+              "rgb(139, 0, 139)", // Dark Magenta
+              0.7,
+              "rgb(128, 0, 0)", // Maroon
+              0.8,
+              "rgb(255, 192, 203)", // Pink
+              0.9,
+              "rgb(0, 0, 0)", // Black
             ],
             // Adjust the heatmap radius by zoom level
             "heatmap-radius": [
@@ -126,18 +132,26 @@ export default function CropMaps() {
               "interpolate",
               ["linear"],
               ["get", "mag"],
-              7,
-              "rgba(33,102,172,0)",
-              7.5,
-              "rgb(103,169,207)",
-              8,
-              "rgb(209,229,240)",
-              8.5,
-              "rgb(253,219,199)",
-              9,
-              "rgb(239,138,98)",
-              9.5,
-              "rgb(178,24,43)",
+              0,
+              "rgb(255, 255, 0)", // Yellow
+              100,
+              "rgb(255, 255, 0)", // Yellow
+              200,
+              "rgb(173, 255, 47)", // Light Green
+              300,
+              "rgb(50, 205, 50)", // Lime Green
+              400,
+              "rgb(0, 128, 0)", // Green
+              500,
+              "rgb(0, 191, 255)", // Sky Blue
+              600,
+              "rgb(65, 105, 225)", // Royal Blue
+              700,
+              "rgb(0, 0, 255)", // Blue
+              800,
+              "rgb(0, 0, 128)", // Navy Blue
+              900,
+              "rgb(25, 25, 112)", // Midnight BlueF
             ],
             "circle-stroke-color": "white",
             "circle-stroke-width": 1,
@@ -147,6 +161,46 @@ export default function CropMaps() {
         },
         "waterway"
       );
+    });
+
+    let popup; // Declare popup variable outside of event listeners
+
+    map.on("click", "earthquakes-point", function (e) {
+      // Create a button element
+      var coordinates = e.features[0].geometry.coordinates.slice();
+      var cityName = e.features[0].properties.districts;
+      var cityValue = Math.round(e.features[0].properties.mag);
+      var Type = e.features[0].properties.type;
+
+      // Create the main div element
+      var popupContent = document.createElement("div");
+      popupContent.className = "pop-up";
+      popupContent.classList.add("popup-content");
+
+      // Create the div element for the city name
+      var cityNameDiv = document.createElement("div");
+      cityNameDiv.className = "sub-pop-up";
+      cityNameDiv.textContent = "City: " + cityName;
+      popupContent.appendChild(cityNameDiv);
+
+      // Create the div element for the city value
+      var cityValueDiv = document.createElement("div");
+      cityValueDiv.className = "sub-pop-up";
+      cityValueDiv.textContent = Type + " " + cityValue;
+      popupContent.appendChild(cityValueDiv);
+
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      // Create new popup and assign it to popup variable
+      var popup = new maplibregl.Popup()
+        .setLngLat(coordinates)
+        .setDOMContent(popupContent) // Set the button as the popup content
+        .addTo(map);
     });
   });
   return (
