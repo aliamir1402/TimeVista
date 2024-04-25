@@ -6,7 +6,6 @@ import userpic from "../components/images/username.svg";
 import passwordpic from "../components/images/password.svg";
 import showeye from "../components/images/visibility.svg";
 import noshoweye from "../components/images/visibility_off.svg";
-import { redirect } from "react-router-dom";
 
 export default function Login() {
   const [passwordEye, setPasswordEye] = useState(noshoweye);
@@ -87,7 +86,7 @@ export default function Login() {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch("https://time-vista-server.vercel.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

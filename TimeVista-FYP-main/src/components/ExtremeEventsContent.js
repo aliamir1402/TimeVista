@@ -70,7 +70,7 @@ export default function VerticalTabs() {
   useEffect(() => {
     async function fetchData(reqObj) {
       try {
-        const response = await fetch("http://localhost:5000/api/ExEvents", {
+        const response = await fetch("https://time-vista-server.vercel.app/api/ExEvents", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

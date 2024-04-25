@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import maplibregl from "maplibre-gl";
 import Data from "./data.geojson";
 
-export default function CropMaps(props) {
+export default function SmogMaps(props) {
   useEffect(() => {
     const map = new maplibregl.Map({
       container: "CropsMap",
@@ -17,7 +17,7 @@ export default function CropMaps(props) {
       // Heatmap layers also work with a vector tile source.
       map.addSource("earthquakes", {
         type: "geojson",
-        data: props.Data,
+        data: Data, //props.Data,
       });
 
       map.addControl(

@@ -204,7 +204,7 @@ export default function Pressure() {
 
   const FetchDataCityWiseFunc = async (Reqobj) => {
     try {
-      const response = await fetch("http://localhost:5000/api/HistoryData", {
+      const response = await fetch("https://time-vista-server.vercel.app/api/HistoryData", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

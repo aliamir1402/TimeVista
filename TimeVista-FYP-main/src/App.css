@@ -561,9 +561,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  color: white;
 }
 
 .cover-img-dashboard {
+  color: white;
   padding-top: 2px;
   padding-bottom: 2px;
 }

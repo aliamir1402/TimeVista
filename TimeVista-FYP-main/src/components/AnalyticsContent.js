@@ -112,7 +112,7 @@ export default function VerticalTabs() {
   const fetchData = async (Reqobj) => {
     let scrollObj = [];
     try {
-      const response = await fetch("http://localhost:5000/api/gisLayer", {
+      const response = await fetch("https://time-vista-server.vercel.app/api/gisLayer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

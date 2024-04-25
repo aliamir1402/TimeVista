@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CropMap from "../components/cropMaps";
+import SmogMap from "../components/smogMaps";
 import Header from "./header";
 import Footer from "./footer";
 import InputLabel from "@mui/material/InputLabel";
@@ -14,16 +14,16 @@ export default function Crops() {
   const [metric, setMetric] = React.useState("");
   const [year, setYear] = React.useState("");
   const [metricArray, setMetricArray] = React.useState([
-    "Area Covered (Acres)",
-    "Crop Yield (Kg)",
-    "Avg Crop Yield (Kg/Acre)",
-  ]);
-  const [cropArray, setCropArray] = React.useState([
-    "Cotton",
-    "Maize",
-    "Rice",
-    "Sugarcane",
-    "Wheat",
+    "AOD",
+    "NO2 (DU)",
+    "SO2 (DU)",
+    "CO Mole Fraction (ppbv)",
+    "Ozone Mole Fraction (ppbv)",
+    "Ozone Total Coloumn (DU)",
+    "Black carbon colomn mass density (kgm-2)",
+    "Dust Column mass density PM2.5 (kgm-2)",
+    "Total column mass density PM2.5 (kgm-2)",
+    "Total surface mass concentration PM2.5 (kgm-3)",
   ]);
   const [yearArray, setYearArray] = useState([]);
   const [CropGISData, setCropGISData] = useState({});
@@ -80,7 +80,7 @@ export default function Crops() {
       Type: metric,
       Year: year,
     };
-    if (DataObj.Crop === "" || DataObj.Type === "" || DataObj.Year === "") {
+    if (DataObj.Type === "" || DataObj.Year === "") {
       document.getElementById("msg-promt").innerText =
         "Please Select All Options";
       document.getElementById("msg-promt").style.backgroundColor = "#ff2828";
@@ -98,7 +98,7 @@ export default function Crops() {
       }, 3500);
     }
 
-    const response = await fetch("http://localhost:5000/api/crop", {
+    const response = await fetch("https://time-vista-server.vercel.app/api/smog", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -128,42 +128,8 @@ export default function Crops() {
           <Header />
         </div>
         <div id="crops-content">
-          <CropMap Data={CropGISData} />
-          <div id="overlay-content-1">
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel
-                id="demo-select-small-label"
-                style={{ fontFamily: "Overpass", fontWeight: 600 }}
-              >
-                Crop
-              </InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={crop}
-                label="Crop"
-                onChange={handleCropChange}
-                className="select-overlay-content"
-              >
-                <MenuItem
-                  value=""
-                  style={{ fontFamily: "Overpass", fontWeight: 500 }}
-                >
-                  <em>None</em>
-                </MenuItem>
-                {cropArray.map((val) => (
-                  <MenuItem
-                    key={val} // Unique key for each MenuItem
-                    value={val} // Dynamic value based on 'val' from yearArray
-                  >
-                    <span style={{ fontFamily: "Overpass", fontWeight: 500 }}>
-                      {val}
-                    </span>
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
+          <SmogMap Data={CropGISData} />
+
           <div id="overlay-content-2">
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel

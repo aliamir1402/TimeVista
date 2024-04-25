@@ -49,7 +49,7 @@ export default function SignUp() {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/signup", {
+      const response = await fetch("https://time-vista-server.vercel.app/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

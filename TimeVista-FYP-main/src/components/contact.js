@@ -30,7 +30,7 @@ export default function Contact() {
         message: message,
       };
 
-      const response = await fetch("http://localhost:5000/api/Contact", {
+      const response = await fetch("https://time-vista-server.vercel.app/api/Contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
