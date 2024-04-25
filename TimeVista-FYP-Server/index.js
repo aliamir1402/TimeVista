@@ -554,7 +554,7 @@ app.post("/api/contact", async (req, res) => {
 });
 
 // Handle the root path with a simple message
-app.get("/", (req, res) => {
+app.get("/api/OK", (req, res) => {
   res.send("Server Started...");
 });
 
