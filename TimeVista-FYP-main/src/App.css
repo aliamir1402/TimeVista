@@ -557,23 +557,15 @@ body {
 }
 
 .themeBlack {
-  color: white;
-  /*background-color: #1d312e;*/
   background-image: url("../src/components/images/Home_Cover.svg");
-  background-size: cover; /*This property ensures the image covers the entire background 
-  /*background-repeat: no-repeat; /* Prevents the background image from repeating */
-  background-position: center center; /* Center the background image */
-  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .cover-img-dashboard {
-  color: white;
-  /*background-color: #1d312e;*/
-  background-image: url("../src/components/images/Home_Cover.svg");
-  background-size: cover; /*This property ensures the image covers the entire background 
-  /*background-repeat: no-repeat; /* Prevents the background image from repeating */
-  background-position: center center; /* Center the background image */
-  height: 100vh;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 /*-----------------------------------*/
@@ -1904,3 +1896,14 @@ input[type="checkbox"] {
   color: #333333;
   box-shadow: 0px 0px 3px 0px #28ffb7;
 }
+
+.future-reading {
+  color: #000000;
+  background-color: #21cebc;
+  border-radius: 0px 0px 5px 5px;
+  padding: 15px;
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+
+/* Smog.js */

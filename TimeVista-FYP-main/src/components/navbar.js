@@ -58,7 +58,7 @@ export default function Navbar(props) {
             <a href="/../" className="wavy-underline nav-effects">
               Home
             </a>
-            <a href="#" className="wavy-underline nav-effects">
+            <a href="/../dashboard" className="wavy-underline nav-effects">
               Products
             </a>
             <a href="/../aboutus" className="wavy-underline nav-effects">
@@ -109,7 +109,7 @@ export default function Navbar(props) {
             <a href="/../" className="wavy-underline nav-effects">
               Home
             </a>
-            <a href="#" className="wavy-underline nav-effects">
+            <a href="/../dashboard" className="wavy-underline nav-effects">
               Products
             </a>
             <a href="/../aboutus" className="wavy-underline nav-effects">

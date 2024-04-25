@@ -27,6 +27,7 @@ export default function Crops() {
   ]);
   const [yearArray, setYearArray] = useState([]);
   const [CropGISData, setCropGISData] = useState({});
+  const [count, setCount] = useState(2020);
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,7 +36,6 @@ export default function Crops() {
   }, []);
 
   useEffect(() => {
-    var count = 2022;
     let array = [];
     if (yearArray.length === 0) {
       for (var i = 1980; i < count; i++) {
@@ -83,7 +83,7 @@ export default function Crops() {
     if (DataObj.Crop === "" || DataObj.Type === "" || DataObj.Year === "") {
       document.getElementById("msg-promt").innerText =
         "Please Select All Options";
-      document.getElementById("msg-promt").style.backgroundColor="#ff2828";
+      document.getElementById("msg-promt").style.backgroundColor = "#ff2828";
       document.getElementById("msg-promt").style.display = "block";
       setTimeout(() => {
         document.getElementById("msg-promt").style.display = "none";
@@ -91,7 +91,7 @@ export default function Crops() {
       return;
     } else {
       document.getElementById("msg-promt").innerText = "Request Send...";
-      document.getElementById("msg-promt").style.backgroundColor="#28ffb7";
+      document.getElementById("msg-promt").style.backgroundColor = "#28ffb7";
       document.getElementById("msg-promt").style.display = "block";
       setTimeout(() => {
         document.getElementById("msg-promt").style.display = "none";
@@ -232,6 +232,15 @@ export default function Crops() {
                     </span>
                   </MenuItem>
                 ))}
+                <MenuItem
+                  class="future-reading"
+                  key={count} // Unique key for each MenuItem
+                  value={count} // Dynamic value based on 'val' from yearArray
+                >
+                  <span style={{ fontFamily: "Overpass", fontWeight: 500 }}>
+                    {count}
+                  </span>
+                </MenuItem>
               </Select>
             </FormControl>
           </div>

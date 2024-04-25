@@ -8,8 +8,8 @@ export default function CropMaps(props) {
       container: "CropsMap",
       style:
         "https://api.maptiler.com/maps/basic/style.json?key=ub6D6mcohLuVpSQqkHI2",
-      center: [71, 31],
-      zoom: 5,
+      center: [70, 31],
+      zoom: 5.5,
     });
 
     map.on("load", () => {

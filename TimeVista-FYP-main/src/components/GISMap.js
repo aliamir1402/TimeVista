@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import maplibregl from "maplibre-gl";
-import PopulationData from "../components/population.geojson";
 import Loader from "../components/loader";
 
 const GISMap = (props) => {
   var x = props.flag;
-  var dtaa = props.data.length;
   useEffect(() => {
     if (x === 1) {
       const map = new maplibregl.Map({
@@ -510,8 +508,6 @@ const GISMap = (props) => {
         map.getContainer().appendChild(legend);
       });
 
-      let popup; // Declare popup variable outside of event listeners
-
       map.on("click", "city-population", function (e) {
         // Create a button element
         var coordinates = e.features[0].geometry.coordinates.slice();
@@ -574,7 +570,7 @@ const GISMap = (props) => {
             width: "100%",
           }}
         >
-          <img src={Loader} alt="Loader" />
+          <Loader />
         </div>{" "}
       </>
     );
