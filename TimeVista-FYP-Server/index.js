@@ -373,11 +373,11 @@ app.post("/api/crop", async (req, res) => {
       temp = [];
       if (EntryData.Type == "Yield") {
         for (let j = 1990; j < 1990 + FetchDisplay.length; i++) {
-          temp.push(FetchDisplay[i][j]);
+          temp.push(FetchDisplay[i][j+""]);
         }
       } else {
         for (let j = 1980; j < 1980 + FetchDisplay.length; i++) {
-          temp.push(FetchDisplay[i][j]);
+          temp.push(FetchDisplay[i][j+""]);
         }
       }
       DataFormat.push({
