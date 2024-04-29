@@ -366,16 +366,20 @@ app.post("/api/crop", async (req, res) => {
       .toArray();
     console.log("Fetched Documents:", FetchDisplay);
     const LengthArray = FetchDisplay.length;
-    var LowestMag = 10000000000000000,
-      HighestMag = 0;
+    var temp = [];
     var DataFormat = [];
 
     for (let i = 0; i < LengthArray; i++) {
-      if (FetchDisplay[i][EntryData.Year] > HighestMag)
-        HighestMag = FetchDisplay[i][EntryData.Year];
-      if (FetchDisplay[i][EntryData.Year] < LowestMag)
-        LowestMag = FetchDisplay[i][EntryData.Year];
-
+      temp = [];
+      if (EntryData.Type == "Yield") {
+        for (let j = 1990; j < 1990 + FetchDisplay.length; i++) {
+          temp.push(FetchDisplay[i][j]);
+        }
+      } else {
+        for (let j = 1980; j < 1980 + FetchDisplay.length; i++) {
+          temp.push(FetchDisplay[i][j]);
+        }
+      }
       DataFormat.push({
         type: "Feature",
         properties: {
@@ -383,6 +387,7 @@ app.post("/api/crop", async (req, res) => {
           type: FetchDisplay[i].Type,
           crop: FetchDisplay[i].Crop,
           districts: FetchDisplay[i].Districts,
+          historyData: temp,
         },
         geometry: {
           type: "Point",
@@ -399,8 +404,6 @@ app.post("/api/crop", async (req, res) => {
         },
       },
       features: DataFormat,
-      Low: LowestMag,
-      High: HighestMag,
     });
   } catch (error) {
     console.error("Error inserting data:", error);
