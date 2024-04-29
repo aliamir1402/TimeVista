@@ -360,20 +360,9 @@ app.post("/api/crop", async (req, res) => {
     const database = client.db("TimeVista");
     const collection = database.collection("CropsDetails");
     const FetchDisplay = await collection
-      .find(
-        {
-          $and: [{ Crop: EntryData.Crop }, { Type: EntryData.Type }],
-        },
-        {
-          projection: {
-            Crop: 1,
-            Type: 1,
-            Coordinates: 1,
-            Districts: 1,
-            [EntryData.Year]: 1, // Dynamic field name
-          },
-        }
-      )
+      .find({
+        $and: [{ Crop: EntryData.Crop }, { Type: EntryData.Type }],
+      })
       .toArray();
     console.log("Fetched Documents:", FetchDisplay);
     const LengthArray = FetchDisplay.length;
