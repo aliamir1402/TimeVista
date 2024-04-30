@@ -18,6 +18,13 @@ export default function Crops() {
     "Crop Yield (Kg)",
     "Avg Crop Yield (Kg/Acre)",
   ]);
+  const [metricName, setMetricName] = React.useState([
+    "Area Covered ('000 Acres)",
+    "Crop Yield ('000 Tonnes)",
+    "Avg Crop Yield (Ton/Acre)",
+  ]);
+  const [couneter, setCouneter] = React.useState([0, 1, 2]);
+
   const [cropArray, setCropArray] = React.useState([
     "Cotton",
     "Maize",
@@ -98,7 +105,7 @@ export default function Crops() {
       }, 3500);
     }
 
-    const response = await fetch("https://time-vista-server.vercel.app/api/crop", {
+    const response = await fetch("http://localhost:4000/api/crop", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -186,13 +193,13 @@ export default function Crops() {
                 >
                   <em>None</em>
                 </MenuItem>
-                {metricArray.map((val) => (
+                {couneter.map((val) => (
                   <MenuItem
-                    key={val} // Unique key for each MenuItem
-                    value={val} // Dynamic value based on 'val' from yearArray
+                    key={metricArray[val]} // Unique key for each MenuItem
+                    value={metricArray[val]} // Dynamic value based on 'val' from yearArray
                   >
                     <span style={{ fontFamily: "Overpass", fontWeight: 500 }}>
-                      {val}
+                      {metricName[val]}
                     </span>
                   </MenuItem>
                 ))}

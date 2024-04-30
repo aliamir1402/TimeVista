@@ -5,7 +5,7 @@ const cors = require("cors");
 const axios = require("axios");
 
 const app = express();
-const PORT = process.env.PORT || 5000; // Use process.env.PORT or default to 5000
+const PORT = process.env.PORT || 4000; // Use process.env.PORT or default to 5000
 
 /*
 app.use(
@@ -364,30 +364,41 @@ app.post("/api/crop", async (req, res) => {
         $and: [{ Crop: EntryData.Crop }, { Type: EntryData.Type }],
       })
       .toArray();
-    console.log("Fetched Documents:", FetchDisplay);
+    //console.log("Fetched Documents:", FetchDisplay);
     const LengthArray = FetchDisplay.length;
+    console.log(LengthArray);
     var temp = [];
+    var historyArray = [];
     var DataFormat = [];
-
+    console.log(EntryData.Year);
     for (let i = 0; i < LengthArray; i++) {
       temp = [];
-      if (EntryData.Type == "Yield") {
-        for (let j = 1990; j < 1990 + FetchDisplay.length; i++) {
-          temp.push(FetchDisplay[i][j+""]);
+      if (EntryData.Type == "Avg Crop Yield (Kg/Acre)") {
+        for (let j = 1990; j < 2021; j++) {
+          temp.push({
+            x: j,
+            y: FetchDisplay[i][j],
+          });
         }
       } else {
-        for (let j = 1980; j < 1980 + FetchDisplay.length; i++) {
-          temp.push(FetchDisplay[i][j+""]);
+        for (let j = 1980; j < 2021; j++) {
+          temp.push({
+            x: j,
+            y: FetchDisplay[i][j],
+          });
         }
       }
+
+      historyArray.push(temp);
+      console.log(historyArray);
       DataFormat.push({
         type: "Feature",
         properties: {
+          index: i,
           mag: FetchDisplay[i][EntryData.Year],
           type: FetchDisplay[i].Type,
           crop: FetchDisplay[i].Crop,
           districts: FetchDisplay[i].Districts,
-          historyData: temp,
         },
         geometry: {
           type: "Point",
@@ -404,6 +415,7 @@ app.post("/api/crop", async (req, res) => {
         },
       },
       features: DataFormat,
+      history: historyArray,
     });
   } catch (error) {
     console.error("Error inserting data:", error);
