@@ -180,20 +180,16 @@ export default function CropMaps(props) {
       var popupContent = `
         <div class="bor flex map-pop-up">
           <div class="bor" style="width: fit-content;">
-            <div class="bor m-2 p-1 map-pop-up-sub" style="height: 30%;">
+            <div class="bor m-2 p-1 map-pop-up-sub" style="height: 48%;">
               <div class="bor m-1 p-1 text-sm flex justify-left items-left">City Name</div>
               <div class="bor m-1 p-1 text-4xl flex justify-center items-center">${cityName}</div>
             </div>
-            <div class="bor m-2 p-1 map-pop-up-sub" style="height: 30%;">
+            <div class="bor m-2 p-1 map-pop-up-sub" style="height: 48%;">
               <div class="bor m-1 p-1 text-sm flex justify-left items-left">Current ${Type}</div>
               <div class="bor m-1 p-1 text-5xl flex justify-center items-center">${cityValue}</div>
               <div class="bor m-1 p-1 text-sm flex justify-center items-center">${Unit}</div>
             </div>
-            <div class="bor m-2 p-1 map-pop-up-sub" style="height: 30%;">
-              <div class="bor m-1 p-1 text-sm flex justify-left items-left">Predicted Production</div>
-              <div class="bor m-1 p-1 text-5xl flex justify-center items-center">40</div>
-              <div class="bor m-1 p-1 text-sm flex justify-center items-center">'000 Tonnes</div>
-            </div>
+            
           </div>
           <div style="width: fit-content;">
             <div class="text-3xl p-2 mb-2">RealTime Stats</div>
