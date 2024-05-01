@@ -6,6 +6,8 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  LabelList,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 
@@ -15,7 +17,7 @@ export default function SimpleLineChart(props) {
   return (
     <div className="temp rounded-lg shadow p-4 md:p-6 divvBox">
       <h2 className="text-center mb-4 text-2xl flex justify-center items-center">
-        Historical Trend of Crop {Type}
+        Historical Trend of {Type}
       </h2>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={Data}>
@@ -24,9 +26,10 @@ export default function SimpleLineChart(props) {
             label={{ value: "Year", position: "insideBottom", offset: 0 }}
             tickMargin={20}
           />
+          <ReferenceLine x={"04-2024"} stroke="red" label="Boundary" />
           <YAxis
             label={{ value: Type, angle: -90, position: "insideLeft" }}
-            domain={[Math.min(...Data.map(item => item.y)), "dataMax"]}
+            domain={[Math.min(...Data.map((item) => item.y)), "dataMax"]}
           />
           <Tooltip />
           <Legend />
