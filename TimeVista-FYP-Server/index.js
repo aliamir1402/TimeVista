@@ -342,6 +342,7 @@ app.post("/api/signup", async (req, res) => {
     const database = client.db("TimeVista");
     const collection = database.collection("users");
     const FetchDisplay = await collection.insertOne(EntryData);
+    res.json(0);
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal Server Error" });
