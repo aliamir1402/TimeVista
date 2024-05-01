@@ -26,7 +26,7 @@ export default function SimpleLineChart(props) {
           />
           <YAxis
             label={{ value: Type, angle: -90, position: "insideLeft" }}
-            domain={[0, "dataMax"]} // Adjust the domain as needed
+            domain={[Math.min(...Data.map(item => item.y)), "dataMax"]}
           />
           <Tooltip />
           <Legend />
