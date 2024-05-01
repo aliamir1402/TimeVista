@@ -34,7 +34,7 @@ export default function Crops() {
   ]);
   const [yearArray, setYearArray] = useState([]);
   const [CropGISData, setCropGISData] = useState({});
-  const [count, setCount] = useState(2020);
+  const [count, setCount] = useState(2024);
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,7 +45,7 @@ export default function Crops() {
   useEffect(() => {
     let array = [];
     if (yearArray.length === 0) {
-      for (var i = 1980; i < count; i++) {
+      for (var i = 1983; i < count; i++) {
         array.push(i);
       }
       console.log(array);
