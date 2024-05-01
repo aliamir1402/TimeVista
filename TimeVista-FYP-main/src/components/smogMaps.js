@@ -169,7 +169,7 @@ export default function SmogMaps(props) {
       // Create a button element
       var coordinates = e.features[0].geometry.coordinates.slice();
       var cityName = e.features[0].properties.districts;
-      var cityValue = Math.round(e.features[0].properties.mag);
+      var cityValue = e.features[0].properties.mag;
       var Type = e.features[0].properties.type;
 
       // Create the main div element
