@@ -105,7 +105,7 @@ export default function Crops() {
       }, 3500);
     }
 
-    const response = await fetch("http://localhost:4000/api/crop", {
+    const response = await fetch("https://time-vista-server.vercel.app/api/crop", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import maplibregl from "maplibre-gl";
-import Data from "./data.geojson";
 import LineChart from "../components/charts/SimpleLineChart";
 import ReactDOM from "react-dom";
 
@@ -165,21 +164,17 @@ export default function CropMaps(props) {
       );
     });
 
-    let popup; // Declare popup variable outside of event listeners
-
     map.on("click", "earthquakes-point", function (e) {
       // Create a button element
       var coordinates = e.features[0].geometry.coordinates.slice();
       var cityName = e.features[0].properties.districts;
       var cityValue = Math.round(e.features[0].properties.mag);
       var Type = e.features[0].properties.type;
-      var HistoryData = e.features[0].properties.historyData;
       var index = e.features[0].properties.index;
       var Unit = "";
-      if (Type == "Area") Unit = "'000 Acres";
-      else if (Type == "Production") Unit = "'000 Tonnes";
-      else if (Type == "Yield") Unit = "Tonnes/Acre";
-      var Data = HistoryData;
+      if (Type === "Area") Unit = "'000 Acres";
+      else if (Type === "Production") Unit = "'000 Tonnes";
+      else if (Type === "Yield") Unit = "Tonnes/Acre";
 
       // Create the main div element
       var popupContent = `

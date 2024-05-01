@@ -10,24 +10,41 @@ import Loader from "../components/loader";
 
 export default function Crops() {
   const [LoadingFlag, setLoadingFlag] = useState(0);
+  const [month, setMonth] = React.useState([
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ]);
   const [crop, setCrop] = React.useState("");
   const [metric, setMetric] = React.useState("");
   const [year, setYear] = React.useState("");
   const [metricArray, setMetricArray] = React.useState([
-    "AOD",
-    "NO2 (DU)",
-    "SO2 (DU)",
-    "CO Mole Fraction (ppbv)",
-    "Ozone Mole Fraction (ppbv)",
-    "Ozone Total Coloumn (DU)",
-    "Black carbon colomn mass density (kgm-2)",
-    "Dust Column mass density PM2.5 (kgm-2)",
-    "Total column mass density PM2.5 (kgm-2)",
-    "Total surface mass concentration PM2.5 (kgm-3)",
+    "AOD", // Aerosol Optical Depth
+    "CO-X Day Concentration", // Carbon Monoxide Concentration during Daytime
+    "CO-X Night Concentration", // Carbon Monoxide Concentration during Nighttime
+    "Ozone-X Day Concentration", // Ozone Concentration during Daytime
+    "Ozone-X Night Concentration", // Ozone Concentration during Nighttime
+    "Ozone Column Density Day", // Ozone Column Density during Daytime
+    "Ozone Column Density Night", // Ozone Column Density during Nighttime
+    "Carbon Column Density", // Carbon Column Density
+    "Dust Column Density", // Dust Column Density
+    "PM2.5 Column Density", // Particulate Matter (PM2.5) Column Density
+    "PM2.5 Surface Concentration", // Particulate Matter (PM2.5) Surface Concentration
+    "NO2 Molecules", // Nitrogen Dioxide (NO2) Molecules
+    "SO2 Surface Concentration", // Sulfur Dioxide (SO2) Surface Concentration
   ]);
   const [yearArray, setYearArray] = useState([]);
   const [CropGISData, setCropGISData] = useState({});
-  const [count, setCount] = useState(2020);
+  const [count, setCount] = useState(2023);
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,7 +55,7 @@ export default function Crops() {
   useEffect(() => {
     let array = [];
     if (yearArray.length === 0) {
-      for (var i = 1980; i < count; i++) {
+      for (var i = 2005; i < count; i++) {
         array.push(i);
       }
       console.log(array);
@@ -76,11 +93,11 @@ export default function Crops() {
 
   const CropDataFetch = async () => {
     let DataObj = {
-      Crop: crop,
       Type: metric,
+      Month: crop,
       Year: year,
     };
-    if (DataObj.Type === "" || DataObj.Year === "") {
+    if (DataObj.Month === "" || DataObj.Type === "" || DataObj.Year === "") {
       document.getElementById("msg-promt").innerText =
         "Please Select All Options";
       document.getElementById("msg-promt").style.backgroundColor = "#ff2828";
@@ -96,6 +113,32 @@ export default function Crops() {
       setTimeout(() => {
         document.getElementById("msg-promt").style.display = "none";
       }, 3500);
+    }
+
+    if (DataObj.Month === "January") {
+      DataObj.Month = "01";
+    } else if (DataObj.Month === "February") {
+      DataObj.Month = "02";
+    } else if (DataObj.Month === "March") {
+      DataObj.Month = "03";
+    } else if (DataObj.Month === "April") {
+      DataObj.Month = "04";
+    } else if (DataObj.Month === "May") {
+      DataObj.Month = "05";
+    } else if (DataObj.Month === "June") {
+      DataObj.Month = "06";
+    } else if (DataObj.Month === "July") {
+      DataObj.Month = "07";
+    } else if (DataObj.Month === "August") {
+      DataObj.Month = "08";
+    } else if (DataObj.Month === "September") {
+      DataObj.Month = "09";
+    } else if (DataObj.Month === "October") {
+      DataObj.Month = "10";
+    } else if (DataObj.Month === "November") {
+      DataObj.Month = "11";
+    } else if (DataObj.Month === "December") {
+      DataObj.Month = "12";
     }
 
     const response = await fetch("https://time-vista-server.vercel.app/api/smog", {
@@ -129,8 +172,43 @@ export default function Crops() {
         </div>
         <div id="crops-content">
           <SmogMap Data={CropGISData} />
-
           <div id="overlay-content-2">
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+              <InputLabel
+                id="demo-select-small-label"
+                style={{ fontFamily: "Overpass", fontWeight: 600 }}
+              >
+                Month
+              </InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-small"
+                value={crop}
+                label="month"
+                onChange={handleCropChange}
+                className="select-overlay-content"
+              >
+                <MenuItem
+                  value=""
+                  style={{ fontFamily: "Overpass", fontWeight: 500 }}
+                >
+                  <em>None</em>
+                </MenuItem>
+                {month.map((val) => (
+                  <MenuItem
+                    key={val} // Unique key for each MenuItem
+                    value={val} // Dynamic value based on 'val' from yearArray
+                  >
+                    <span style={{ fontFamily: "Overpass", fontWeight: 500 }}>
+                      {val}
+                    </span>
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+
+          <div id="overlay-content-1">
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel
                 id="demo-select-small-label"

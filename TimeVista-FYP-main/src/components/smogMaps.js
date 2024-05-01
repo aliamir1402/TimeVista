@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import maplibregl from "maplibre-gl";
 import Data from "./data.geojson";
+import BarChart from "../components/charts/SimpleBarChart";
+import ReactDOM from "react-dom";
 
 export default function SmogMaps(props) {
   useEffect(() => {
@@ -17,7 +19,7 @@ export default function SmogMaps(props) {
       // Heatmap layers also work with a vector tile source.
       map.addSource("earthquakes", {
         type: "geojson",
-        data: Data, //props.Data,
+        data: props.Data,
       });
 
       map.addControl(
@@ -163,8 +165,6 @@ export default function SmogMaps(props) {
       );
     });
 
-    let popup; // Declare popup variable outside of event listeners
-
     map.on("click", "earthquakes-point", function (e) {
       // Create a button element
       var coordinates = e.features[0].geometry.coordinates.slice();
@@ -173,21 +173,42 @@ export default function SmogMaps(props) {
       var Type = e.features[0].properties.type;
 
       // Create the main div element
-      var popupContent = document.createElement("div");
-      popupContent.className = "pop-up";
-      popupContent.classList.add("popup-content");
-
-      // Create the div element for the city name
-      var cityNameDiv = document.createElement("div");
-      cityNameDiv.className = "sub-pop-up";
-      cityNameDiv.textContent = "City: " + cityName;
-      popupContent.appendChild(cityNameDiv);
-
-      // Create the div element for the city value
-      var cityValueDiv = document.createElement("div");
-      cityValueDiv.className = "sub-pop-up";
-      cityValueDiv.textContent = Type + " " + cityValue;
-      popupContent.appendChild(cityValueDiv);
+      var popupContent = `
+        <div class="bor flex map-pop-up">
+          <div class="bor" style="width: fit-content;">
+            <div class="bor m-2 p-1 map-pop-up-sub" style="height: 30%;">
+              <div class="bor m-1 p-1 text-sm flex justify-left items-left">Current ${Type}</div>
+              <div class="bor m-1 p-1 text-5xl flex justify-center items-center">${cityValue}</div>
+              <div class="bor m-1 p-1 text-sm flex justify-center items-center">PPM</div>
+            </div>
+            <div class="bor m-2 p-1 map-pop-up-sub" style="height: 30%;">
+              <div class="bor m-1 p-1 text-sm flex justify-left items-left">Predicted Production</div>
+              <div class="bor m-1 p-1 text-5xl flex justify-center items-center">40</div>
+              <div class="bor m-1 p-1 text-sm flex justify-center items-center">PPM</div>
+            </div>
+          </div>
+          <div style="width: fit-content;">
+            <div class="text-3xl p-2">RealTime Stats</div>
+            <div class="bor flex">
+              <div class="bor m-2 p-1 map-pop-up-sub" style="width: 30%;">
+                <div class="bor m-1 p-1 text-sm flex justify-left items-left">Temperature</div>
+                <div class="bor m-1 p-1 text-3xl flex justify-center items-center">20</div>
+                <div class="bor m-1 p-1 text-sm flex justify-center items-center">°C</div>
+              </div>
+              <div class="bor m-2 p-1 map-pop-up-sub" style="width: 30%;">
+                <div class="bor m-1 p-1 text-sm flex justify-left items-left">Weather</div>
+                <div class="bor m-1 p-1 text-3xl flex justify-center items-center">Icon</div>
+              </div>
+              <div class="bor m-2 p-1 map-pop-up-sub" style="width: 30%;">
+                <div class="bor m-1 p-1 text-sm flex justify-left items-left">Air Quality</div>
+                <div class="bor m-1 p-1 text-3xl flex justify-center items-center">94</div>
+                <div class="bor m-1 p-1 text-sm flex justify-center items-center">AQI</div>
+              </div>
+            </div>
+            <div class="bor m-2 p-2 Chart-popup" id="chartContainer">
+            </div>
+          </div>
+        </div>`;
 
       // Ensure that if the map is zoomed out such that multiple
       // copies of the feature are visible, the popup appears
@@ -196,11 +217,22 @@ export default function SmogMaps(props) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
 
-      // Create new popup and assign it to popup variable
-      var popup = new maplibregl.Popup()
-        .setLngLat(coordinates)
-        .setDOMContent(popupContent) // Set the button as the popup content
+      // Create new popup element
+      var popup = new maplibregl.Popup({ maxWidth: "auto" })
+        .setLngLat(e.lngLat)
+        .setHTML(popupContent)
         .addTo(map);
+
+      // Render the LineChart component into the chartContainer div
+      ReactDOM.render(
+        <BarChart Data={props.Data.History} Type={Type} />,
+        document.getElementById("chartContainer")
+      );
+
+      // Calculate and set the popup width and height based on its content
+      var popupNode = popup._content;
+      popupNode.style.width = popupNode.offsetWidth + "px";
+      popupNode.style.height = popupNode.offsetHeight + "px";
     });
   });
   return (
