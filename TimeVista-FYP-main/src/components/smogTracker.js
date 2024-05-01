@@ -44,7 +44,7 @@ export default function Crops() {
   ]);
   const [yearArray, setYearArray] = useState([]);
   const [CropGISData, setCropGISData] = useState({});
-  const [count, setCount] = useState(2023);
+  const [count, setCount] = useState(2024);
 
   useEffect(() => {
     setTimeout(() => {
@@ -141,7 +141,7 @@ export default function Crops() {
       DataObj.Month = "12";
     }
 
-    const response = await fetch("https://time-vista-server.vercel.app/api/smog", {
+    const response = await fetch("http://localhost:4000/api/smog", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -155,6 +155,23 @@ export default function Crops() {
   useEffect(() => {
     console.log(CropGISData);
   }, [CropGISData]);
+
+  // Check if an item exists in local storage
+  function isLocalStorageItemExists(key) {
+    return localStorage.getItem(key) !== null;
+  }
+  var name = "",
+    flag = 0;
+  // Example usage
+  const itemName = "username"; // Replace with the name of the item you want to check
+  const exists = isLocalStorageItemExists(itemName);
+
+  if (exists) {
+    flag = 1;
+    name = localStorage.getItem(itemName);
+  } else {
+    flag = 0;
+  }
 
   if (LoadingFlag) {
     return (
@@ -170,7 +187,23 @@ export default function Crops() {
         >
           <Header />
         </div>
-        <div id="crops-content">
+        <div className="welcome-box-analytics mt-4 mb-4">
+          <div className="text-md font-normal">Welcome, {name}</div>
+          <div className="text-3xl font-bold">
+            Air Quailty{" "}
+            <span className="text-transparent bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text font-bold text-3xl">
+              Dashboard
+            </span>
+          </div>
+        </div>
+        <div
+          id="crops-content"
+          style={{
+            borderTop: "10px solid",
+            borderImage:
+              "linear-gradient(90deg, #719b5c, #23634b, #23634c6b, #00000067) 1",
+          }}
+        >
           <SmogMap Data={CropGISData} />
           <div id="overlay-content-2">
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">

@@ -24,11 +24,10 @@ export default function SignUp() {
   };
 
   const SignUpFunc = async () => {
-    var usernameerr = document.getElementById("usernameerr");
-    var emailerr = document.getElementById("emailerr");
-    var registersuccess = document.getElementById("registersuccess");
-
     try {
+      var usernameerr = document.getElementById("usernameerr");
+      var emailerr = document.getElementById("emailerr");
+      var registersuccess = document.getElementById("registersuccess");
       const DataInsert = {
         name: document.getElementById("FullName").value,
         username: document.getElementById("username").value,
@@ -48,8 +47,8 @@ export default function SignUp() {
         alert("Please fill in all required fields.");
         return;
       }
-
-      const response = await fetch("https://time-vista-server.vercel.app/api/signup", {
+      console.log(DataInsert);
+      const response = await fetch("http://localhost:4000/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,8 +86,8 @@ export default function SignUp() {
   };
 
   return (
-    <div className="pt-8 pl-8 pb-8 login-bg">
-      <div class="login-container">
+    <div className="login-bg" style={{ padding: "2vw", paddingLeft: "5vw" }}>
+      <div class="login-container anamation">
         <div class="login-box">
           <div className="p-4 login-image">
             <img src={LogoTV} alt="LoginImage" width={60} height={60} />
@@ -108,12 +107,13 @@ export default function SignUp() {
             Registration Successfull!
           </div>
 
-          <div class="flex_box border-b-2 border-solid border-gray-300">
+          <div class="flex_box">
             <div className="h-fit m-2 mt-3.5">
               <img src={userpic} alt="userpic" width={30} height={30} />
             </div>
             <div className="m-2 flex_item">
               <input
+                style={{ border: "3px solid #e9e9e9", borderRadius: "12px" }}
                 type="text"
                 id="FullName"
                 name="FullName"
@@ -123,12 +123,13 @@ export default function SignUp() {
             </div>
           </div>
 
-          <div class="flex_box border-b-2 border-solid border-gray-300">
+          <div class="flex_box">
             <div className="h-fit m-2 mt-3.5">
               <img src={emailpic} alt="userpic" width={30} height={30} />
             </div>
             <div className="m-2 flex_item">
               <input
+                style={{ border: "3px solid #e9e9e9", borderRadius: "12px" }}
                 type="text"
                 id="username"
                 name="username"
@@ -148,12 +149,13 @@ export default function SignUp() {
           >
             Username Already Taken...
           </div>
-          <div class="flex_box border-b-2 border-solid border-gray-300">
+          <div class="flex_box">
             <div className="h-fit m-2 mt-3.5">
               <img src={usernamepic} alt="userpic" width={30} height={30} />
             </div>
             <div className="m-2 flex_item">
               <input
+                style={{ border: "3px solid #e9e9e9", borderRadius: "12px" }}
                 type="email"
                 id="email"
                 name="email"
@@ -174,12 +176,13 @@ export default function SignUp() {
             Email Already Taken...
           </div>
 
-          <div class="flex_box border-b-2 border-solid border-gray-300">
+          <div class="flex_box">
             <div className="h-fit m-2 mt-3.5">
               <img src={passwordpic} alt="passwordpic" width={30} height={30} />
             </div>
             <div className="m-2 flex_item">
               <input
+                style={{ border: "3px solid #e9e9e9", borderRadius: "12px" }}
                 type="password"
                 id="password"
                 name="password"
@@ -197,12 +200,13 @@ export default function SignUp() {
             </div>
           </div>
 
-          <div class="flex_box border-b-2 border-solid border-gray-300">
+          <div class="flex_box">
             <div className="h-fit m-2 mt-3.5">
               <img src={passwordpic} alt="passwordpic" width={30} height={30} />
             </div>
             <div className="m-2 flex_item">
               <input
+                style={{ border: "3px solid #e9e9e9", borderRadius: "12px" }}
                 type="password"
                 id="ConfirmPassword"
                 name="ConfirmPassword"
@@ -226,7 +230,6 @@ export default function SignUp() {
           <div className="flex_box mt-2">
             <div className="checkbox-group flex_item"></div>
           </div>
-          {<Auth></Auth>}
         </div>
         <div className="login-account-title">
           <a href="./login">Already have an account...</a>

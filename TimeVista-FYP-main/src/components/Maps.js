@@ -12,8 +12,6 @@ import CycloneIcon from "../components/images/tornado.png";
 import LocustIcon from "../components/images/locust.png";
 import Loader from "./loader.js";
 import InfoImage from "../components/images/LandScapeImg.jpg";
-import CloseIcon from "../components/images/close.svg";
-import { Notes } from "@mui/icons-material";
 
 export default function Maps(props) {
   useEffect(() => {
@@ -95,11 +93,6 @@ export default function Maps(props) {
           var infoSub1 = document.createElement("div");
           infoSub1.id = "info_sub_1";
           infoSub1.className = "flex justify-center text-center text-3xl";
-          var img = document.createElement("img");
-          img.src =
-            "https://en.wikipedia.org/wiki/File:Phet_2010-06-02_0655Z.jpg";
-          img.alt = "image";
-          infoSub1.appendChild(img);
 
           // Create the second child div element
           var infoSub2 = document.createElement("div");
@@ -127,11 +120,13 @@ export default function Maps(props) {
 
           // Create the description and references div elements
           var descriptionDiv = document.createElement("div");
-          descriptionDiv.className = "justify-center text-center info_sub_2_section";
+          descriptionDiv.className =
+            "justify-center text-center info_sub_2_section";
           descriptionDiv.textContent = notes;
 
           var referencesDiv = document.createElement("div");
-          referencesDiv.className = "justify-center text-center info_sub_2_section";
+          referencesDiv.className =
+            "justify-center text-center info_sub_2_section";
 
           // Create an anchor element
           var linkElement = document.createElement("a");
@@ -194,276 +189,3 @@ export default function Maps(props) {
     );
   }
 }
-
-/*
-[
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [72.38, 34.1478], // Coordinates for Sialkot
-              },
-              properties: {
-                cityName: "Sialkot",
-                icon: "RainFall",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [71.4816, 30.199], // Coordinates for Bahawalpur
-              },
-              properties: {
-                cityName: "Bahawalpur",
-                icon: "Floods",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [71.4389, 30.1968], // Coordinates for Rahim Yar Khan
-              },
-              properties: {
-                cityName: "Rahim Yar Khan",
-                icon: "Winds",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [70.4506, 31.5566], // Coordinates for Jhelum
-              },
-              properties: {
-                cityName: "Jhelum",
-                icon: "RainFall",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [68.8497, 25.1282], // Coordinates for Hyderabad
-              },
-              properties: {
-                cityName: "Hyderabad",
-                icon: "Floods",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [73.7512, 33.9949], // Coordinates for Sheikhupura
-              },
-              properties: {
-                cityName: "Sheikhupura",
-                icon: "Winds",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [71.6296, 30.1984], // Coordinates for Dera Ghazi Khan
-              },
-              properties: {
-                cityName: "Dera Ghazi Khan",
-                icon: "RainFall",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [68.4216, 28.4224], // Coordinates for Sukkur
-              },
-              properties: {
-                cityName: "Sukkur",
-                icon: "Floods",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [71.6312, 30.1998], // Coordinates for Muzaffargarh
-              },
-              properties: {
-                cityName: "Muzaffargarh",
-                icon: "Winds",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [73.2562, 31.4686], // Coordinates for Chakwal
-              },
-              properties: {
-                cityName: "Chakwal",
-                icon: "RainFall",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [68.4153, 28.2668], // Coordinates for Larkana
-              },
-              properties: {
-                cityName: "Larkana",
-                icon: "Floods",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [68.8484, 25.3933], // Coordinates for Nawabshah
-              },
-              properties: {
-                cityName: "Nawabshah",
-                icon: "Winds",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [70.6254, 32.0836], // Coordinates for Khushab
-              },
-              properties: {
-                cityName: "Khushab",
-                icon: "RainFall",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [69.5541, 30.2016], // Coordinates for Rajanpur
-              },
-              properties: {
-                cityName: "Rajanpur",
-                icon: "Floods",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [71.493, 31.594], // Coordinates for Mandi Bahauddin
-              },
-              properties: {
-                cityName: "Mandi Bahauddin",
-                icon: "Winds",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [71.6504, 33.6077], // Coordinates for Okara
-              },
-              properties: {
-                cityName: "Okara",
-                icon: "RainFall",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [72.1296, 32.5789], // Coordinates for Mianwali
-              },
-              properties: {
-                cityName: "Mianwali",
-                icon: "Floods",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [68.8671, 27.8057], // Coordinates for Jacobabad
-              },
-              properties: {
-                cityName: "Jacobabad",
-                icon: "Winds",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [73.0422, 33.7356], // Coordinates for Gujrat
-              },
-              properties: {
-                cityName: "Gujrat",
-                icon: "RainFall",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [71.455, 29.5532], // Coordinates for Bhakkar
-              },
-              properties: {
-                cityName: "Bhakkar",
-                icon: "Floods",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [74.0011, 34.1478],
-              },
-              properties: {
-                cityName: "Karachi",
-                year: "2010",
-                icon: "Snow",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [74.3587, 31.5204],
-              },
-              properties: {
-                cityName: "Lahore",
-                year: "2015",
-                icon: "Snow",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [73.0479, 33.6844],
-              },
-              properties: {
-                cityName: "Islamabad",
-                year: "2001",
-                icon: "Snow",
-              },
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [67.8808, 29.5532],
-              },
-              properties: {
-                cityName: "Sibi",
-                year: "2001",
-                icon: "Drought",
-              },
-            },
-          ],
-*/

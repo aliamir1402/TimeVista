@@ -12,10 +12,12 @@ import extremeevents from "./images/icons8-climate-change-100.png";
 import cropsinsights from "./images/icons8-forage-mixed-96.png";
 import irrigation from "./images/icons8-irrigation-96.png";
 import datavisual from "./images/icons8-data-visualization-68.png";
-import Gtick from "./images/greentick.png";
 import Footer from "./footer.js";
 import AboutUsCover from "../components/images/climatecover.png";
-import Icon from "../components/images/tornado.png";
+import F1 from "../components/images/FeatureOneImg.jpg";
+import F2 from "../components/images/FeatureTwoImg-removebg-preview.png";
+import F3 from "../components/images/FeatureThreeImg.jpg";
+import F4 from "../components/images/FeatureFourImg-removebg-preview.png";
 
 export default function Home() {
   return (
@@ -49,7 +51,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-12 mx-12 bor flex_box">
+          <div className="mt-12 mx-12 bor flex_box anamation3">
             <div className="m-4 feature-box flex_item">
               <div className="">
                 <img src={infographic} alt="info" height={50} width={50} />
@@ -107,7 +109,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="bor mx-12 mb-20 flex_box">
+          <div className="bor mx-12 mb-20 flex_box anamation3">
             <div className="m-4 feature-box flex_item">
               <div>
                 <img src={cropsinsights} alt="info" height={50} width={50} />
@@ -133,15 +135,16 @@ export default function Home() {
               </div>
               <div className="p-2">
                 <span className="text-white text-2xl">
-                  ASSESSING WATER AVAILABILITY
+                  AIR QUALITY AND SMOG INGHTS{" "}
                 </span>
               </div>
               <div className="p-2">
                 <span className="text-gray-300 text-base">
-                  The system includes features specifically designed to assess
-                  the availability of water. It could involve monitoring water
-                  levels, predicting changes, and providing insights into water
-                  resource management.
+                  Explore real-time updates and detailed analyses on air quality
+                  and smog conditions with our comprehensive feature. With
+                  interactive maps, pinpoint areas of concern and track
+                  pollution hotspots, enabling proactive measures to mitigate
+                  exposure.
                 </span>
               </div>
             </div>
@@ -151,7 +154,7 @@ export default function Home() {
               </div>
               <div className="p-2">
                 <span className="text-white text-2xl">
-                  Real-time Data Visualization
+                  REAL-TIME DATA VISUALIZATION
                 </span>
               </div>
               <div className="p-2">
@@ -171,11 +174,12 @@ export default function Home() {
               backgroundColor: "#333333",
               color: "white",
               borderTop: "10px solid",
+              borderBottom: "10px solid",
               borderImage:
                 "linear-gradient(90deg, #719b5c, #23634b, #23634c6b, #00000067) 1",
             }}
           >
-            <div style={{ width: "50%", paddingLeft: "5vw" }}>
+            <div style={{ width: "45%", paddingLeft: "5vw" }} className="anamation">
               <img
                 src={AboutUsCover}
                 alt="AboutUsCover"
@@ -183,27 +187,79 @@ export default function Home() {
                 height="90%"
               />
             </div>
-            <div style={{ width: "50%" }}>
-              <div className="about-title-2">App Features</div>
-              <div className="about-description-2">Description</div>
+            <div style={{ width: "55%" }}>
+              <div className="about-title-2 anamation3">
+                TimeVista{" "}
+                <span class="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
+                  Features
+                </span>
+              </div>
+              <div className="about-description-2 anamation3"></div>
               <div className="flex_box mb-8">
                 <div
+                  className="flex_box flex_item anamation3"
+                  style={{
+                    border: "3px solid #fdfdfd",
+                    padding: "6px",
+                    margin: "1%",
+                    borderRadius: "10px",
+                    width: "10vw",
+                  }}
+                >
+                  <div className="flex justify-center items-center mr-2">
+                    <img src={F1} alt="icon" height={100} width={100} />
+                  </div>
+                  <div>
+                    <div className="section-2-title">
+                      Agriculture Weather <br />
+                      Prediction
+                    </div>
+                    <div className="section-2-description">
+                      Charts & Infographics
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="flex_box flex_item anamation3"
+                  style={{
+                    border: "3px solid #fdfdfd",
+                    padding: "7px",
+                    margin: "1%",
+                    borderRadius: "10px",
+                    width: "10vw",
+                  }}
+                >
+                  <div className="flex justify-center items-center mr-2">
+                    <img src={F2} alt="icon" height={100} width={100} />
+                  </div>
+                  <div>
+                    <div className="section-2-title">
+                      Crop Yield <br /> Forecasting
+                    </div>
+                    <div className="section-2-description">
+                      Analytics & AI Insights
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex_box mb-8 anamation3">
+                <div
                   className="flex_box flex_item"
                   style={{
                     border: "3px solid #fdfdfd",
                     padding: "7px",
                     margin: "1%",
                     borderRadius: "10px",
-                    width: "fit-content",
+                    width: "10vw",
                   }}
                 >
-                  <div>
-                    <img src={Icon} alt="icon" height={80} width={80} />
+                  <div className="flex justify-center items-center mr-2">
+                    <img src={F3} alt="icon" height={100} width={100} />
                   </div>
                   <div>
-                    <div className="section-2-title">Events Analytics</div>
+                    <div className="section-2-title">Smog Predictions</div>
                     <div className="section-2-description">
-                      Charts/Dashboards
+                      Analytics & AI Insights
                     </div>
                   </div>
                 </div>
@@ -214,58 +270,18 @@ export default function Home() {
                     padding: "7px",
                     margin: "1%",
                     borderRadius: "10px",
-                    width: "fit-content",
+                    width: "10vw",
                   }}
                 >
-                  <div>
-                    <img src={Icon} alt="icon" height={80} width={80} />
+                  <div className="flex justify-center items-center mr-2">
+                    <img src={F4} alt="icon" height={100} width={100} />
                   </div>
-                  <div>
-                    <div className="section-2-title">Forecast Ex.Events</div>
-                    <div className="section-2-description">
-                      Usage of LSTM Models
+                  <div className="justify-center items-center">
+                    <div className="section-2-title">
+                      Climate Analytics <br /> Insights{" "}
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex_box mb-8">
-                <div
-                  className="flex_box flex_item"
-                  style={{
-                    border: "3px solid #fdfdfd",
-                    padding: "7px",
-                    margin: "1%",
-                    borderRadius: "10px",
-                    width: "fit-content",
-                  }}
-                >
-                  <div>
-                    <img src={Icon} alt="icon" height={80} width={80} />
-                  </div>
-                  <div>
-                    <div className="section-2-title">Events Analytics</div>
                     <div className="section-2-description">
-                      Charts/Dashboards
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="flex_box flex_item"
-                  style={{
-                    border: "3px solid #fdfdfd",
-                    padding: "7px",
-                    margin: "1%",
-                    borderRadius: "10px",
-                    width: "fit-content",
-                  }}
-                >
-                  <div>
-                    <img src={Icon} alt="icon" height={80} width={80} />
-                  </div>
-                  <div>
-                    <div className="section-2-title">Forecast Ex.Events</div>
-                    <div className="section-2-description">
-                      Usage of LSTM Models
+                      Infographics & Charts
                     </div>
                   </div>
                 </div>
@@ -273,169 +289,6 @@ export default function Home() {
             </div>
           </div>
 
-          <div
-            className="flex flex-col items-center justify-center text-center pt-16"
-            style={{
-              borderTop: "10px solid",
-              borderImage:
-                "linear-gradient(90deg, #719b5c, #23634b, #23634c6b, #00000067) 1",
-            }}
-          >
-            <p className="text-4xl">
-              System{" "}
-              <span class="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
-                Packages
-              </span>
-            </p>
-            <p className="mx-28 my-4 mb-0">
-              TimeVista is a groundbreaking project that encapsulates over four
-              decades of historical climate data, spanning 1980 to 2022, with a
-              singular focus: Revolutionizing Pakistan's agricultural landscape.
-            </p>
-          </div>
-
-          <div className="bor m-20 mt-12 flex_box">
-            <div
-              className="bor mt-12 m-2 flex_item justify-center items-center"
-              style={{ backgroundColor: "#151515", borderRadius: "17px" }}
-            >
-              <div
-                className="text-4xl p-2 bg-gradient-to-b from-green-600 to-green-500 text-white font-bold text-center"
-                style={{ borderRadius: "17px 17px 0px 0px" }}
-              >
-                BASIC
-              </div>
-              <div className="text-6xl p-2 bg-gradient-to-b from-green-500 to-blue-400 text-black font-bold text-center ">
-                $9.99
-              </div>
-
-              <div className="packages text-white font-bold pt-4">
-                <div className="flex justify-left items-left pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu </div>
-                </div>
-                <div className="flex justify-left items-left bg-black  pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsus</div>
-                </div>
-                <div className="flex justify-left items-left pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu</div>
-                </div>
-                <div className="flex justify-left items-left bg-black  pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu</div>
-                </div>
-              </div>
-              <div className="text-center p-4">
-                <button className="p-6 pt-2 pb-2 rounded-full bg-gradient-to-r from-green-500 to-blue-500 text-black font-bold">
-                  BUY NOW
-                </button>
-              </div>
-            </div>
-
-            <div
-              className="bor mt-2 m-2 flex_item justify-center items-center"
-              style={{ backgroundColor: "#151515", borderRadius: "17px" }}
-            >
-              <div
-                className="text-4xl p-2 bg-gradient-to-b from-yellow-500 to-yellow-400 text-white font-bold text-center"
-                style={{ borderRadius: "17px 17px 0px 0px" }}
-              >
-                Premium
-              </div>
-              <div className="text-6xl p-2 bg-gradient-to-b from-yellow-400 to-yellow-300 text-black font-bold text-center">
-                $29.99
-              </div>
-
-              <div className="packages text-white font-bold pt-4">
-                <div className="flex justify-left items-left pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu </div>
-                </div>
-                <div className="flex justify-left items-left bg-black  pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsus</div>
-                </div>
-                <div className="flex justify-left items-left pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu</div>
-                </div>
-                <div className="flex justify-left items-left bg-black  pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu</div>
-                </div>
-              </div>
-              <div className="text-center p-4">
-                <button className="p-6 pt-2 pb-2 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 text-black font-bold">
-                  BUY NOW
-                </button>
-              </div>
-            </div>
-
-            <div
-              className="bor mt-12 m-2 flex_item justify-center items-center"
-              style={{ backgroundColor: "#151515", borderRadius: "17px" }}
-            >
-              <div
-                className="text-4xl p-2 bg-gradient-to-b from-green-600 to-green-500 text-white font-bold text-center"
-                style={{ borderRadius: "17px 17px 0px 0px" }}
-              >
-                STANDARD
-              </div>
-              <div className="text-6xl p-2 bg-gradient-to-b from-green-500 to-blue-400 text-black font-bold text-center">
-                $19.99
-              </div>
-
-              <div className="packages text-white font-bold pt-4">
-                <div className="flex justify-left items-left pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu </div>
-                </div>
-                <div className="flex justify-left items-left bg-black  pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsus</div>
-                </div>
-                <div className="flex justify-left items-left pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu</div>
-                </div>
-                <div className="flex justify-left items-left bg-black  pl-20">
-                  <div className="p-2">
-                    <img src={Gtick} alt="greentick" height={30} width={30} />
-                  </div>
-                  <div className="p-2.5">lorem ipsu</div>
-                </div>
-              </div>
-              <div className="text-center p-4">
-                <button className="p-6 pt-2 pb-2 rounded-full bg-gradient-to-r from-green-500 to-blue-500 text-black font-bold">
-                  BUY NOW
-                </button>
-              </div>
-            </div>
-          </div>
           <div style={{ color: "white" }}>
             <Accordion></Accordion>
           </div>

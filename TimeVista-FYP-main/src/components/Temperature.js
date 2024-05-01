@@ -204,7 +204,7 @@ export default function Temperature() {
 
   const FetchDataCityWiseFunc = async (Reqobj) => {
     try {
-      const response = await fetch("https://time-vista-server.vercel.app/api/HistoryData", {
+      const response = await fetch("http://localhost:4000/api/HistoryData", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

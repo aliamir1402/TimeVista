@@ -10,7 +10,7 @@ export default function cover(props) {
   return (
     <>
       <div className="mt-4 flex_box bor">
-        <div className="pt-12 sec-1 bor ">
+        <div className="pt-12 sec-1 bor anamation">
           <div className="flex_box">
             <div className="p-1">
               <img src={X} alt="" height={32} width={32} />
@@ -53,16 +53,18 @@ export default function cover(props) {
                 Explore Earth
               </button>
             </Link>
-            <button
-              type="button"
-              class="learn-more-button inline-block rounded-full der-2 der-primary-100 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:der-primary-accent-100 hover:bg-neutral-100 hover:bg-opacity-10 focus:der-primary-accent-100 focus:outline-none focus:ring-0 active:der-primary-accent-200 dark:text-primary-100 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-              data-te-ripple-init
-            >
-              Learn more
-            </button>
+            <Link to="/aboutus">
+              <button
+                type="button"
+                class="learn-more-button inline-block rounded-full der-2 der-primary-100 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:der-primary-accent-100 hover:bg-neutral-100 hover:bg-opacity-10 focus:der-primary-accent-100 focus:outline-none focus:ring-0 active:der-primary-accent-200 dark:text-primary-100 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                data-te-ripple-init
+              >
+                Learn more
+              </button>
+            </Link>
           </div>
         </div>
-        <div className="container flex_item bor">
+        <div className="container flex_item bor anamation2">
           <img className="centered-image" src={props.Earth} alt="graphics" />
         </div>
       </div>

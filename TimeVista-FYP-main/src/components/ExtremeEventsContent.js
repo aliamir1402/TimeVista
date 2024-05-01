@@ -70,7 +70,7 @@ export default function VerticalTabs() {
   useEffect(() => {
     async function fetchData(reqObj) {
       try {
-        const response = await fetch("https://time-vista-server.vercel.app/api/ExEvents", {
+        const response = await fetch("http://localhost:4000/api/ExEvents", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -779,54 +779,17 @@ export default function VerticalTabs() {
                 </button>
               </div>
             </div>
-            <div id="map-gis" className="flex justify-center items-center">
+            <div
+              id="map-gis"
+              className="flex justify-center items-center"
+              style={{ height: "100vh" }}
+            >
               <Map
                 flag={gisflag}
                 data={mapsData}
                 feature={feature}
                 showBox={showBoxFunc}
               ></Map>
-            </div>
-          </div>
-
-          <div
-            className="pt-8 pl-12 flex_box"
-            style={{
-              fontSize: "25px",
-              backgroundColor: "#f8f9fb",
-              fontWeight: 800,
-              marginBottom: "2%",
-            }}
-          >
-            <div
-              style={{
-                border: "3px solid #2d5b40",
-                borderRadius: "10px",
-                width: "5px",
-                marginRight: "5px",
-                height: "35px",
-              }}
-            ></div>
-            <div>Extreme Events Predictor</div>
-          </div>
-          <div className="bor flex_box ml-4 mr-8 mb-4">
-            <div className="bor flex justify-center text-center text-3xl flex_item">
-              <img src="" alt="Image" />
-            </div>
-            <div className="bor flex_item">
-              <div className="bor justify-center text-center">Title</div>
-              <div className="bor flex">
-                <div className="bor justify-center text-center flex_item">
-                  Category
-                </div>
-                <div className="bor justify-center text-center flex_item">
-                  Location
-                </div>
-              </div>
-              <div className="bor">
-                <div className="bor">Description</div>
-                <div>References</div>
-              </div>
             </div>
           </div>
         </div>

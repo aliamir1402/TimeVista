@@ -24,22 +24,19 @@ export default function Footer() {
 
         <div className="flex_box items-center justify-center text-center mt-8 mb-4 px-20">
           <div className="flex_item feature-item">
-            <a href="">Home</a>
+            <a href="/../">Home</a>
           </div>
           <div className="flex_item feature-item">
-            <a href="">Products</a>
+            <a href="/../dashboard">Products</a>
           </div>
           <div className="flex_item feature-item">
-            <a href="">About</a>
+            <a href="/../aboutus">About</a>
           </div>
           <div className="flex_item feature-item">
-            <a href="">Articles</a>
+            <a href="/../articles">Articles</a>
           </div>
           <div className="flex_item feature-item">
-            <a href="">Contact Us</a>
-          </div>
-          <div className="flex_item feature-item">
-            <a href="">FAQs</a>
+            <a href="/../contact">Contact Us</a>
           </div>
         </div>
         <div className="bor flex_box items-center justify-center text-center mt-4 mb-4">

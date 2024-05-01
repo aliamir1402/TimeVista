@@ -511,14 +511,14 @@ const GISMap = (props) => {
       map.on("click", "city-population", function (e) {
         // Create a button element
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var cityName = e.features[0].properties.city;
+        var cityName = e.features[0].properties.name;
         var cityValue = Math.round(e.features[0].properties.population);
 
         // Create the main div element
         var popupContent = document.createElement("div");
         popupContent.className = "pop-up";
         popupContent.classList.add("popup-content");
-
+ 
         // Create the div element for the city name
         var cityNameDiv = document.createElement("div");
         cityNameDiv.className = "sub-pop-up";

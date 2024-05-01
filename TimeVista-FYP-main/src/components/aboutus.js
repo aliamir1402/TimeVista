@@ -3,7 +3,10 @@ import Accodation from "./accodation";
 import Header from "./header";
 import Footer from "./footer";
 import AboutUsCover from "../components/images/climatecover.png";
-import Icon from "../components/images/tornado.png";
+import F1 from "../components/images/FeatureOneImg.jpg";
+import F2 from "../components/images/FeatureTwoImg-removebg-preview.png";
+import F3 from "../components/images/FeatureThreeImg.jpg";
+import F4 from "../components/images/FeatureFourImg-removebg-preview.png";
 
 export default function Aboutus() {
   return (
@@ -87,12 +90,14 @@ export default function Aboutus() {
                   }}
                 >
                   <div>
-                    <img src={Icon} alt="icon" height={80} width={80} />
+                    <img src={F1} alt="icon" height={100} width={100} />
                   </div>
                   <div>
-                    <div className="section-2-title">Events Analytics</div>
+                    <div className="section-2-title">
+                      Agriculture Weather Prediction
+                    </div>
                     <div className="section-2-description">
-                      Charts/Dashboards
+                      Charts & Infographics
                     </div>
                   </div>
                 </div>
@@ -108,12 +113,14 @@ export default function Aboutus() {
                   }}
                 >
                   <div>
-                    <img src={Icon} alt="icon" height={80} width={80} />
+                    <img src={F2} alt="icon" height={100} width={100} />
                   </div>
                   <div>
-                    <div className="section-2-title">Forecast Ex.Events</div>
+                    <div className="section-2-title">
+                      Crop Yield Forecasting
+                    </div>
                     <div className="section-2-description">
-                      Usage of LSTM Models
+                      Analytics & AI Insights
                     </div>
                   </div>
                 </div>
@@ -131,11 +138,38 @@ export default function Aboutus() {
                   }}
                 >
                   <div>
-                    <img src={Icon} alt="icon" height={80} width={80} />
+                    <img src={F3} alt="icon" height={100} width={100} />
                   </div>
                   <div>
-                    <div className="section-2-title">Crop Yield Forecasts</div>
-                    <div className="section-2-description">Description</div>
+                    <div className="section-2-title">Smog Predictions</div>
+                    <div className="section-2-description">
+                      Analytics & AI Insights
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex_box mb-8">
+                <div
+                  className="flex_box flex_item"
+                  style={{
+                    border: "3px solid #fdfdfd",
+                    padding: "10px",
+                    paddingLeft: "15px",
+                    paddingRight: "15px",
+                    borderRadius: "10px",
+                    width: "fit-content",
+                  }}
+                >
+                  <div>
+                    <img src={F4} alt="icon" height={100} width={100} />
+                  </div>
+                  <div>
+                    <div className="section-2-title">
+                      Climate Analytics Insights
+                    </div>
+                    <div className="section-2-description">
+                      Infographics & Charts
+                    </div>
                   </div>
                 </div>
               </div>

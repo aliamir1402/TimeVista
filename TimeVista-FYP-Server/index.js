@@ -684,7 +684,7 @@ app.post("/api/smog", async (req, res) => {
       });
     }
     console.log("------------------------------------");
-    console.log("DataFormat", DataFormat);
+    //console.log("DataFormat", DataFormat);
     console.log("------------------------------------");
     console.log("History", tempData[0]);
     res.json({

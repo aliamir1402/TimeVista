@@ -70,12 +70,6 @@ export default function Navbar(props) {
             <a href="/../contact" className="wavy-underline nav-effects">
               Contact Us
             </a>
-            <a href="#" className="wavy-underline nav-effects">
-              FAQs
-            </a>
-            <a href="#" className="wavy-underline nav-effects">
-              Subscribe
-            </a>
           </div>
 
           <div className="flex_item">
@@ -120,12 +114,6 @@ export default function Navbar(props) {
             </a>
             <a href="/../contact" className="wavy-underline nav-effects">
               Contact Us
-            </a>
-            <a href="#" className="wavy-underline nav-effects">
-              FAQs
-            </a>
-            <a href="#" className="wavy-underline nav-effects">
-              Subscribe
             </a>
           </div>
 

@@ -78,9 +78,10 @@ export default function Dashboard() {
                       <div class="p-4 flex flex-col feature">
                         <div className="title-feature">Extreme Events</div>
                         <div className="des-feature">
-                          Analytics is the systematic exploration,
-                          interpretation, and communication of meaningful
-                          patterns and insights derived from data.
+                          The Extreme Historical Events Display Module in
+                          TimeVista offer a dynamic visualization of significant
+                          past climate events, such as heatwaves, droughts,
+                          floods, and storms.
                         </div>
                       </div>
                     </div>
@@ -99,9 +100,11 @@ export default function Dashboard() {
                       <div class="p-4 flex flex-col feature">
                         <div className="title-feature">Crop yield </div>
                         <div className="des-feature">
-                          Analytics is the systematic exploration,
-                          interpretation, and communication of meaningful
-                          patterns and insights derived from data.
+                          Crop Yield and Analytics Module in TimeVista offers
+                          in-depth analysis and forecasting capabilities for
+                          crop production. It empowers users with historical
+                          data insights, predictive analytics, and key
+                          agricultural indicators.
                         </div>
                       </div>
                     </div>
@@ -120,9 +123,9 @@ export default function Dashboard() {
                       <div class="p-4 flex flex-col feature">
                         <div className="title-feature">Air Quaility </div>
                         <div className="des-feature">
-                          Analytics is the systematic exploration,
-                          interpretation, and communication of meaningful
-                          patterns and insights derived from data.
+                          The Air Quality Module provides real-time monitoring
+                          and forecasting of air pollution levels. The module
+                          tracks smog trends, predicts air quality fluctuations.
                         </div>
                       </div>
                     </div>
@@ -141,9 +144,9 @@ export default function Dashboard() {
                       <div class="p-4 flex flex-col feature">
                         <div className="title-feature">Climate Datasets </div>
                         <div className="des-feature">
-                          Analytics is the systematic exploration,
-                          interpretation, and communication of meaningful
-                          patterns and insights derived from data.
+                          Climate datasets in TimeVista encompass a rich
+                          repository of historical climate data spanning over 40
+                          years.
                         </div>
                       </div>
                     </div>
@@ -153,7 +156,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div style={{marginTop:"20vh"}}>
+        <div style={{ marginTop: "20vh" }}>
           <Footer></Footer>
         </div>
       </div>

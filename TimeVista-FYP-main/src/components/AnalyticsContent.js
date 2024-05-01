@@ -52,7 +52,22 @@ function a11yProps(index) {
 }
 
 export default function VerticalTabs() {
-  const [name, setName] = useState("Ali Amir Khawaja");
+  // Check if an item exists in local storage
+  function isLocalStorageItemExists(key) {
+    return localStorage.getItem(key) !== null;
+  }
+  var name = "",
+    flag = 0;
+  // Example usage
+  const itemName = "username"; // Replace with the name of the item you want to check
+  const exists = isLocalStorageItemExists(itemName);
+
+  if (exists) {
+    flag = 1;
+    name = localStorage.getItem(itemName);
+  } else {
+    flag = 0;
+  }
   const [value, setValue] = useState(0);
   const [timecounter, setTimecounter] = useState(1985);
   const [isSelected1, setIsSelected1] = useState(true);
@@ -112,7 +127,7 @@ export default function VerticalTabs() {
   const fetchData = async (Reqobj) => {
     let scrollObj = [];
     try {
-      const response = await fetch("https://time-vista-server.vercel.app/api/gisLayer", {
+      const response = await fetch("http://localhost:4000/api/gisLayer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -448,7 +463,6 @@ export default function VerticalTabs() {
                     Year
                   </button>
                 </div>
-                
               </div>
             </div>
 

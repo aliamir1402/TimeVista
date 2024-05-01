@@ -86,13 +86,16 @@ export default function Login() {
         return;
       }
 
-      const response = await fetch("https://time-vista-server.vercel.app/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(DataInsert),
-      });
+      const response = await fetch(
+        "http://localhost:4000/api/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(DataInsert),
+        }
+      );
 
       var userId, token, expirationTime;
 
@@ -123,8 +126,8 @@ export default function Login() {
   };
 
   return (
-    <div className="pt-20 pb-20 pl-8 login-bg">
-      <div class="login-container">
+    <div className="login-bg" style={{ padding: "10vw", paddingLeft: "5vw" }}>
+      <div class="login-container anamation">
         <div class="login-box">
           <div className="p-4 login-image">
             <img src={LogoTV} alt="LoginImage" width={60} height={60} />
@@ -178,6 +181,7 @@ export default function Login() {
 
             <div className="m-2 flex_item">
               <input
+                style={{ border: "3px solid #e9e9e9", borderRadius: "12px" }}
                 type="text"
                 id="username"
                 name="username"
@@ -193,6 +197,7 @@ export default function Login() {
             </div>
             <div className="m-2 flex_item">
               <input
+                style={{ border: "3px solid #e9e9e9", borderRadius: "12px" }}
                 type="password"
                 id="password"
                 name="password"
@@ -223,7 +228,6 @@ export default function Login() {
               </a>
             </div>
           </div>
-          {<Auth></Auth>}
         </div>
         <div className="login-account-title">
           <a href="./sign-up">Don't have an account...</a>

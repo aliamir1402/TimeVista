@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import DropDownMenu from "./DropDownMenu.js";
-import helpIcon from "./images/help.png";
 import ppic from "./images/profilepic.png";
-import SearchIcon from "./images/search.png";
-import ThemeChange from "./themechange.js";
 import logo from "./images/logo.png";
-import Notifications from "./Notifications.js";
 
 export default function Header() {
   var name = "",

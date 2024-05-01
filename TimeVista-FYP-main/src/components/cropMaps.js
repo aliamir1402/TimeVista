@@ -196,23 +196,8 @@ export default function CropMaps(props) {
             </div>
           </div>
           <div style="width: fit-content;">
-            <div class="text-3xl p-2">RealTime Stats</div>
-            <div class="bor flex">
-              <div class="bor m-2 p-1 map-pop-up-sub" style="width: 30%;">
-                <div class="bor m-1 p-1 text-sm flex justify-left items-left">Temperature</div>
-                <div class="bor m-1 p-1 text-3xl flex justify-center items-center">20</div>
-                <div class="bor m-1 p-1 text-sm flex justify-center items-center">°C</div>
-              </div>
-              <div class="bor m-2 p-1 map-pop-up-sub" style="width: 30%;">
-                <div class="bor m-1 p-1 text-sm flex justify-left items-left">Weather</div>
-                <div class="bor m-1 p-1 text-3xl flex justify-center items-center">Icon</div>
-              </div>
-              <div class="bor m-2 p-1 map-pop-up-sub" style="width: 30%;">
-                <div class="bor m-1 p-1 text-sm flex justify-left items-left">Air Quality</div>
-                <div class="bor m-1 p-1 text-3xl flex justify-center items-center">94</div>
-                <div class="bor m-1 p-1 text-sm flex justify-center items-center">AQI</div>
-              </div>
-            </div>
+            <div class="text-3xl p-2 mb-2">RealTime Stats</div>
+            
             <div class="bor m-2 p-2 Chart-popup" id="chartContainer">
             </div>
           </div>

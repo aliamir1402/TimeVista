@@ -24,16 +24,18 @@ export default function Accodation() {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    Section 1 title
+                    What is TimeVista?
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} className="p-3 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                TimeVista is a web application designed to provide stakeholders,
+                from the general public to farm owners, with agricultural and
+                air quality forecasts. It utilizes deep learning to combine
+                agricultural weather prediction, crop yield forecasting, and
+                smog prediction through dynamic map interfaces and interactive
+                infographics.
               </AccordionPanel>
             </AccordionItem>
 
@@ -41,16 +43,16 @@ export default function Accodation() {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    Section 2 title
+                    How does TimeVista help stakeholders?
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} className="p-3 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                TimeVista helps stakeholders in better planning and
+                implementation by providing historical insights, using machine
+                learning techniques for forecasting, and offering interactive
+                visualizations of agricultural and air quality data.
               </AccordionPanel>
             </AccordionItem>
 
@@ -58,16 +60,16 @@ export default function Accodation() {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    Section 3 title
+                    What data does TimeVista use for forecasting?
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} className="p-3 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                TimeVista utilizes over 40 years of climate data to predict the
+                yield of Pakistan's top 5 crops in the future. It incorporates
+                agricultural climate variables to present comprehensive
+                forecasts.
               </AccordionPanel>
             </AccordionItem>
 
@@ -75,16 +77,32 @@ export default function Accodation() {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    Section 4 title
+                    What role does deep learning play in TimeVista?
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} className="p-3 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Deep learning is the core technology used in TimeVista for data
+                analysis and forecasting. It powers the prediction models for
+                agricultural weather, crop yield, and smog, enabling accurate
+                and timely forecasts.
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem className="p-3 acc-item">
+              <h2>
+                <AccordionButton>
+                  <Box as="span" flex="1" textAlign="left">
+                    What technologies are used in TimeVista?
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4} className="p-3 text-base">
+                TimeVista utilizes deep learning for data analysis and
+                forecasting. It integrates agricultural weather prediction, crop
+                yield forecasting, and smog prediction using dynamic map
+                interfaces and interactive infographics.
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
@@ -94,16 +112,17 @@ export default function Accodation() {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    Section 1 title
+                    How accurate are the forecasts provided by TimeVista?
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} className="p-3 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                TimeVista leverages advanced machine learning techniques to
+                provide accurate forecasts based on historical data and
+                real-time inputs. However, the accuracy may vary depending on
+                the complexity of the underlying factors and the quality of
+                available data.
               </AccordionPanel>
             </AccordionItem>
 
@@ -111,16 +130,17 @@ export default function Accodation() {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    Section 2 title
+                    How does TimeVista address climate change?
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} className="p-3 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                TimeVista addresses climate change by integrating historical
+                climate data and insights to inform stakeholders and inspire
+                action towards a sustainable future. By providing actionable
+                information, it aims to support informed decision-making and
+                mitigate the impacts of climate change.
               </AccordionPanel>
             </AccordionItem>
 
@@ -128,16 +148,15 @@ export default function Accodation() {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    Section 3 title
+                    Can TimeVista predict smog trends?
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} className="p-3 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Yes, TimeVista can predict smog trends over time using deep
+                learning models. It offers forecasts that assist policymakers in
+                implementing targeted interventions to combat air pollution.
               </AccordionPanel>
             </AccordionItem>
 
@@ -145,16 +164,32 @@ export default function Accodation() {
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
-                    Section 4 title
+                    How can users explore a specific region of interest in
+                    TimeVista?
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} className="p-3 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Users can explore a specific region of interest in TimeVista by
+                using the interactive map interface. They can simply click on
+                the map to select their desired region and access relevant data
+                and forecasts.
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem className="p-3 acc-item">
+              <h2>
+                <AccordionButton>
+                  <Box as="span" flex="1" textAlign="left">
+                    Who is behind the development of TimeVista?
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4} className="p-3 text-base">
+                TimeVista is developed by a team of Ali Amir Khawaja, Nirmal Rai
+                and Hashim Mahmood, under the supervision and guidance of
+                advisors Dr. Shah Khalid and Dr. Bilal Ali.
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
