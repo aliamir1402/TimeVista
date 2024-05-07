@@ -1,0 +1,18 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.234906738972, 31.70562200131828]]]
+      },
+      "properties": {
+        "STATE_ID": "17",
+        "STATE_NAME": "Illinois",
+        "mag": 14
+      },
+      "id": 17
+    }
+  ]
+}
