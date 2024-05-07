@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../components/images/logo.png";
-import sun from "./images/sun.png";
-import moon from "./images/moon.png";
+import ppic from "../components/images/profilepic.png";
+import DropDownMenu from "./DropDownMenu";
 
 export default function Navbar(props) {
   var [im_theme, setim_theme] = useState("sun-logo");
@@ -72,16 +72,14 @@ export default function Navbar(props) {
             </a>
           </div>
 
-          <div className="flex_item">
-            <Link to="/profile">
-              <button
-                type="button"
-                class="text-white bg-gradient-to-br from-green-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-full text-sm px-7 py-2.5 text-center mr-2 mb-2 mt-5"
-              >
-                {name}
-              </button>
-            </Link>
+          <div className="flex bor flex_item">
+          <div className="mr-2 mt-3.5">
+            <img src={ppic} alt="Profile Pic" className="ppic" />
           </div>
+          <div className="mr-2 mt-2.5">
+            <DropDownMenu profileName={name}></DropDownMenu>
+          </div>
+        </div>
         </div>
       </>
     );

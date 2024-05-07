@@ -69,12 +69,6 @@ export default function Header() {
           <a href="/../contact" className="wavy-underline nav-effects">
             Contact Us
           </a>
-          <a href="#" className="wavy-underline nav-effects">
-            FAQs
-          </a>
-          <a href="#" className="wavy-underline nav-effects">
-            Subscribe
-          </a>
         </div>
         <div className="divider flex"></div>
         <div className="flex bor flex_item">

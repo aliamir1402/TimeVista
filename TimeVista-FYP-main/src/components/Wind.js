@@ -25,18 +25,63 @@ export default function Wind() {
       setCityList(["ISB-Islamabad"]);
     } else if (selectedRegion === "Punjab") {
       setCityList([
+        "ATK-Attock",
+        "BHK-Bhakkar",
+        "BHV-Bahawalpur",
+        "CHAH-Chagai",
+        "CHL-Chakwal",
+        "DIK-Dera Ismail Khan",
+        "FSD-Faisalabad",
         "RWP-Rawalpindi",
         "LHR-Lahore",
         "FSB-Faisalabad",
         "MUL-Multan",
         "GWJ-Gujranwala",
+        "HAF-Hafizabad",
+        "HYD-Hyderabad",
+        "JHE-Jhelum",
+        "KHAN-Khanewal",
+        "KHUS-Khushab",
+        "LAY-Layyah",
+        "LOD-Lodhran",
+        "MNW-Mianwali",
+        "MUZ-Muzaffargarh",
+        "NAR-Narowal",
+        "OKD-Okara",
+        "PANJ-Panjeer",
+        "PPT-Pakpattan",
+        "QAS-Qasur",
+        "RAP-Rajanpur",
+        "RYK-Rahim Yar Khan",
+        "SAH-Sahiwal",
+        "SAR-Sargodha",
+        "SHP-Sheikhupura",
+        "SIA-Sialkot",
+        "TTS-Toba Tak Singh",
+        "VEH-Vehari",
+        "WGB-Bahawalnagar",
       ]);
     } else if (selectedRegion === "Sindh") {
-      setCityList([]);
+      setCityList([
+        "JAM-Jamshoro",
+        "THAR-Tharparkar",
+        "THT-Thatta",
+        "UMK-Umerkot",
+      ]);
     } else if (selectedRegion === "KPK") {
-      setCityList(["AAW-Abbottabad", "MRD-Mardan", "SWT-Swat", "MGO-Mingaora"]);
+      setCityList([
+        "AAW-Abbottabad",
+        "BEZ-Bannu",
+        "CTR-LowerDir",
+        "DGK-Dera Ghazi Khan",
+        "KHUR-Khurrum",
+        "PES-Peshawar",
+        "SWT-Swat",
+      ]);
     } else if (selectedRegion === "Balochistan") {
-      setCityList([]);
+      setCityList(["BHC-Barkhan", "GWD-Gwadar", "QET-Quetta", "TUR-Turbat"]);
+    } else if (selectedRegion === "Gilgit-Baltistan") {
+      setCityList(["SKD-Skardu"]);
     }
   };
 

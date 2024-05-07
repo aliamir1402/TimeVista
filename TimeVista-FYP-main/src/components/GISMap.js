@@ -1,580 +1,450 @@
 import React, { useEffect } from "react";
 import maplibregl from "maplibre-gl";
-import Loader from "../components/loader";
+import LineChart from "../components/charts/SimpleLineChart";
+import ReactDOM from "react-dom";
+import Data from "./test.geojson";
+import Loader from "./loader";
 
-const GISMap = (props) => {
-  var x = props.flag;
+export default function Test(props) {
   useEffect(() => {
-    if (x === 1) {
+    if (props.flag) {
       const map = new maplibregl.Map({
-        container: "map",
+        container: "TestMap",
         style:
           "https://api.maptiler.com/maps/streets/style.json?key=ub6D6mcohLuVpSQqkHI2",
-        center: [73.0479, 33.6844],
-        zoom: 4.5,
+        center: [73.234906738972, 31.70562200131828],
+        zoom: 5,
       });
 
-      map.on("load", async () => {
-        map.addSource("PopulationData", {
+      let hoveredStateId = null;
+      let paintColor = "#FF0000";
+
+      map.on("load", () => {
+        map.addSource("states", {
           type: "geojson",
-          data: props.data, //PopulationData,Make sure to provide the correct path to your GeoJSON data
+          data: props.Data,
+        });
+        var layer;
+        if (props.feature === 1) {
+          layer = {
+            id: "state-fills",
+            type: "fill",
+            source: "states",
+            layout: {},
+            paint: {
+              "fill-color": [
+                "case",
+                [
+                  "all",
+                  [">=", ["get", "mag"], -20],
+                  ["<", ["get", "mag"], -15],
+                ],
+                "#225ea9", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], -15], ["<", ["get", "mag"], -10]],
+                "#41b7c5", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], -10], ["<", ["get", "mag"], -5]],
+                "#ffffcd", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], -5], ["<", ["get", "mag"], 0]],
+                "#ffeea1", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 0], ["<", ["get", "mag"], 5]],
+                "#ffda76", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 5], ["<", ["get", "mag"], 10]],
+                "#ffb34c", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 15], ["<", ["get", "mag"], 20]],
+                "#fe8e3c", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 20], ["<", ["get", "mag"], 25]],
+                "#fd4e2a", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 25], ["<", ["get", "mag"], 30]],
+                "#e41a1c", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 30], ["<", ["get", "mag"], 35]],
+                "#be0026", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 35], ["<", ["get", "mag"], 40]],
+                "#800026", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 40]],
+                "#333333", // If mag is between 20 and 30, color blue
+                "#ffffff",
+              ],
+              "fill-opacity": [
+                "case",
+                ["boolean", ["feature-state", "hover"], false],
+                1,
+                0.5,
+              ],
+            },
+          };
+        } else if (props.feature === 2) {
+          layer = {
+            id: "state-fills",
+            type: "fill",
+            source: "states",
+            layout: {},
+            paint: {
+              "fill-color": [
+                "case",
+                ["<", ["get", "mag"], 0],
+                "rgb(100, 255, 0)", // If mag is less than 10, color red
+                ["all", [">=", ["get", "mag"], 10], ["<", ["get", "mag"], 15]],
+                [
+                  "interpolate",
+                  ["linear"],
+                  ["get", "mag"],
+                  5,
+                  "rgb(176, 255, 0)", // Light green
+                  10,
+                  "rgb(0, 128, 0)", // Dark green
+                ],
+                [
+                  "all",
+                  [">=", ["get", "mag"], -20],
+                  ["<", ["get", "mag"], -10],
+                ],
+                "#FF00FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], -10], ["<", ["get", "mag"], 0]],
+                "#FF00FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 0], ["<", ["get", "mag"], 10]],
+                "#FF00FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 10], ["<", ["get", "mag"], 15]],
+                "#FF00FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 15], ["<", ["get", "mag"], 20]],
+                "#FF00FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 20], ["<", ["get", "mag"], 25]],
+                "#ffe600", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 25], ["<", ["get", "mag"], 30]],
+                "#00FFFF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 30], ["<", ["get", "mag"], 35]],
+                "#0FF0FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 35], ["<", ["get", "mag"], 40]],
+                "#0FF0FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 40], ["<", ["get", "mag"], 45]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 45], ["<", ["get", "mag"], 50]],
+                "#F000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 50]],
+                "#333333", // If mag is between 20 and 30, color blue
+                "#ffffff",
+              ],
+              "fill-opacity": [
+                "case",
+                ["boolean", ["feature-state", "hover"], false],
+                1,
+                0.5,
+              ],
+            },
+          };
+        } else if (props.feature === 3) {
+          layer = {
+            id: "state-fills",
+            type: "fill",
+            source: "states",
+            layout: {},
+            paint: {
+              "fill-color": [
+                "case",
+                ["<", ["get", "mag"], 0],
+                "rgb(100, 255, 0)", // If mag is less than 10, color red
+                ["all", [">=", ["get", "mag"], 10], ["<", ["get", "mag"], 100]],
+                [
+                  "interpolate",
+                  ["linear"],
+                  ["get", "mag"],
+                  5,
+                  "rgb(176, 255, 0)", // Light green
+                  10,
+                  "rgb(0, 128, 0)", // Dark green
+                ],
+
+                ["all", [">=", ["get", "mag"], 100], ["<", ["get", "mag"], 15]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 200], ["<", ["get", "mag"], 20]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 300], ["<", ["get", "mag"], 25]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 400], ["<", ["get", "mag"], 30]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 500], ["<", ["get", "mag"], 35]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 600], ["<", ["get", "mag"], 40]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 700], ["<", ["get", "mag"], 45]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 800], ["<", ["get", "mag"], 50]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 50]],
+                "#333333", // If mag is between 20 and 30, color blue
+                "#ffffff",
+              ],
+              "fill-opacity": [
+                "case",
+                ["boolean", ["feature-state", "hover"], false],
+                1,
+                0.5,
+              ],
+            },
+          };
+        } else if (props.feature === 4) {
+          layer = {
+            id: "state-fills",
+            type: "fill",
+            source: "states",
+            layout: {},
+            paint: {
+              "fill-color": [
+                "case",
+                ["<", ["get", "mag"], 0],
+                "rgb(100, 255, 0)", // If mag is less than 10, color red
+                ["all", [">=", ["get", "mag"], 10], ["<", ["get", "mag"], 100]],
+                [
+                  "interpolate",
+                  ["linear"],
+                  ["get", "mag"],
+                  5,
+                  "rgb(176, 255, 0)", // Light green
+                  10,
+                  "rgb(0, 128, 0)", // Dark green
+                ],
+
+                ["all", [">=", ["get", "mag"], 100], ["<", ["get", "mag"], 15]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 200], ["<", ["get", "mag"], 20]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 300], ["<", ["get", "mag"], 25]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 400], ["<", ["get", "mag"], 30]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 500], ["<", ["get", "mag"], 35]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 600], ["<", ["get", "mag"], 40]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 700], ["<", ["get", "mag"], 45]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 800], ["<", ["get", "mag"], 50]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 50]],
+                "#333333", // If mag is between 20 and 30, color blue
+                "#ffffff",
+              ],
+              "fill-opacity": [
+                "case",
+                ["boolean", ["feature-state", "hover"], false],
+                1,
+                0.5,
+              ],
+            },
+          };
+        } else if (props.feature === 5) {
+          layer = {
+            id: "state-fills",
+            type: "fill",
+            source: "states",
+            layout: {},
+            paint: {
+              "fill-color": [
+                "case",
+                ["<", ["get", "mag"], 0],
+                "rgb(100, 255, 0)", // If mag is less than 10, color red
+                ["all", [">=", ["get", "mag"], 10], ["<", ["get", "mag"], 100]],
+                [
+                  "interpolate",
+                  ["linear"],
+                  ["get", "mag"],
+                  5,
+                  "rgb(176, 255, 0)", // Light green
+                  10,
+                  "rgb(0, 128, 0)", // Dark green
+                ],
+
+                ["all", [">=", ["get", "mag"], 100], ["<", ["get", "mag"], 15]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 200], ["<", ["get", "mag"], 20]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 300], ["<", ["get", "mag"], 25]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 400], ["<", ["get", "mag"], 30]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 500], ["<", ["get", "mag"], 35]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 600], ["<", ["get", "mag"], 40]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 700], ["<", ["get", "mag"], 45]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 800], ["<", ["get", "mag"], 50]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 50]],
+                "#333333", // If mag is between 20 and 30, color blue
+                "#ffffff",
+              ],
+              "fill-opacity": [
+                "case",
+                ["boolean", ["feature-state", "hover"], false],
+                1,
+                0.5,
+              ],
+            },
+          };
+        } else if (props.feature === 6) {
+          layer = {
+            id: "state-fills",
+            type: "fill",
+            source: "states",
+            layout: {},
+            paint: {
+              "fill-color": [
+                "case",
+                ["<", ["get", "mag"], 0],
+                "rgb(100, 255, 0)", // If mag is less than 10, color red
+                ["all", [">=", ["get", "mag"], 10], ["<", ["get", "mag"], 100]],
+                [
+                  "interpolate",
+                  ["linear"],
+                  ["get", "mag"],
+                  5,
+                  "rgb(176, 255, 0)", // Light green
+                  10,
+                  "rgb(0, 128, 0)", // Dark green
+                ],
+
+                ["all", [">=", ["get", "mag"], 100], ["<", ["get", "mag"], 15]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 200], ["<", ["get", "mag"], 20]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 300], ["<", ["get", "mag"], 25]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 400], ["<", ["get", "mag"], 30]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 500], ["<", ["get", "mag"], 35]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 600], ["<", ["get", "mag"], 40]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 700], ["<", ["get", "mag"], 45]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 800], ["<", ["get", "mag"], 50]],
+                "#0000FF", // If mag is between 20 and 30, color blue
+                ["all", [">=", ["get", "mag"], 50]],
+                "#333333", // If mag is between 20 and 30, color blue
+                "#ffffff",
+              ],
+              "fill-opacity": [
+                "case",
+                ["boolean", ["feature-state", "hover"], false],
+                1,
+                0.5,
+              ],
+            },
+          };
+        }
+
+        map.addLayer(layer);
+
+        map.addLayer({
+          id: "state-borders",
+          type: "line",
+          source: "states",
+          layout: {},
+          paint: {
+            "line-color": "#444444",
+            "line-width": 2,
+          },
         });
 
-        map.addControl(
-          new maplibregl.GeolocateControl({
-            positionOptions: {
-              enableHighAccuracy: true,
-            },
-            trackUserLocation: true,
-          })
-        );
+        // When the mouse leaves the state-fill layer, update the feature state of the
+        // previously hovered feature.
 
-        var legend;
-        if (props.feature === 1) {
-          map.addLayer({
-            id: "city-population",
-            type: "circle",
-            source: "PopulationData",
-            paint: {
-              "circle-radius": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                -20,
-                10,
-              ],
-              "circle-color": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                -20,
-                "blue",
-                -10,
-                "rgba(132, 242, 255, 0.8)",
-                0,
-                "rgba(255, 197, 0, 0.8)",
-                10,
-                "rgba(255,116,0,0.8)",
-                20,
-                "rgba(255, 50, 0, 0.8)",
-                30,
-                "rgba(255, 2, 0, 0.8)",
-                40,
-                "rgba(107,2,24,0.8)",
-              ],
-            },
-          });
-          // Positioning the legend within the map container
-          var legend = document.createElement("div");
-          legend.className = "legend";
-          legend.innerHTML = `
-          <div class="flex ml-4">
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: blue;color:#efefef;border-radius:10px 0px 0px 10px;"
-          >-20 to -10 °C</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(132, 242, 255, 0.8)"
-          >-10 to 0 °C</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(255, 197, 0, 0.8)"
-          >0 to 10 °C</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(255, 116, 0, 0.8)"
-          >10 to 20 °C</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(255, 50, 0, 0.8);color:#efefef;"
-          >20 to 30 °C</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(255, 2, 0, 0.8);color:#efefef;"
-          >30 to 40 °C</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(107,2,24,0.8);color:#efefef;border-radius:0px 10px 10px 0px;"
-          >40+ °C</div>
-          
-        </div></div>
-      `;
-        } else if (props.feature === 2) {
-          map.addLayer({
-            id: "city-population",
-            type: "circle",
-            source: "PopulationData",
-            paint: {
-              "circle-radius": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                10,
-              ],
-              "circle-color": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                "grey",
-                250,
-                "rgba(132, 242, 255, 1)",
-                500,
-                "rgba(0, 0, 255, 1)",
-                1000,
-                "rgba(0, 0, 139, 1)",
-                1500,
-                "rgba(128, 0, 128, 1)",
-                2000,
-                "rgba(75, 0, 130, 1)",
-              ],
-            },
-          });
-          // Positioning the legend within the map container
-          var legend = document.createElement("div");
-          legend.className = "legend";
-          legend.innerHTML = `
-          <div class="flex ml-4">
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: grey;color:#efefef;border-radius:10px 0px 0px 10px;"
-          >0 to 250 mm</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(132, 242, 255, 1);"
-          >251 to 500 mm</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(0, 0, 255, 1);;color:#efefef;"
-          >501 to 1000 mm</div>
-        
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(0, 0, 139, 1);color:#efefef;"
-          >1001 to 1500 mm</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(128, 0, 128, 1);color:#efefef;border-radius:0px 10px 10px 0px;"
-          >1501 to 2000 mm</div>
-          
-        </div>   
-      `;
-        } else if (props.feature === 3) {
-          map.addLayer({
-            id: "city-population",
-            type: "circle",
-            source: "PopulationData",
-            paint: {
-              "circle-radius": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                10,
-              ],
-              "circle-color": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                "grey",
-                20,
-                "rgba(224, 255, 255, 1)",
-                40,
-                "rgba(144, 238, 144, 1)",
-                60,
-                "rgba(238, 221, 130, 1)",
-                80,
-                "rgba(238, 221, 130, 1)",
-                100,
-                "rgba(240, 128, 128, 1)",
-              ],
-            },
-          });
-          var legend = document.createElement("div");
-          legend.className = "legend";
-          legend.innerHTML = `
-          <div class="flex ml-4">
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: grey;color:#efefef;border-radius:10px 0px 0px 10px;"
-          >0 to 20 %</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(224, 255, 255, 1)"
-          >21 to 40 %</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(144, 238, 144, 1)"
-          >41 to 60 %</div>
-        
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(238, 221, 130, 1)"
-          >61 to 80 %</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(240, 128, 128, 1); color:#efefef;border-radius:0px 10px 10px 0px;"
-          >81 to 100 %</div>
-          
-        </div></div>
-      `;
-        } else if (props.feature === 4) {
-          map.addLayer({
-            id: "city-population",
-            type: "circle",
-            source: "PopulationData",
-            paint: {
-              "circle-radius": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                10,
-              ],
-              "circle-color": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                "grey",
-                70000,
-                "rgba(224, 255, 255, 1)",
-                80000,
-                "rgba(144, 238, 144, 1)",
-                90000,
-                "rgba(238, 221, 130, 1)",
-                100000,
-                "rgba(255, 50, 0, 0.7)",
-                110000,
-                "rgba(240, 128, 128, 1)",
-                120000,
-                "rgba(139, 0, 0, 1)",
-              ],
-            },
-          });
-          var legend = document.createElement("div");
-          legend.className = "legend";
-          legend.innerHTML = `
-          <div class="flex ml-4">
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: grey;color:#efefef;border-radius:10px 0px 0px 10px;">
-            0 to 70000 Pa
-          </div>
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(224, 255, 255, 1)"
-          >70001 to 80000 Pa</div>
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(144, 238, 144, 1)"
-          >80001 to 90000 Pa</div>
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(238, 221, 130, 1)"
-          >90001 to 100000 Pa
-          </div>
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(240, 128, 128, 1)"
-          >100001 to 110000 Pa</div>
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(139, 0, 0, 1); color:#efefef;border-radius:0px 10px 10px 0px;"
-          >110000+ Pa</div>
-        </div></div>
-      `;
-        } else if (props.feature === 5) {
-          map.addLayer({
-            id: "city-population",
-            type: "circle",
-            source: "PopulationData",
-            paint: {
-              "circle-radius": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                12,
-              ],
-              "circle-color": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                "black",
-                2,
-                "rgba(173, 216, 230, 1)",
-                4,
-                "rgba(144, 238, 144, 1)",
-                6,
-                "rgba(255, 255, 102, 1)",
-                8,
-                "rgba(255, 165, 0, 1)",
-                10,
-                "rgba(139, 0, 0, 1)",
-              ],
-            },
-          });
-          var legend = document.createElement("div");
-          legend.className = "legend";
-          legend.innerHTML = `
-          <div class="flex ml-4">
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: grey;color:#efefef;border-radius:10px 0px 0px 10px;">
-          0 to 2 m/s (Calm)</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(173, 216, 230, 1)"
-          >2.1 to 4 m/s (Light Breeze)</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(144, 238, 144, 1)"
-          >4.1 to 6 m/s (Moderate Breeze)</div>
-        
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(255, 255, 102, 1)"
-          >6.1 to 8 m/s (Fresh Breeze)</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(255, 165, 0, 1)"
-          >8.1 to 10 m/s (Strong Breeze)</div>
-          
-        </div>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: rgba(139, 0, 0, 1);color:#efefef;border-radius:0px 10px 10px 0px;"
-          >10+ m/s (Strong Breeze)</div>
-          
-        </div></div>
-      `;
-        } else if (props.feature === 6) {
-          map.addLayer({
-            id: "city-population",
-            type: "circle",
-            source: "PopulationData",
-            paint: {
-              "circle-radius": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                12,
-              ],
-              "circle-color": [
-                "interpolate",
-                ["linear"],
-                ["get", "population"],
-                0,
-                "black",
-                50,
-                "rgba(173, 216, 230, 1)",
-                100,
-                "rgba(144, 238, 144, 1)",
-                150,
-                "rgba(255, 255, 102, 1)",
-                200,
-                "rgba(255, 165, 0, 1)",
-                300,
-                "rgba(139, 0, 0, 1)",
-              ],
-            },
-          });
-          var legend = document.createElement("div");
-          legend.className = "legend";
-          legend.innerHTML = `
-          <div class="flex mr-6">
-          <div class="legend-item">
-            <div class="legend-color" style="background-color: grey;color:#efefef;border-radius:10px 0px 0px 10px;">
-            Very Low Smog (Below 50 µg/m³)
+        map.on("mousemove", "state-fills", (e) => {
+          if (e.features.length > 0) {
+            if (hoveredStateId) {
+              map.setFeatureState(
+                { source: "states", id: hoveredStateId },
+                { hover: false }
+              );
+            }
+            hoveredStateId = e.features[0].id;
+            map.setFeatureState(
+              { source: "states", id: hoveredStateId },
+              { hover: true }
+            );
+          }
+        });
+        // When the mouse leaves the state-fill layer, update the feature state of the
+        // previously hovered feature.
+        map.on("mouseleave", "state-fills", () => {
+          if (hoveredStateId) {
+            map.setFeatureState(
+              { source: "states", id: hoveredStateId },
+              { hover: false }
+            );
+          }
+          hoveredStateId = null;
+        });
+
+        map.on("click", "state-fills", function (e) {
+          // Create a button element
+          var coordinates = e.features[0].geometry.coordinates.slice();
+          var cityName = e.features[0].properties.cityName;
+          var cityValue = e.features[0].properties.mag;
+          var Type = e.features[0].properties.type;
+          var Unit = "";
+          if (Type === "Temperature") Unit = "° C";
+          else if (Type === "RainFall") Unit = "mm";
+          else if (Type === "Pressure") Unit = "Pa";
+          else if (Type === "Humidity") Unit = "%";
+          else if (Type === "Wind Speed") Unit = "m/s";
+          else if (Type === "Smog") Unit = "ppm";
+
+          var popupContent = `
+          <div class="bor flex map-pop-up">
+            <div style="width: fit-content;">
+              <div class="bor  m-2 p-1 map-pop-up-sub" style="height:48%;">
+                <div class="bor m-1 p-1 text-sm flex justify-left items-left">City</div>
+                <div class="bor m-1 p-1 text-5xl flex justify-center items-center">${cityName}</div>
+              </div>
+              <div class="bor m-2 p-1 map-pop-up-sub" style="height:48%;">
+                <div class="bor m-1 p-1 text-sm flex justify-left items-left">Current ${Type}</div>
+                <div class="bor m-1 p-1 text-5xl flex justify-center items-center">${cityValue.toFixed(
+                  1
+                )}<div class="bor m-1 p-1 text-sm flex justify-center items-center">${Unit}</div></div>
+                
+              </div>
             </div>
-          </div>
-          <div class="legend-item">
-            <div
-              class="legend-color"
-              style="background-color: rgba(173, 216, 230, 1)"
-            >
-            Low Smog (50 µg/m³ - 100 µg/m³)
-            </div>
-          </div>
-          <div class="legend-item">
-            <div
-              class="legend-color"
-              style="background-color: rgba(144, 238, 144, 1)"
-            >
-            Moderate Smog (101 µg/m³ - 150 µg/m³)
-            </div>
-          </div>
-          <div class="legend-item">
-            <div
-              class="legend-color"
-              style="background-color: rgba(255, 255, 102, 1)"
-            >
-            High Smog (151 µg/m³ - 200 µg/m³)
-            </div>
-          </div>
-          <div class="legend-item">
-            <div
-              class="legend-color"
-              style="background-color: rgba(255, 165, 0, 1)"
-            >
-            Very High Smog (201 µg/m³ - 300 µg/m³)
-            </div>
-          </div>
-          <div class="legend-item">
-            <div
-              class="legend-color"
-              style="background-color: rgba(139, 0, 0, 1);color:#efefef;border-radius:0px 10px 10px 0px;"
-            >
-            Extreme Smog (Above 300 µg/m³)
-            </div>
-          </div>
-        </div>
-      `;
-        }
+            
+          </div>`;
 
-        map.getContainer().appendChild(legend);
-      });
+          // Ensure that if the map is zoomed out such that multiple
+          // copies of the feature are visible, the popup appears
+          // over the copy being pointed to.
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+          }
 
-      map.on("click", "city-population", function (e) {
-        // Create a button element
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var cityName = e.features[0].properties.name;
-        var cityValue = Math.round(e.features[0].properties.population);
+          // Create new popup element
+          var popup = new maplibregl.Popup({ maxWidth: "auto" })
+            .setLngLat(e.lngLat)
+            .setHTML(popupContent)
+            .addTo(map);
 
-        // Create the main div element
-        var popupContent = document.createElement("div");
-        popupContent.className = "pop-up";
-        popupContent.classList.add("popup-content");
- 
-        // Create the div element for the city name
-        var cityNameDiv = document.createElement("div");
-        cityNameDiv.className = "sub-pop-up";
-        cityNameDiv.textContent = "City: " + cityName;
-        popupContent.appendChild(cityNameDiv);
-
-        // Create the div element for the city value
-        var cityValueDiv = document.createElement("div");
-        cityValueDiv.className = "sub-pop-up";
-        cityValueDiv.textContent = "Value: " + cityValue;
-        popupContent.appendChild(cityValueDiv);
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        // Create new popup and assign it to popup variable
-        var popup = new maplibregl.Popup()
-          .setLngLat(coordinates)
-          .setDOMContent(popupContent) // Set the button as the popup content
-          .addTo(map);
+          // Calculate and set the popup width and height based on its content
+          var popupNode = popup._content;
+          popupNode.style.width = popupNode.offsetWidth + "px";
+          popupNode.style.height = popupNode.offsetHeight + "px";
+        });
       });
     }
-  }, [props.data]); // Added props.data to the dependency array
+  }, [props.Data]);
 
-  if (x === 1) {
+  if (props.flag) {
     return (
-      <div>
-        <div
-          id="map"
-          style={{
-            height: "530px",
-            width: "100%",
-            borderRadius: "10px",
-          }}
-        ></div>{" "}
-      </div>
+      <div
+        id="TestMap"
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      ></div>
     );
   } else {
     return (
-      <>
-        <div
-          className="flex justify-center items-center text-center"
-          style={{
-            height: "500px",
-            width: "100%",
-          }}
-        >
-          <Loader />
-        </div>{" "}
-      </>
+      <div className="flex justify-center items-center mt-72">
+        <Loader></Loader>
+      </div>
     );
   }
-};
-
-export default GISMap;
+}

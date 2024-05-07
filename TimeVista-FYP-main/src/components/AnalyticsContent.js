@@ -102,9 +102,6 @@ export default function VerticalTabs() {
       setTimecounter(timecounter - 1);
       document.getElementById("next").disabled = false;
     }
-    setTimeout(() => {
-      DataFetchGISLayer();
-    }, 0);
   };
 
   const nextSlide = () => {
@@ -119,9 +116,6 @@ export default function VerticalTabs() {
       setTimecounter(timecounter + 1);
       document.getElementById("prev").disabled = false;
     }
-    setTimeout(() => {
-      DataFetchGISLayer();
-    }, 0);
   };
 
   const fetchData = async (Reqobj) => {
@@ -144,12 +138,15 @@ export default function VerticalTabs() {
           scrollObj.push({
             type: "Feature",
             properties: {
+              feature: 1,
+              type: "Temperature",
               city: responseData[i].City,
-              population: responseData[i].Temperature,
+              cityName: responseData[i].name,
+              mag: responseData[i].Temperature,
             },
             geometry: {
-              type: "Point",
-              coordinates: responseData[i].coordinates,
+              type: "Polygon",
+              coordinates: [responseData[i].coordinates],
             },
           });
         }
@@ -158,12 +155,15 @@ export default function VerticalTabs() {
           scrollObj.push({
             type: "Feature",
             properties: {
+              feature: 2,
+              type: "RainFall",
               city: responseData[i].City,
-              population: responseData[i].RainFall,
+              cityName: responseData[i].name,
+              mag: responseData[i].RainFall,
             },
             geometry: {
-              type: "Point",
-              coordinates: responseData[i].coordinates,
+              type: "Polygon",
+              coordinates: [responseData[i].coordinates],
             },
           });
         }
@@ -172,12 +172,15 @@ export default function VerticalTabs() {
           scrollObj.push({
             type: "Feature",
             properties: {
+              feature: 3,
+              type: "Humidity",
               city: responseData[i].City,
-              population: responseData[i].Humidity,
+              cityName: responseData[i].name,
+              mag: responseData[i].Humidity,
             },
             geometry: {
-              type: "Point",
-              coordinates: responseData[i].coordinates,
+              type: "Polygon",
+              coordinates: [responseData[i].coordinates],
             },
           });
         }
@@ -186,12 +189,15 @@ export default function VerticalTabs() {
           scrollObj.push({
             type: "Feature",
             properties: {
+              feature: 4,
+              type: "Pressure",
               city: responseData[i].City,
-              population: responseData[i].Pressure,
+              cityName: responseData[i].name,
+              mag: responseData[i].Pressure,
             },
             geometry: {
-              type: "Point",
-              coordinates: responseData[i].coordinates,
+              type: "Polygon",
+              coordinates: [responseData[i].coordinates],
             },
           });
         }
@@ -200,12 +206,15 @@ export default function VerticalTabs() {
           scrollObj.push({
             type: "Feature",
             properties: {
+              type: "Wind Speed",
+              feature: 5,
               city: responseData[i].City,
-              population: responseData[i].WindSpeed,
+              cityName: responseData[i].name,
+              mag: responseData[i].WindSpeed,
             },
             geometry: {
-              type: "Point",
-              coordinates: responseData[i].coordinates,
+              type: "Polygon",
+              coordinates: [responseData[i].coordinates],
             },
           });
         }
@@ -214,12 +223,15 @@ export default function VerticalTabs() {
           scrollObj.push({
             type: "Feature",
             properties: {
+              type: "Smog",
+              feature: 6,
               city: responseData[i].City,
-              population: responseData[i].Smog,
+              cityName: responseData[i].name,
+              mag: responseData[i].Smog,
             },
             geometry: {
-              type: "Point",
-              coordinates: responseData[i].coordinates,
+              type: "Polygon",
+              coordinates: [responseData[i].coordinates],
             },
           });
         }
@@ -235,6 +247,10 @@ export default function VerticalTabs() {
       setGisflag(1);
     }
   };
+
+  useEffect(() => {
+    console.log(scrollData);
+  }, []);
 
   const DataFetchGISLayer = () => {
     setGisflag(0);
@@ -490,9 +506,17 @@ export default function VerticalTabs() {
                 Next&#10095;
               </button>
             </div>
+            <div className="flex items-center justify-center pt-2 pb-4">
+              <button
+                onClick={DataFetchGISLayer}
+                className="analytics-fetch-button"
+              >
+                Fetch
+              </button>
+            </div>
           </div>
           <div id="map-gis">
-            <Map flag={gisflag} data={scrollData} feature={feature}></Map>
+            <Map flag={gisflag} Data={scrollData} feature={feature}></Map>
           </div>
         </div>
 

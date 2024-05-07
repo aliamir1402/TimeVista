@@ -10,13 +10,13 @@ import Loader from "../components/loader";
 
 export default function Crops() {
   const [LoadingFlag, setLoadingFlag] = useState(0);
-  const [crop, setCrop] = React.useState("");
-  const [metric, setMetric] = React.useState("");
-  const [year, setYear] = React.useState("");
+  const [crop, setCrop] = React.useState("Cotton");
+  const [metric, setMetric] = React.useState("Crop Yield ('000 Tonnes)");
+  const [year, setYear] = React.useState("2010");
   const [metricArray, setMetricArray] = React.useState([
-    "Area Covered (Acres)",
-    "Crop Yield (Kg)",
-    "Avg Crop Yield (Kg/Acre)",
+    "Area Covered ('000 Acres)",
+    "Crop Yield ('000 Tonnes)",
+    "Avg Crop Yield (Ton/Acre)",
   ]);
   const [metricName, setMetricName] = React.useState([
     "Area Covered ('000 Acres)",
@@ -205,7 +205,7 @@ export default function Crops() {
             </FormControl>
           </div>
           <div id="overlay-content-2">
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <FormControl sx={{ m: 1, minWidth: 240 }} size="small">
               <InputLabel
                 id="demo-select-small-label"
                 style={{ fontFamily: "Overpass", fontWeight: 600 }}

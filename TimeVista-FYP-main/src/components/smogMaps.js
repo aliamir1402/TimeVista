@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import maplibregl from "maplibre-gl";
-import Data from "./data.geojson";
 import BarChart from "../components/charts/SimpleBarChart";
 import ReactDOM from "react-dom";
 
