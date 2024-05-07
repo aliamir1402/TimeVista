@@ -14,7 +14,7 @@ import Carbontracker from "./components/carbontracker.js";
 import Articles from "./components/articles.js";
 import CropTracker from "./components/crops.js";
 import SmogTracker from "./components/smogTracker.js";
-
+import Test from "./components/test.js";
 export default function App() {
   return (
     <>
@@ -33,6 +33,7 @@ export default function App() {
           <Route path="/crop-tracker" element={<CropTracker />} />
           <Route path="/smog-tracker" element={<SmogTracker />} />
           <Route path="/carbon-tracker" element={<Carbontracker />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </Router>
