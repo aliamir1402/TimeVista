@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Header from "./header";
 import Footer from "./footer";
-import DatasetPic from "../components/images/LandScapeImg.jpg";
 import Loader from "../components/loader";
-import dataset from "../components/images/pakistan-dataset.png";
+import dataset1 from "../components/images/pakistan-dataset.png";
+import dataset2 from "../components/images/cropsData.png";
+import dataset3 from "../components/images/smogData.png";
+import Download from "../components/images/download.png";
 
 export default function Datasets() {
+  const Image = [dataset1, dataset2, dataset3];
   const [Flag, setFlag] = useState(false);
   const items = [
     "ClimateChrono: 1980-2020 Climate Archive (Pakistan)",
@@ -110,7 +113,7 @@ export default function Datasets() {
                 <div className="box-dataset">
                   <div className="sub-title-datasets">{item}</div>
                   <div className="img-dataset">
-                    <img src={dataset} alt="" />
+                    <img src={Image[index]} alt="" />
                   </div>
                   <div className="divider-dataset"></div>
                   <div className="sub-description-dataset">
@@ -123,6 +126,11 @@ export default function Datasets() {
                     ))}{" "}
                   </div>
                   <div className="divider-dataset"></div>
+                  <div className="flex justify-end items-end p-4">
+                    <a href="https://drive.google.com/drive/folders/1AWzK5PVmIejHLd6b-nkNhFsIA_0_pVVa?usp=drive_link">
+                      <img src={Download} alt="download" width={50} height={50}/>
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>

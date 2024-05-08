@@ -167,8 +167,8 @@ export default function SmogMaps(props) {
     map.on("click", "earthquakes-point", function (e) {
       // Create a button element
       var coordinates = e.features[0].geometry.coordinates.slice();
-      var cityName = e.features[0].properties.districts;
       var cityValue = e.features[0].properties.mag;
+      cityValue=cityValue.toFixed(2);
       var Type = e.features[0].properties.type;
 
       // Create the main div element
@@ -182,7 +182,6 @@ export default function SmogMaps(props) {
             </div>
           </div>
           <div style="width: fit-content;">
-            <div class="text-3xl p-2 mb-2">RealTime Stats</div>
             <div class="bor m-2 p-2 Chart-popup" id="chartContainer">
             </div>
           </div>

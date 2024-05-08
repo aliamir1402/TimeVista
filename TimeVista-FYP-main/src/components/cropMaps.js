@@ -164,6 +164,7 @@ export default function Test(props) {
             Type={Type}
             Unit={Unit}
             index={index}
+            Year={props.Year}
           />,
           document.getElementById("chartContainer")
         );

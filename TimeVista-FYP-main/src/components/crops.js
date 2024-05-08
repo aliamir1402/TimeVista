@@ -34,7 +34,7 @@ export default function Crops() {
   ]);
   const [yearArray, setYearArray] = useState([]);
   const [CropGISData, setCropGISData] = useState({});
-  const [count, setCount] = useState(2024);
+  const [count, setCount] = useState(2025);
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,7 +45,7 @@ export default function Crops() {
   useEffect(() => {
     let array = [];
     if (yearArray.length === 0) {
-      for (var i = 1983; i < count; i++) {
+      for (var i = 1985; i < count; i++) {
         array.push(i);
       }
       console.log(array);
@@ -168,7 +168,7 @@ export default function Crops() {
               "linear-gradient(90deg, #719b5c, #23634b, #23634c6b, #00000067) 1",
           }}
         >
-          <CropMap Data={CropGISData} />
+          <CropMap Data={CropGISData} Year={year} />
           <div id="overlay-content-1">
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel
