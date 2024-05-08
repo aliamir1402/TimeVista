@@ -20,11 +20,11 @@ export default function SimpleLineChart(props) {
         Historical Trend of {Type}
       </h2>
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={Data}>
+        <LineChart width={700} height={400} data={Data}>
           <XAxis
             dataKey="x"
             label={{ value: "Year", position: "insideBottom", offset: 0 }}
-            tickMargin={20}
+            tickMargin={3}
           />
           <ReferenceLine x={"04-2024"} stroke="red" label="Boundary" />
           <YAxis
@@ -32,7 +32,6 @@ export default function SimpleLineChart(props) {
             domain={[Math.min(...Data.map((item) => item.y)), "dataMax"]}
           />
           <Tooltip />
-          <Legend />
           <Line dataKey="y" fill="#8884d8" />
         </LineChart>
       </ResponsiveContainer>

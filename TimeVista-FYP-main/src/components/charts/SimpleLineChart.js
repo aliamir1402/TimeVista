@@ -5,14 +5,14 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   ReferenceLine,
+  ReferenceDot,
   ResponsiveContainer,
 } from "recharts";
 
 export default function SimpleLineChart(props) {
-  const { Data, Type } = props;
-
+  const { Type, Year, HighlightedValue } = props;
+  const Data = props.Data[props.index];
   return (
     <div className="shadow p-4 md:p-6 divvBox" style={{ width: "60vw" }}>
       <h2 className="text-center mb-4 text-2xl flex justify-center items-center">
@@ -27,7 +27,7 @@ export default function SimpleLineChart(props) {
             tickMargin={20}
           />
           <ReferenceLine
-            x={2020}
+            x={2023}
             stroke="red"
             label="Future Estimates"
             labelBackgroundColor="lightgrey"
@@ -44,8 +44,22 @@ export default function SimpleLineChart(props) {
               boxShadow: "0px 0px 5px 0px wheat",
             }}
           />
-          
-          <Line type="monotone" dataKey={props.Type} stroke="#8884d8" strokeWidth={2} />
+
+          <Line
+            type="monotone"
+            dataKey={props.Type}
+            stroke="#8884d8"
+            strokeWidth={2}
+          />
+          {/* Add ReferenceDot for the highlighted year */}
+          <ReferenceDot
+            x={Year}
+            y={Data.find((data) => data.x === Year)[Type]} // Set Y value based on the data for the specified year and type
+            r={8}
+            fill="red"
+            stroke="white"
+            strokeWidth={2}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>
