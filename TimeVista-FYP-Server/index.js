@@ -23324,7 +23324,7 @@ app.post("/api/gisLayer", async (req, res) => {
     var CityOBJ = [];
     for (let i = 1; i <= numberOfCities.length; i++) {
       CityOBJ.push({
-        index:0,
+        index: 0,
         City: "",
         name: "",
         coordinates: [],
@@ -23340,9 +23340,7 @@ app.post("/api/gisLayer", async (req, res) => {
     }
     //console.log("Year", regexPattern);
     //console.log("Length of Coordinates", coordinatesCities.length);
-   //console.log("Length of Cities", uniqueCities.length - 1);
-
-
+    //console.log("Length of Cities", uniqueCities.length - 1);
 
     for (let i = 1; i < numberOfCities.length; i++) {
       console.log(".");
@@ -23355,7 +23353,7 @@ app.post("/api/gisLayer", async (req, res) => {
           })
           .project({
             CityID: 1,
-            name:1,
+            name: 1,
             date: 1,
             temperature_2m_mean: 1,
             total_precipitation_mean: 1,
@@ -23367,10 +23365,8 @@ app.post("/api/gisLayer", async (req, res) => {
           })
           .toArray();
 
-        
-
         var YearOBJ = {
-          index:0,
+          index: 0,
           City: "",
           coordinates: [],
           Date: 0,
@@ -23388,10 +23384,10 @@ app.post("/api/gisLayer", async (req, res) => {
         var count = 0;
         //console.log("A");
         YearOBJ.City = numberOfCities[i];
-        YearOBJ.name=FetchDisplay[0].name;
+        YearOBJ.name = FetchDisplay[0].name;
         //console.log("B");
         YearOBJ.Date = EntryData.year;
-        YearOBJ.coordinates = coordinatesCities[i-1];
+        YearOBJ.coordinates = coordinatesCities[i - 1];
         for (let j = 0; j < FetchDisplay.length; j++) {
           YearOBJ.Temperature += FetchDisplay[j].temperature_2m_mean - 273.15;
           YearOBJ.RainFall += FetchDisplay[j].total_precipitation_mean;
@@ -23422,7 +23418,6 @@ app.post("/api/gisLayer", async (req, res) => {
         //console.log(CityOBJ[i]);
         //console.log(CityOBJ);
       }
-
     }
     //console.log(CityOBJ);
 
@@ -23566,7 +23561,7 @@ app.post("/api/crop", async (req, res) => {
     else if (EntryData.Type === "Crop Yield ('000 Tonnes)")
       EntryData.Type = "Production";
     else EntryData.Type = "Yield";
-
+    EntryData.Year = EntryData.Year - 5;
     const database = client.db("TimeVista");
     const collection = database.collection("CropsDetails");
     const FetchDisplay = await collection
@@ -23586,14 +23581,14 @@ app.post("/api/crop", async (req, res) => {
       if (EntryData.Type == "Avg Crop Yield (Kg/Acre)") {
         for (let j = 1990; j < 2021; j++) {
           temp.push({
-            x: j + 3,
+            x: j + 5,
             y: FetchDisplay[i][j],
           });
         }
       } else {
         for (let j = 1980; j < 2021; j++) {
           temp.push({
-            x: j + 3,
+            x: j + 5,
             [FetchDisplay[i].Type]: FetchDisplay[i][j],
           });
         }
