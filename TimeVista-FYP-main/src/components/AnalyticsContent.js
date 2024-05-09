@@ -86,6 +86,49 @@ export default function VerticalTabs() {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
+    console.log(value);
+  }, [value]);
+  useEffect(() => {
+    console.log(timecounter);
+  }, [timecounter]);
+  useEffect(() => {
+    console.log(isSelected1);
+  }, [isSelected1]);
+  useEffect(() => {
+    console.log(isSelected2);
+  }, [isSelected2]);
+  useEffect(() => {
+    console.log(isSelected3);
+  }, [isSelected3]);
+  useEffect(() => {
+    console.log(isSelected4);
+  }, [isSelected4]);
+  useEffect(() => {
+    console.log(isSelected5);
+  }, [isSelected5]);
+  useEffect(() => {
+    console.log(isSelected6);
+  }, [isSelected6]);
+  useEffect(() => {
+    console.log(isSelected9);
+  }, [isSelected9]);
+  useEffect(() => {
+    console.log(isSelected10);
+  }, [isSelected10]);
+  useEffect(() => {
+    console.log(isSelected11);
+  }, [isSelected11]);
+  useEffect(() => {
+    console.log(gisflag);
+  }, [gisflag]);
+  useEffect(() => {
+    console.log(feature);
+  }, [feature]);
+  useEffect(() => {
+    console.log(time);
+  }, [time]);
+
+  useEffect(() => {
     DataFetchGISLayer();
   }, []);
 
@@ -176,7 +219,7 @@ export default function VerticalTabs() {
               type: "Humidity",
               city: responseData[i].City,
               cityName: responseData[i].name,
-              mag: responseData[i].Humidity,
+              mag: responseData[i].Humidity - 45,
             },
             geometry: {
               type: "Polygon",
@@ -247,10 +290,6 @@ export default function VerticalTabs() {
       setGisflag(1);
     }
   };
-
-  useEffect(() => {
-    console.log(scrollData);
-  }, []);
 
   const DataFetchGISLayer = () => {
     setGisflag(0);
@@ -516,7 +555,12 @@ export default function VerticalTabs() {
             </div>
           </div>
           <div id="map-gis">
-            <Map flag={gisflag} Data={scrollData} feature={feature}></Map>
+            <Map
+              flag={gisflag}
+              Data={scrollData}
+              feature={feature}
+              Year={timecounter}
+            ></Map>
           </div>
         </div>
 

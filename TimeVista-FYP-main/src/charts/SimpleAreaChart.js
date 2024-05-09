@@ -6,7 +6,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 
@@ -147,6 +147,13 @@ export default function SimpleAreaChart(props) {
             <XAxis dataKey="x" />
             <YAxis
               domain={[props.MinVal - 5, props.MaxVal + 5]} // Set the domain dynamically based on the data
+            />
+            <ReferenceLine
+              x={"01-01-2024"}
+              stroke="red"
+              label="Future Estimates"
+              labelBackgroundColor="lightgrey"
+              position="top"
             />
             <Tooltip
               cursor={{ strokeDasharray: "3 3" }}

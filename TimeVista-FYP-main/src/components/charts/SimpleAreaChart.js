@@ -6,7 +6,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 
@@ -71,6 +71,8 @@ export default function SimpleAreaChart(props) {
     }
   }, [props.Flag, props.chartData]);
 
+  
+
   return (
     <div className="md:p-6 pb-0">
       <div className="flex justify-between pb-4 mb-4 der-b">
@@ -113,6 +115,14 @@ export default function SimpleAreaChart(props) {
                 Math.round(props.MaxVal) + 2,
               ]} // Set the domain dynamically based on the data
             />
+            
+            <ReferenceLine
+              x={"01-01-2024"}
+              stroke="red"
+              label="Future Estimates"
+              labelBackgroundColor="lightgrey"
+              position="top"
+            />
             <Tooltip
               cursor={{ strokeDasharray: "3 3" }}
               contentStyle={{
@@ -145,9 +155,10 @@ export default function SimpleAreaChart(props) {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="x" />
-            <YAxis
+            <YAxis label={{ value: "Value", angle: -90, position: "insideLeft" }}
               domain={[props.MinVal - 5, props.MaxVal + 5]} // Set the domain dynamically based on the data
             />
+            
             <Tooltip
               cursor={{ strokeDasharray: "3 3" }}
               contentStyle={{

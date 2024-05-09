@@ -38,7 +38,6 @@ export default function RainFall() {
         "MUL-Multan",
         "GWJ-Gujranwala",
         "HAF-Hafizabad",
-        "HYD-Hyderabad",
         "JHE-Jhelum",
         "KHAN-Khanewal",
         "KHUS-Khushab",
@@ -274,8 +273,18 @@ export default function RainFall() {
     for (let i = 0; i < graphData.length; i++) {
       tempArray.push(graphData[i].total_precipitation_mean * 1000);
       DateArray.push(graphData[i].date);
+      let dateString = graphData[i].date;
+      const [day, month, year] = dateString.split("-");
+      const date = new Date(`${year}-${month}-${day}`);
+      date.setFullYear(date.getFullYear() + 2);
+      date.setMonth(date.getMonth() - 6);
+      const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
+        date.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}-${date.getFullYear()}`;
       dataChart.push({
-        x: graphData[i].date,
+        x: formattedDate,
         y: graphData[i].total_precipitation_mean * 1000,
       });
     }

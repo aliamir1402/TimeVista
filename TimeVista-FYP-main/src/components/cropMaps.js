@@ -1,10 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import maplibregl from "maplibre-gl";
 import LineChart from "../components/charts/SimpleLineChart";
 import ReactDOM from "react-dom";
 import Data from "./test.geojson";
+import MapKey from "./MapKey";
+import { position } from "@chakra-ui/react";
+import zIndex from "@mui/material/styles/zIndex";
 
 export default function Test(props) {
+  const [TextArray, setTextArray] = useState([
+    "0-10",
+    "10-100",
+    "100-200",
+    "200-300",
+    "300-400",
+    "400-500",
+    "500-600",
+    "600-700",
+    "700-800",
+    "800-900",
+    "900+",
+  ]);
+  const [ColorArray, setColorsArray] = useState([
+    "#225ea9",
+    "#41b7c5",
+    "#ffffcd",
+    "#ffeea1",
+    "#ffda76",
+    "#ffb34c",
+    "#fe8e3c",
+    "#fd4e2a",
+    "#e41a1c",
+    "#be0026",
+    "#800026",
+  ]);
+
   useEffect(() => {
     const map = new maplibregl.Map({
       container: "TestMap",
@@ -43,24 +73,28 @@ export default function Test(props) {
               100,
               "rgb(0, 128, 0)", // Dark green
             ],
-            ["all", [">=", ["get", "mag"], 100], ["<", ["get", "mag"], 200]],
-            "#0000FF", // If mag is between 20 and 30, color blue
-            ["all", [">=", ["get", "mag"], 200], ["<", ["get", "mag"], 300]],
-            "#0000FF", // If mag is between 20 and 30, color blue
-            ["all", [">=", ["get", "mag"], 300], ["<", ["get", "mag"], 400]],
-            "#0000FF", // If mag is between 20 and 30, color blue
-            ["all", [">=", ["get", "mag"], 400], ["<", ["get", "mag"], 500]],
-            "#0000FF", // If mag is between 20 and 30, color blue
-            ["all", [">=", ["get", "mag"], 500], ["<", ["get", "mag"], 600]],
-            "#0000FF", // If mag is between 20 and 30, color blue
-            ["all", [">=", ["get", "mag"], 600], ["<", ["get", "mag"], 700]],
-            "#0000FF", // If mag is between 20 and 30, color blue
-            ["all", [">=", ["get", "mag"], 700], ["<", ["get", "mag"], 800]],
-            "#0000FF", // If mag is between 20 and 30, color blue
-            ["all", [">=", ["get", "mag"], 800], ["<", ["get", "mag"], 900]],
-            "#0000FF", // If mag is between 20 and 30, color blue
-            ["all", [">=", ["get", "mag"], 900]],
-            "#333333", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 0], ["<", ["get", "mag"], 10]],
+            "#225ea9", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 10], ["<", ["get", "mag"], 100]],
+            "#41b7c5", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 101], ["<", ["get", "mag"], 200]],
+            "#ffffcd", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 201], ["<", ["get", "mag"], 300]],
+            "#ffeea1", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 301], ["<", ["get", "mag"], 400]],
+            "#ffda76", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 401], ["<", ["get", "mag"], 500]],
+            "#ffb34c", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 501], ["<", ["get", "mag"], 600]],
+            "#fe8e3c", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 601], ["<", ["get", "mag"], 700]],
+            "#fd4e2a", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 701], ["<", ["get", "mag"], 800]],
+            "#e41a1c", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 801], ["<", ["get", "mag"], 900]],
+            "#be0026", // If mag is between 20 and 30, color blue
+            ["all", [">=", ["get", "mag"], 901]],
+            "#800026", // If mag is between 20 and 30, color blue
             "#ffffff",
           ],
           "fill-opacity": [
@@ -178,12 +212,18 @@ export default function Test(props) {
   }, [props.Data]);
 
   return (
-    <div
-      id="TestMap"
-      style={{
-        width: "100vw",
-        height: "100%",
-      }}
-    ></div>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <div
+        id="TestMap"
+        style={{
+          width: "100vw",
+          height: "100%",
+        }}
+      ></div>
+      <MapKey
+        colors={ColorArray}
+        text={TextArray}
+      />
+    </div>
   );
 }

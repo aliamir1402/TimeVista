@@ -38,7 +38,6 @@ export default function Smog() {
         "MUL-Multan",
         "GWJ-Gujranwala",
         "HAF-Hafizabad",
-        "HYD-Hyderabad",
         "JHE-Jhelum",
         "KHAN-Khanewal",
         "KHUS-Khushab",
@@ -276,8 +275,18 @@ export default function Smog() {
         graphData[i].surface_thermal_radiation_downwards_mean / 100000
       );
       DateArray.push(graphData[i].date);
+      let dateString = graphData[i].date;
+      const [day, month, year] = dateString.split("-");
+      const date = new Date(`${year}-${month}-${day}`);
+      date.setFullYear(date.getFullYear() + 2);
+      date.setMonth(date.getMonth() - 6);
+      const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
+        date.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}-${date.getFullYear()}`;
       dataChart.push({
-        x: graphData[i].date,
+        x: formattedDate,
         y: graphData[i].surface_thermal_radiation_downwards_mean / 100000,
       });
     }

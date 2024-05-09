@@ -37,7 +37,6 @@ export default function Temperature() {
         "FSB-Faisalabad",
         "MUL-Multan",
         "GWJ-Gujranwala",
-        "HAF-Hafizabad",
         "HYD-Hyderabad",
         "JHE-Jhelum",
         "KHAN-Khanewal",
@@ -67,6 +66,7 @@ export default function Temperature() {
         "THAR-Tharparkar",
         "THT-Thatta",
         "UMK-Umerkot",
+        "HAF-Hafizabad",
       ]);
     } else if (selectedRegion === "KPK") {
       setCityList([
@@ -274,8 +274,20 @@ export default function Temperature() {
     for (let i = 0; i < graphData.length; i++) {
       tempArray.push(graphData[i].temperature_2m_mean - 273.15);
       DateArray.push(graphData[i].date);
+      console.log(graphData[i].date);
+      let dateString = graphData[i].date;
+      const [day, month, year] = dateString.split("-");
+      const date = new Date(`${year}-${month}-${day}`);
+      date.setFullYear(date.getFullYear() + 2);
+      date.setMonth(date.getMonth() - 6);
+      const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
+        date.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}-${date.getFullYear()}`;
+
       dataChart.push({
-        x: graphData[i].date,
+        x: formattedDate,
         y: (graphData[i].temperature_2m_mean - 273.15).toFixed(1),
       });
     }
